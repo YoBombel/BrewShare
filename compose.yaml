@@ -1,0 +1,41 @@
+services:
+  app:
+    image: brewshare_app
+    container_name: brewshare_app
+    restart: never
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/brewshare_db?createDatabaseIfNotExist=true&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    networks:
+      - backend
+
+
+  db:
+    image: mysql:8.2.0
+    container_name: brewshare_db
+    volumes:
+      - brewshare_db_data:/data/db
+    restart: always
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: brewshare_db
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+
+volumes:
+  brewshare_db_data:
+
+networks:
+  backend:
