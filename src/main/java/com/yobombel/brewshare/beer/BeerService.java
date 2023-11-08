@@ -1,6 +1,5 @@
 package com.yobombel.brewshare.beer;
 
-import com.yobombel.brewshare.util.TempBeerList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,14 +7,22 @@ import java.util.List;
 @Service
 public class BeerService {
 
-    private final TempBeerList tempBeerList;
+    private final BeerRepository beerRepository;
 
-    public BeerService(TempBeerList tempBeerList) {
-        this.tempBeerList = tempBeerList;
+    public BeerService(BeerRepository beerRepository) {
+        this.beerRepository = beerRepository;
     }
 
-    public List<Beer> findAll(){
-        return tempBeerList.getTemporaryBeerList();
+    public List<Beer> findAll() {
+        return beerRepository.findAll();
+    }
+
+    public void addBeer(Beer beer) {
+        beerRepository.save(beer);
+    }
+
+    public void deleteAllBeers() {
+        beerRepository.deleteAll();
     }
 
 }

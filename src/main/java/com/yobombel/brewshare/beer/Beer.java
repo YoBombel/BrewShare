@@ -1,14 +1,38 @@
 package com.yobombel.brewshare.beer;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = Beer.TABLE_NAME)
 public class Beer {
 
+    public static final String TABLE_NAME = "beer";
+    public static final String COLUMN_PREFIX = "b_";
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = COLUMN_PREFIX + "id")
     private Long id;
+
+    @Column(name = COLUMN_PREFIX + "name")
     private String name;
+
+    @Column(name = COLUMN_PREFIX + "style")
     private String style;
+
+    @Column(name = COLUMN_PREFIX + "batchSize")
     private double batchSize;
+
+    @Column(name = COLUMN_PREFIX + "originalGravity")
     private double originalGravity;
+
+    @Column(name = COLUMN_PREFIX + "abv")
     private double abv;
+
+    @Column(name = COLUMN_PREFIX + "ibu")
     private double ibu;
+
+    @Column(name = COLUMN_PREFIX + "color")
     private double color;
 
     public Beer() {

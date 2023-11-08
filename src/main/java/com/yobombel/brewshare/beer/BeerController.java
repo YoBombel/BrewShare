@@ -14,7 +14,7 @@ public class BeerController {
     }
 
     @GetMapping("")
-    public String allBeers(Model model){
+    public String allBeers(Model model) {
         model.addAttribute("allBeers", beerService.findAll());
         return "allBeers";
     }
