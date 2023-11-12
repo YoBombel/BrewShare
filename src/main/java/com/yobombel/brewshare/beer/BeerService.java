@@ -1,5 +1,6 @@
 package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.beer.domain.Beer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

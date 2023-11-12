@@ -1,6 +1,8 @@
-package com.yobombel.brewshare.beer;
+package com.yobombel.brewshare.beer.domain;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = Beer.TABLE_NAME)
@@ -34,6 +36,9 @@ public class Beer {
 
     @Column(name = COLUMN_PREFIX + "color")
     private double color;
+
+    @OneToMany
+    private List<Ingredient> ingredients;
 
     public Beer() {
     }

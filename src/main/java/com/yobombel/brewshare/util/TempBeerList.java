@@ -1,6 +1,6 @@
 package com.yobombel.brewshare.util;
 
-import com.yobombel.brewshare.beer.Beer;
+import com.yobombel.brewshare.beer.domain.Beer;
 import com.yobombel.brewshare.beer.BeerService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
