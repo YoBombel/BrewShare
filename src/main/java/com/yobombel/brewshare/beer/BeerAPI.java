@@ -17,7 +17,7 @@ public class BeerAPI {
     }
 
     @GetMapping("all")
-    public List<Beer> viewAllBeers(){
+    public List<Beer> viewAllBeers() {
         return beerService.findAll();
     }
 

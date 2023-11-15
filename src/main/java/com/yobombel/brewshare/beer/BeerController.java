@@ -3,6 +3,7 @@ package com.yobombel.brewshare.beer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class BeerController {
@@ -17,6 +18,12 @@ public class BeerController {
     public String allBeers(Model model) {
         model.addAttribute("allBeers", beerService.findAll());
         return "allBeers";
+    }
+
+    @GetMapping("/beer/id/{id}")
+    public String viewBeerDetails(Model model, @PathVariable Long id) {
+        model.addAttribute("beer", beerService.findById(id));
+        return "beerDetails";
     }
 
 }

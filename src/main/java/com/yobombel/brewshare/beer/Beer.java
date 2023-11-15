@@ -1,6 +1,9 @@
 package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = Beer.TABLE_NAME)
@@ -35,8 +38,8 @@ public class Beer {
     @Column(name = COLUMN_PREFIX + "color")
     private double color;
 
-    public Beer() {
-    }
+    @OneToMany
+    private List<Ingredient> ingredients;
 
     public Long getId() {
         return id;
@@ -100,5 +103,13 @@ public class Beer {
 
     public void setColor(double color) {
         this.color = color;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
