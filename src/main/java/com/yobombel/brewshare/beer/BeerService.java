@@ -18,6 +18,8 @@ public class BeerService {
         return beerRepository.findAll();
     }
 
+    public Beer findById(Long id){ return beerRepository.findById(id).orElseThrow(RuntimeException::new); }
+
     public void addBeer(Beer beer) {
         beerRepository.save(beer);
     }

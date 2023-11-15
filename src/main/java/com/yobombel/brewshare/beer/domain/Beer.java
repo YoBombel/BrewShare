@@ -40,9 +40,6 @@ public class Beer {
     @OneToMany
     private List<Ingredient> ingredients;
 
-    public Beer() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -105,5 +102,13 @@ public class Beer {
 
     public void setColor(double color) {
         this.color = color;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
