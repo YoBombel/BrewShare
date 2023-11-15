@@ -1,6 +1,5 @@
 package com.yobombel.brewshare.beer;
 
-import com.yobombel.brewshare.beer.domain.Beer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +17,15 @@ public class BeerService {
         return beerRepository.findAll();
     }
 
-    public Beer findById(Long id){ return beerRepository.findById(id).orElseThrow(RuntimeException::new); }
+    public Beer findById(Long id) {
+        return beerRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 
     public void addBeer(Beer beer) {
         beerRepository.save(beer);
     }
 
+    //TODO - temporary method, delete after implementing better beer examples
     public void deleteAllBeers() {
         beerRepository.deleteAll();
     }

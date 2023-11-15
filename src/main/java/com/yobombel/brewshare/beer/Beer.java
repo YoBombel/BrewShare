@@ -1,5 +1,6 @@
-package com.yobombel.brewshare.beer.domain;
+package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.persistence.*;
 
 import java.util.List;

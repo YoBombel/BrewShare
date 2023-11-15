@@ -20,8 +20,8 @@ public class BeerController {
         return "allBeers";
     }
 
-    @GetMapping("/{id}")
-    public String viewBeerDetails(Model model, @PathVariable Long id){
+    @GetMapping("/beer/id/{id}")
+    public String viewBeerDetails(Model model, @PathVariable Long id) {
         model.addAttribute("beer", beerService.findById(id));
         return "beerDetails";
     }

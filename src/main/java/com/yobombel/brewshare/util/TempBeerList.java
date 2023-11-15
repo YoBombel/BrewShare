@@ -1,9 +1,9 @@
 package com.yobombel.brewshare.util;
 
 import com.yobombel.brewshare.beer.BeerService;
-import com.yobombel.brewshare.beer.IngredientService;
-import com.yobombel.brewshare.beer.domain.Beer;
-import com.yobombel.brewshare.beer.domain.Ingredient;
+import com.yobombel.brewshare.beer.ingredient.IngredientService;
+import com.yobombel.brewshare.beer.Beer;
+import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
@@ -49,7 +49,7 @@ public class TempBeerList {
         List<Ingredient> ingredients = new ArrayList<>();
         for (int j = 0; j < i; j++) {
             Ingredient ingredient = new Ingredient();
-            ingredient.setName("Ingredient " + (j+1));
+            ingredient.setName("Ingredient " + (j + 1));
             ingredient.setAmount(generate1DecimalPlaceRandom(10, 5000));
             ingredients.add(ingredient);
             ingredientService.addIngredient(ingredient);

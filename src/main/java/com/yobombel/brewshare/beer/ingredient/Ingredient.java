@@ -1,8 +1,8 @@
-package com.yobombel.brewshare.beer.domain;
+package com.yobombel.brewshare.beer.ingredient;
 
 import jakarta.persistence.*;
 
-import static com.yobombel.brewshare.beer.domain.Ingredient.TABLE_NAME;
+import static com.yobombel.brewshare.beer.ingredient.Ingredient.TABLE_NAME;
 
 @Entity
 @Table(name = TABLE_NAME)
@@ -21,9 +21,6 @@ public class Ingredient {
 
     @Column(name = COLUMN_PREFIX + "amount")
     private double amount;
-
-    public Ingredient() {
-    }
 
     public Long getId() {
         return id;

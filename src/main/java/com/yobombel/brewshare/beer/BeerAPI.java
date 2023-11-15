@@ -1,6 +1,5 @@
 package com.yobombel.brewshare.beer;
 
-import com.yobombel.brewshare.beer.domain.Beer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +17,7 @@ public class BeerAPI {
     }
 
     @GetMapping("all")
-    public List<Beer> viewAllBeers(){
+    public List<Beer> viewAllBeers() {
         return beerService.findAll();
     }
 

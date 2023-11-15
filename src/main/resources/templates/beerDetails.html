@@ -29,7 +29,8 @@
             </ul>
             <ol>
                 <li th:each="ingredient :${beer.ingredients}">
-                    <span th:text="${ingredient.name}"></span></li>
+                    <span th:text="${ingredient.name}"></span> - amount: <span th:text="${ingredient.amount}"></span>
+                </li>
             </ol>
         </div>
     </div>
