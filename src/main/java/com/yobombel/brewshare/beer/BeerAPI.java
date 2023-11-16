@@ -1,8 +1,6 @@
 package com.yobombel.brewshare.beer;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +17,15 @@ public class BeerAPI {
     @GetMapping("all")
     public List<Beer> viewAllBeers() {
         return beerService.findAll();
+    }
+
+    @GetMapping("id/{id}")
+    public Beer findBeerById(@PathVariable Long id){ return beerService.findById(id); }
+
+    //TODO - add ingredient support
+    @PostMapping("add")
+    public void addBeer(@RequestBody Beer beer) {
+        beerService.addBeer(beer);
     }
 
 }
