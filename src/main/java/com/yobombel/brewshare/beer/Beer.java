@@ -2,6 +2,10 @@ package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -17,24 +21,34 @@ public class Beer {
     @Column(name = COLUMN_PREFIX + "id")
     private Long id;
 
+    @NotBlank(message = "Name cannot be blank")
+    @Size(max = 64, message = "Name cannot be longer than 64 characters")
     @Column(name = COLUMN_PREFIX + "name")
     private String name;
 
+    @Size(max = 64, message = "Style cannot be longer than 64 characters")
     @Column(name = COLUMN_PREFIX + "style")
     private String style;
 
+    @DecimalMin(value = "0.0", message = "Batch size cannot be negative")
     @Column(name = COLUMN_PREFIX + "batchSize")
     private double batchSize;
 
+    @DecimalMin(value = "0.0", message = "Original gravity cannot be negative")
+    @DecimalMax(value = "99.9", message = "Original gravity cannot exceed 99.9")
     @Column(name = COLUMN_PREFIX + "originalGravity")
     private double originalGravity;
 
+    @DecimalMin(value = "0.0", message = "Alcohol content cannot be negative")
+    @DecimalMax(value = "96", message = "Alcohol content cannot exceed 96")
     @Column(name = COLUMN_PREFIX + "abv")
     private double abv;
 
+    @DecimalMin(value = "0.0", message = "IBU cannot be negative")
     @Column(name = COLUMN_PREFIX + "ibu")
     private double ibu;
 
+    @DecimalMin(value = "0.0", message = "Color cannot be negative")
     @Column(name = COLUMN_PREFIX + "color")
     private double color;
 
