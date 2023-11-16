@@ -21,8 +21,8 @@ public class BeerService {
         return beerRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public void addBeer(Beer beer) {
-        beerRepository.save(beer);
+    public Long addBeer(Beer beer) {
+        return beerRepository.save(beer).getId();
     }
 
     //TODO - temporary method, delete after implementing better beer examples
