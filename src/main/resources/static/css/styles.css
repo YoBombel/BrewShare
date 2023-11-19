@@ -1,4 +1,17 @@
+body {
+    color: #cecece;
+}
+
+a {
+    text-decoration: none;
+    color: #cecece;
+}
+
 #logo{
     color: darkorange;
-    text-decoration: none;
+}
+
+.link-orange-hover:hover{
+    color: darkorange; !important;
+    text-decoration-color: darkorange; !important;
 }
