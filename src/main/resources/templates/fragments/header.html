@@ -1,10 +1,27 @@
-<div class="flex-row d-flex justify-content-center">
-  <a href="/" class="text-decoration-none">
-    <div class="py-3 px-4 my-3">
-
-      <!-- Made with textcraft.net/ -->
-      <img th:src="@{/img/brewing-stats.png}" width="100%" alt="Brewing Stats">
-
-    </div>
-  </a>
+<div class="flex-row d-flex justify-content-center my-2">
+<h1><a href="/beer/all" id="logo">BrewShare</a></h1>
 </div>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/beer/all">All beers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/beer/new">New beer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Statistics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">About</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
