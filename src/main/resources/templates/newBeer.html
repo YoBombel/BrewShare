@@ -19,7 +19,7 @@
     <form th:object="${beer}" th:method="post" th:action="@{/beer/new}">
 
         <label for="name">Beer name</label>
-        <input id="name" type="text" th:name="name" maxlength="64"
+        <input id="name" type="text" th:name="name" maxlength="64" required
                class="form-control" placeholder="Item name" aria-label="Beer name<">
 
         <label for="style">Style</label>
@@ -27,23 +27,23 @@
                class="form-control" placeholder="Style" aria-label="Style">
 
         <label for="batchSize">Batch size</label>
-        <input id="batchSize" type="number" th:name="batchSize" step=".01" min="0"
+        <input id="batchSize" type="number" th:name="batchSize" step=".01" min="0" value="0"
                class="form-control" placeholder="Batch size" aria-label="Batch size">
 
         <label for="originalGravity">Original gravity</label>
-        <input id="originalGravity" type="number" th:name="originalGravity" step=".01" min="0" max="99.9"
+        <input id="originalGravity" type="number" th:name="originalGravity" step=".01" min="0" max="99.9" value="0"
                class="form-control" placeholder="Original gravity" aria-label="Original gravity">
 
         <label for="abv">ABV</label>
-        <input id="abv" type="number" th:name="abv" step=".01" min="0" max="96"
+        <input id="abv" type="number" th:name="abv" step=".01" min="0" max="96" value="0"
                class="form-control" placeholder="ABV" aria-label="ABV">
 
         <label for="ibu">IBU</label>
-        <input id="ibu" type="number" th:name="ibu" step=".01" min="0"
+        <input id="ibu" type="number" th:name="ibu" step=".01" min="0" value="0"
                class="form-control" placeholder="IBU" aria-label="IBU">
 
         <label for="color">Color</label>
-        <input id="color" type="number" th:name="color" step=".01" min="0"
+        <input id="color" type="number" th:name="color" step=".01" min="0" value="0"
                class="form-control" placeholder="Color" aria-label="Color">
 
         <button type="submit" class="btn btn-success">Add beer</button>

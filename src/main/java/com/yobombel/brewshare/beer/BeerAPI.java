@@ -24,7 +24,6 @@ public class BeerAPI {
         return beerService.findById(id);
     }
 
-    //TODO - add ingredient support
     @PostMapping("add")
     public void addBeer(@RequestBody Beer beer) {
         beerService.add(beer);
