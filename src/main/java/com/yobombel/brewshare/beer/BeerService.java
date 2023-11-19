@@ -1,16 +1,23 @@
 package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.CRUDService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BeerService {
+public class BeerService implements CRUDService<Beer, Long> {
 
     private final BeerRepository beerRepository;
 
     public BeerService(BeerRepository beerRepository) {
         this.beerRepository = beerRepository;
+    }
+
+    @Override
+    public Long add(Beer entity) {
+        return beerRepository.save(entity)
+                .getId();
     }
 
     public List<Beer> findAll() {
@@ -21,13 +28,10 @@ public class BeerService {
         return beerRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public Long addBeer(Beer beer) {
-        return beerRepository.save(beer).getId();
-    }
-
     //TODO - temporary method, delete after implementing better beer examples
     public void deleteAllBeers() {
         beerRepository.deleteAll();
     }
+
 
 }

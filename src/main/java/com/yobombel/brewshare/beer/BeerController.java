@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/beer/")
 public class BeerController {
 
     private final BeerService beerService;
@@ -16,26 +18,26 @@ public class BeerController {
         this.beerService = beerService;
     }
 
-    @GetMapping("")
+    @GetMapping("all")
     public String allBeers(Model model) {
         model.addAttribute("allBeers", beerService.findAll());
         return "allBeers";
     }
 
-    @GetMapping("/beer/id/{id}")
+    @GetMapping("id/{id}")
     public String viewBeerDetails(Model model, @PathVariable Long id) {
         model.addAttribute("beer", beerService.findById(id));
         return "beerDetails";
     }
 
-    @GetMapping("/beer/new")
-    public String newBeer(){
+    @GetMapping("new")
+    public String newBeer() {
         return "newBeer";
     }
 
-    @PostMapping("/beer/new")
-    public String newBeer(@Valid Beer beer){
-        Long id = beerService.addBeer(beer);
+    @PostMapping("new")
+    public String newBeer(@Valid Beer beer) {
+        Long id = beerService.add(beer);
         return "redirect:/beer/id/" + id;
     }
 

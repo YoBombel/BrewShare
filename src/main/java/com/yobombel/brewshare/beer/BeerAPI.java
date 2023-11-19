@@ -20,12 +20,14 @@ public class BeerAPI {
     }
 
     @GetMapping("id/{id}")
-    public Beer findBeerById(@PathVariable Long id){ return beerService.findById(id); }
+    public Beer findBeerById(@PathVariable Long id) {
+        return beerService.findById(id);
+    }
 
     //TODO - add ingredient support
     @PostMapping("add")
     public void addBeer(@RequestBody Beer beer) {
-        beerService.addBeer(beer);
+        beerService.add(beer);
     }
 
 }

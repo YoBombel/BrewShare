@@ -41,7 +41,7 @@ public class TempBeerList {
             beer.setIbu(generate1DecimalPlaceRandom(0, 100));
             beer.setColor(generate1DecimalPlaceRandom(4, 65));
             beer.setIngredients(generateIngredients(i + 3));
-            beerService.addBeer(beer);
+            beerService.add(beer);
         }
     }
 
