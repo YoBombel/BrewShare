@@ -2,10 +2,8 @@ package com.yobombel.brewshare.beer.ingredient;
 
 import jakarta.persistence.*;
 
-import static com.yobombel.brewshare.beer.ingredient.Ingredient.TABLE_NAME;
-
 @Entity
-@Table(name = TABLE_NAME)
+@Table(name = Ingredient.TABLE_NAME)
 public class Ingredient {
 
     public static final String TABLE_NAME = "ingredient";
