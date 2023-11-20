@@ -36,9 +36,10 @@
                 <a th:href="@{#}">
                     <button class="btn btn-outline-warning mx-2">Edit</button>
                 </a>
-                <a th:href="@{#}">
+                <form th:action="@{/beer/id/{id}(id = ${beer.id})}" th:method="delete">
                     <button class="btn btn-outline-danger">Delete</button>
-                </a></div>
+                </form>
+            </div>
         </div>
     </div>
 

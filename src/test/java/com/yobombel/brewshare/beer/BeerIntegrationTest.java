@@ -55,18 +55,21 @@ class BeerIntegrationTest {
     @Autowired
     IngredientService ingredientService;
 
+    Long id;
+    Beer beer;
+
     @BeforeEach
     void setUp(){
         beerRepository.deleteAll();
         ingredientRepository.deleteAll();
+        beer = new Beer();
+        beer.setName("Test Beer");
+        beer.setId(1L);
     }
 
     @Test
     void shouldAddBeer(){
         //GIVEN
-        Beer beer = new Beer();
-        beer.setName("TestBeer");
-
         //WHEN
         Long id = beerService.add(beer);
         List<Beer> beerList = beerRepository.findAll();
@@ -74,6 +77,20 @@ class BeerIntegrationTest {
         //THEN
         assertNotNull(id);
         assertThat(beerList).hasSize(1);
+    }
+
+    @Test
+    void shouldDeleteById(){
+        //GIVEN
+        id = beerService.add(beer);
+
+        //WHEN
+        beerService.deleteById(id);
+        List<Beer> beerList = beerRepository.findAll();
+
+        //THEN
+        assertThat(beerList).isEmpty();
+
 
     }
 

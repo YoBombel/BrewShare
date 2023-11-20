@@ -11,6 +11,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -25,10 +26,12 @@ class BeerServiceTest {
     @Spy
     private BeerService beerService;
 
+    private Long id;
     private Beer beer;
 
     @BeforeEach
     void init(){
+        id = 1L;
         beer = new Beer();
         beer.setName("TestBeer");
     }
@@ -44,4 +47,15 @@ class BeerServiceTest {
         //THEN
         verify(beerRepository).save(any(Beer.class));
     }
+
+    @Test
+    void shouldCallRepositoryDeleteById(){
+        //GIVEN
+        //WHEN
+        beerService.deleteById(id);
+
+        //THEN
+        verify(beerRepository).deleteById(anyLong());
+    }
+
 }

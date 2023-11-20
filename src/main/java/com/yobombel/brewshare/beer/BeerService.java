@@ -28,6 +28,8 @@ public class BeerService implements CRUDService<Beer, Long> {
         return beerRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    public void deleteById(Long id) {beerRepository.deleteById(id);}
+
     //TODO - temporary method, delete after implementing better beer examples
     public void deleteAllBeers() {
         beerRepository.deleteAll();

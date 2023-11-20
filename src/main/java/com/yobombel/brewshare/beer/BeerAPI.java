@@ -29,4 +29,9 @@ public class BeerAPI {
         beerService.add(beer);
     }
 
+    @DeleteMapping("id/{id}")
+    public void deleteById(@PathVariable Long id){
+        beerService.deleteById(id);
+    }
+
 }

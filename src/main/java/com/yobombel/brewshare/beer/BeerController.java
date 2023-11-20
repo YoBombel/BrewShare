@@ -3,10 +3,7 @@ package com.yobombel.brewshare.beer;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/beer/")
@@ -39,6 +36,12 @@ public class BeerController {
     public String newBeer(@Valid Beer beer) {
         Long id = beerService.add(beer);
         return "redirect:/beer/id/" + id;
+    }
+
+    @DeleteMapping("id/{id}")
+    public String deleteBeerById(@PathVariable Long id){
+        beerService.deleteById(id);
+        return "redirect:/beer/all";
     }
 
 }
