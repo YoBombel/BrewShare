@@ -33,7 +33,7 @@
                 </li>
             </ol>
             <div class="d-flex justify-content-end m-2">
-                <a th:href="@{#}">
+                <a th:href="@{/beer/edit/{id}(id = ${beer.id})}">
                     <button class="btn btn-outline-warning mx-2">Edit</button>
                 </a>
                 <form th:action="@{/beer/id/{id}(id = ${beer.id})}" th:method="delete">

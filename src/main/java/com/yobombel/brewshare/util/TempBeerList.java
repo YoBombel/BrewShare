@@ -27,7 +27,7 @@ public class TempBeerList {
 
     @PostConstruct
     private void createTemporaryBeerList() {
-        beerService.deleteAllBeers();
+        beerService.deleteAll();
         ingredientService.deleteAllIngredients();
 
         for (int i = 1; i <= 10; i++) {

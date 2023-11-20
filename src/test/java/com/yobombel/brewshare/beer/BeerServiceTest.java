@@ -14,6 +14,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class BeerServiceTest {
@@ -45,7 +46,7 @@ class BeerServiceTest {
         beerService.add(beer);
 
         //THEN
-        verify(beerRepository).save(any(Beer.class));
+        verify(beerRepository).save(beer);
     }
 
     @Test
@@ -55,7 +56,19 @@ class BeerServiceTest {
         beerService.deleteById(id);
 
         //THEN
-        verify(beerRepository).deleteById(anyLong());
+        verify(beerRepository).deleteById(id);
+    }
+
+    @Test
+    void shouldUpdate(){
+        //GIVEN
+        given(beerRepository.save(beer)).willReturn(beer);
+
+        //WHEN
+        beerService.update(id, beer);
+
+        //THEN
+        verify(beerRepository).save(beer);
     }
 
 }

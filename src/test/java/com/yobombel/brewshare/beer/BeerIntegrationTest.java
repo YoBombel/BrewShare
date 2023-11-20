@@ -65,15 +65,14 @@ class BeerIntegrationTest {
         beer = new Beer();
         beer.setName("Test Beer");
         beer.setId(1L);
+        id = beerService.add(beer);
     }
 
     @Test
     void shouldAddBeer(){
         //GIVEN
         //WHEN
-        Long id = beerService.add(beer);
         List<Beer> beerList = beerRepository.findAll();
-
         //THEN
         assertNotNull(id);
         assertThat(beerList).hasSize(1);
@@ -82,16 +81,29 @@ class BeerIntegrationTest {
     @Test
     void shouldDeleteById(){
         //GIVEN
-        id = beerService.add(beer);
-
         //WHEN
         beerService.deleteById(id);
         List<Beer> beerList = beerRepository.findAll();
 
         //THEN
         assertThat(beerList).isEmpty();
+    }
 
+    @Test
+    void shouldUpdate(){
+        //GIVEN
+        Beer updatedBeer = beerService.findById(id);
+        String updatedName = "UpdatedName";
+        updatedBeer.setName(updatedName);
 
+        //WHEN
+        beerService.update(id, updatedBeer);
+        Beer result = beerService.findById(id);
+        List<Beer> allBeers = beerService.findAll();
+
+        //THEN
+        assertThat(result.getName()).isEqualTo(updatedName);
+        assertThat(allBeers).hasSize(1);
     }
 
 }

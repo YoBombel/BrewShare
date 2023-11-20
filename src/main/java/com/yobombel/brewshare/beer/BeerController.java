@@ -39,9 +39,21 @@ public class BeerController {
     }
 
     @DeleteMapping("id/{id}")
-    public String deleteBeerById(@PathVariable Long id){
+    public String deleteBeerById(@PathVariable Long id) {
         beerService.deleteById(id);
         return "redirect:/beer/all";
+    }
+
+    @GetMapping("edit/{id}")
+    public String editBeer(Model model, @PathVariable Long id) {
+        model.addAttribute("beer", beerService.findById(id));
+        return "editBeer";
+    }
+
+    @PutMapping("edit/{id}")
+    public String editBeer(@PathVariable Long id, @Valid Beer editedBeer) {
+        beerService.update(id, editedBeer);
+        return "redirect:/beer/id/" + id;
     }
 
 }

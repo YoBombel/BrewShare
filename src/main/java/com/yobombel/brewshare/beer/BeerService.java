@@ -2,10 +2,12 @@ package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.CRUDService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class BeerService implements CRUDService<Beer, Long> {
 
     private final BeerRepository beerRepository;
@@ -28,12 +30,17 @@ public class BeerService implements CRUDService<Beer, Long> {
         return beerRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public void deleteById(Long id) {beerRepository.deleteById(id);}
+    public void deleteById(Long id) {
+        beerRepository.deleteById(id);
+    }
 
     //TODO - temporary method, delete after implementing better beer examples
-    public void deleteAllBeers() {
+    public void deleteAll() {
         beerRepository.deleteAll();
     }
 
-
+    public void update(Long id, Beer editedBeer) {
+        editedBeer.setId(id);
+        beerRepository.save(editedBeer);
+    }
 }
