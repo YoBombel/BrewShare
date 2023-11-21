@@ -58,7 +58,7 @@ public class TempBeerList {
             ingredient.setName("Ingredient " + (j + 1));
             ingredient.setAmount(generate1DecimalPlaceRandom(10, 5000));
             ingredients.add(ingredient);
-            ingredientService.addIngredient(ingredient);
+            ingredientService.add(ingredient);
         }
         return ingredients;
     }

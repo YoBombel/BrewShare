@@ -3,6 +3,8 @@ package com.yobombel.brewshare.beer.ingredient;
 import com.yobombel.brewshare.CRUDService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class IngredientService implements CRUDService<Ingredient, Long> {
 
@@ -18,8 +20,24 @@ public class IngredientService implements CRUDService<Ingredient, Long> {
                 .getId();
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredientRepository.save(ingredient);
+    @Override
+    public List<Ingredient> findAll() {
+        return null;
+    }
+
+    @Override
+    public Ingredient findById(Long aLong) {
+        return null;
+    }
+
+    @Override
+    public void update(Long aLong, Ingredient entity) {
+
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
+
     }
 
     //TODO - temporary method, delete after implementing better beer examples

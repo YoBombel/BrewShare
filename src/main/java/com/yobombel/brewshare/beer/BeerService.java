@@ -27,16 +27,26 @@ public class BeerService implements CRUDService<Beer, Long> {
                 .getId();
     }
 
+    @Override
     public List<Beer> findAll() {
         log.info("Finding all beers");
         return beerRepository.findAll();
     }
 
+    @Override
     public Beer findById(Long id) {
         log.info("Finding by id: {}", id);
         return beerRepository.findById(id).orElseThrow(() -> new BeerNotFoundException(id));
     }
 
+    @Override
+    public void update(Long id, Beer editedBeer) {
+        log.info("Updating beer id: {}", id);
+        editedBeer.setId(id);
+        beerRepository.save(editedBeer);
+    }
+
+    @Override
     public void deleteById(Long id) {
         log.info("Deleting by id: {}", id);
         beerRepository.findById(id)
@@ -51,9 +61,5 @@ public class BeerService implements CRUDService<Beer, Long> {
         beerRepository.deleteAll();
     }
 
-    public void update(Long id, Beer editedBeer) {
-        log.info("Updating beer id: {}", id);
-        editedBeer.setId(id);
-        beerRepository.save(editedBeer);
-    }
+
 }

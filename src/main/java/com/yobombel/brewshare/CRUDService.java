@@ -1,7 +1,17 @@
 package com.yobombel.brewshare;
 
-public interface CRUDService <T, ID> {
+import java.util.List;
 
-    ID add(T entity);
+public interface CRUDService<T, Id> {
+
+    Id add(T entity);
+
+    List<T> findAll();
+
+    T findById(Id id);
+
+    void update(Id id, T entity);
+
+    void deleteById(Id id);
 
 }
