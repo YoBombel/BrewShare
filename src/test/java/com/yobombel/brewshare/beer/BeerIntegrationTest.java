@@ -1,16 +1,12 @@
 package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
 import com.yobombel.brewshare.beer.ingredient.IngredientRepository;
 import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -19,6 +15,10 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BeerIntegrationTest {
@@ -29,12 +29,12 @@ class BeerIntegrationTest {
     static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.2.0");
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         mysql.start();
     }
 
     @AfterAll
-    static void afterAll(){
+    static void afterAll() {
         mysql.stop();
     }
 
@@ -59,7 +59,7 @@ class BeerIntegrationTest {
     Beer beer;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         beerRepository.deleteAll();
         ingredientRepository.deleteAll();
         beer = new Beer();
@@ -69,7 +69,7 @@ class BeerIntegrationTest {
     }
 
     @Test
-    void shouldAddBeer(){
+    void shouldAddBeer() {
         //GIVEN
         //WHEN
         List<Beer> beerList = beerRepository.findAll();
@@ -79,7 +79,7 @@ class BeerIntegrationTest {
     }
 
     @Test
-    void shouldDeleteById(){
+    void shouldDeleteById() {
         //GIVEN
         //WHEN
         beerService.deleteById(id);
@@ -90,7 +90,7 @@ class BeerIntegrationTest {
     }
 
     @Test
-    void shouldUpdate(){
+    void shouldUpdate() {
         //GIVEN
         Beer updatedBeer = beerService.findById(id);
         String updatedName = "UpdatedName";
@@ -104,6 +104,32 @@ class BeerIntegrationTest {
         //THEN
         assertThat(result.getName()).isEqualTo(updatedName);
         assertThat(allBeers).hasSize(1);
+    }
+
+    @Test
+    void shouldThrowBeerNotFoundException() {
+        //GIVEN
+        String expectedExceptionMessage = "Beer not found, id: " + id;
+        beerRepository.deleteAll();
+        //WHEN
+        Throwable thrown = catchThrowable(() -> beerService.findById(id));
+        //THEN
+        assertThat(thrown)
+                .isExactlyInstanceOf(BeerNotFoundException.class)
+                .hasMessage(expectedExceptionMessage);
+    }
+
+    @Test
+    void shouldThrowBeerToDeleteNotFoundException() {
+        //GIVEN
+        String expectedExceptionMessage = "Beer not found, id: " + id;
+        beerRepository.deleteAll();
+        //WHEN
+        Throwable thrown = catchThrowable(() -> beerService.deleteById(id));
+        //THEN
+        assertThat(thrown)
+                .isExactlyInstanceOf(BeerNotFoundException.class)
+                .hasMessage(expectedExceptionMessage);
     }
 
 }

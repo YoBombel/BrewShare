@@ -1,5 +1,6 @@
 package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,9 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,7 +30,7 @@ class BeerServiceTest {
     private Beer beer;
 
     @BeforeEach
-    void init(){
+    void init() {
         id = 1L;
         beer = new Beer();
         beer.setName("TestBeer");
@@ -50,17 +49,19 @@ class BeerServiceTest {
     }
 
     @Test
-    void shouldCallRepositoryDeleteById(){
+    void shouldCallRepositoryDelete() {
         //GIVEN
+        when(beerRepository.findById(id)).thenReturn(Optional.of(beer));
+
         //WHEN
         beerService.deleteById(id);
 
         //THEN
-        verify(beerRepository).deleteById(id);
+        verify(beerRepository).delete(beer);
     }
 
     @Test
-    void shouldUpdate(){
+    void shouldUpdate() {
         //GIVEN
         given(beerRepository.save(beer)).willReturn(beer);
 
@@ -69,6 +70,36 @@ class BeerServiceTest {
 
         //THEN
         verify(beerRepository).save(beer);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenBeerNotFound() {
+        //GIVEN
+        given(beerRepository.findById(id)).willReturn(Optional.empty());
+        String expectedExceptionMessage = "Beer not found, id: " + id;
+
+        //WHEN
+        Throwable thrown = catchThrowable(() -> beerService.findById(id));
+        //THEN
+        assertThat(thrown)
+                .isExactlyInstanceOf(BeerNotFoundException.class)
+                .hasMessage(expectedExceptionMessage);
+        verify(beerRepository).findById(id);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenBeerToDeleteNotFound() {
+        //GIVEN
+        when(beerRepository.findById(id)).thenReturn(Optional.empty());
+        String expectedExceptionMessage = "Beer not found, id: " + id;
+
+        //WHEN
+        Throwable thrown = catchThrowable(() -> beerService.deleteById(id));
+        //THEN
+        assertThat(thrown)
+                .isExactlyInstanceOf(BeerNotFoundException.class)
+                .hasMessage(expectedExceptionMessage);
+        verify(beerRepository).findById(id);
     }
 
 }

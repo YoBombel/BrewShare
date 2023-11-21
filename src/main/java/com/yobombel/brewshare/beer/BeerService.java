@@ -1,6 +1,7 @@
 package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.CRUDService;
+import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,11 +28,14 @@ public class BeerService implements CRUDService<Beer, Long> {
     }
 
     public Beer findById(Long id) {
-        return beerRepository.findById(id).orElseThrow(RuntimeException::new);
+        return beerRepository.findById(id).orElseThrow(() -> new BeerNotFoundException(id));
     }
 
     public void deleteById(Long id) {
-        beerRepository.deleteById(id);
+        beerRepository.findById(id)
+                .ifPresentOrElse(beerRepository::delete, () -> {
+                            throw new BeerNotFoundException(id);
+                        });
     }
 
     //TODO - temporary method, delete after implementing better beer examples
