@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,6 +47,16 @@ class BeerServiceTest {
 
         //THEN
         verify(beerRepository).save(beer);
+    }
+
+    @Test
+    void shouldFindAll(){
+        //GIVEN
+        given(beerRepository.findAll()).willReturn(List.of(beer));
+        //WHEN
+        beerService.findAll();
+        //THEN
+        verify(beerRepository).findAll();
     }
 
     @Test
@@ -100,6 +111,15 @@ class BeerServiceTest {
                 .isExactlyInstanceOf(BeerNotFoundException.class)
                 .hasMessage(expectedExceptionMessage);
         verify(beerRepository).findById(id);
+    }
+
+    @Test
+    void shouldDeleteAll(){
+        //GIVEN
+        //WHEN
+        beerService.deleteAll();
+        //THEN
+        verify(beerRepository).deleteAll();
     }
 
 }
