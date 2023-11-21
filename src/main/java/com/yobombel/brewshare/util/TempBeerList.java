@@ -1,10 +1,13 @@
 package com.yobombel.brewshare.util;
 
 import com.yobombel.brewshare.beer.BeerService;
+import com.yobombel.brewshare.beer.ErrorHandlingController;
 import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import com.yobombel.brewshare.beer.Beer;
 import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -18,6 +21,8 @@ public class TempBeerList {
 
     private final BeerService beerService;
     private final IngredientService ingredientService;
+    private static final Logger log = LoggerFactory.getLogger(TempBeerList.class);
+
     Random random = new Random();
 
     public TempBeerList(BeerService beerService, IngredientService ingredientService) {
@@ -27,6 +32,7 @@ public class TempBeerList {
 
     @PostConstruct
     private void createTemporaryBeerList() {
+        log.info("Creating temporary beer list");
         beerService.deleteAll();
         ingredientService.deleteAllIngredients();
 
