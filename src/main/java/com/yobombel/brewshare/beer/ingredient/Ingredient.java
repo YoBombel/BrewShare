@@ -1,5 +1,6 @@
 package com.yobombel.brewshare.beer.ingredient;
 
+import com.yobombel.brewshare.beer.Beer;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,9 @@ public class Ingredient {
     @Column(name = COLUMN_PREFIX + "id")
     private Long id;
 
+    @ManyToOne
+    private Beer beer;
+
     @Column(name = COLUMN_PREFIX + "name")
     private String name;
 
@@ -26,6 +30,14 @@ public class Ingredient {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Beer getBeer() {
+        return beer;
+    }
+
+    public void setBeer(Beer beer) {
+        this.beer = beer;
     }
 
     public String getName() {

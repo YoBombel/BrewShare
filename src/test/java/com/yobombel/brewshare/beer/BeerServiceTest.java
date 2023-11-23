@@ -1,6 +1,7 @@
 package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
+import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +22,8 @@ class BeerServiceTest {
 
     @Mock
     private BeerRepository beerRepository;
+    @Mock
+    private IngredientService ingredientService;
     @Captor
     private ArgumentCaptor<Beer> captor;
     @InjectMocks
@@ -68,7 +71,7 @@ class BeerServiceTest {
         beerService.deleteById(id);
 
         //THEN
-        verify(beerRepository).delete(beer);
+        verify(beerRepository).deleteById(id);
     }
 
     @Test

@@ -52,7 +52,7 @@ public class Beer {
     @Column(name = COLUMN_PREFIX + "color")
     private double color;
 
-    @OneToMany
+    @OneToMany(mappedBy = "beer")
     private List<Ingredient> ingredients;
 
     public Long getId() {

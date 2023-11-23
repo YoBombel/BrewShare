@@ -2,6 +2,7 @@ package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.CRUDService;
 import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
+import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,12 @@ import java.util.List;
 public class BeerService implements CRUDService<Beer, Long> {
 
     private final BeerRepository beerRepository;
+    private final IngredientService ingredientService;
     private static final Logger log = LoggerFactory.getLogger(BeerService.class);
 
-    public BeerService(BeerRepository beerRepository) {
+    public BeerService(BeerRepository beerRepository, IngredientService ingredientService) {
         this.beerRepository = beerRepository;
+        this.ingredientService = ingredientService;
     }
 
     @Override
@@ -48,11 +51,10 @@ public class BeerService implements CRUDService<Beer, Long> {
 
     @Override
     public void deleteById(Long id) {
-        log.info("Deleting by id: {}", id);
-        beerRepository.findById(id)
-                .ifPresentOrElse(beerRepository::delete, () -> {
-                            throw new BeerNotFoundException(id);
-                        });
+        Beer beer = findById(id);
+        ingredientService.deleteAllFromList(beer.getIngredients());
+        log.info("Deleting beer by id: {}", id);
+        beerRepository.deleteById(id);
     }
 
     //TODO - temporary method, delete after implementing better beer examples

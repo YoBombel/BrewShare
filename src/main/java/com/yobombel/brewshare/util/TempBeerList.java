@@ -33,30 +33,29 @@ public class TempBeerList {
     @PostConstruct
     private void createTemporaryBeerList() {
         log.info("Creating temporary beer list");
-        beerService.deleteAll();
-        ingredientService.deleteAllIngredients();
 
         for (int i = 1; i <= 10; i++) {
             Beer beer = new Beer();
-            beer.setId((long) i);
             beer.setName("TestBeer" + i);
+            Long id = beerService.add(beer);
             beer.setStyle("TestStyle" + i);
             beer.setBatchSize(generate1DecimalPlaceRandom(19, 23));
             beer.setOriginalGravity(generate1DecimalPlaceRandom(7, 30));
             beer.setAbv(generate1DecimalPlaceRandom(3, 13));
             beer.setIbu(generate1DecimalPlaceRandom(0, 100));
             beer.setColor(generate1DecimalPlaceRandom(4, 65));
-            beer.setIngredients(generateIngredients(i + 3));
-            beerService.add(beer);
+            beer.setIngredients(generateIngredients((i + 3), beer));
+            beerService.update(id, beer);
         }
     }
 
-    private List<Ingredient> generateIngredients(int i) {
+    private List<Ingredient> generateIngredients(int i, Beer beer) {
         List<Ingredient> ingredients = new ArrayList<>();
         for (int j = 0; j < i; j++) {
             Ingredient ingredient = new Ingredient();
             ingredient.setName("Ingredient " + (j + 1));
             ingredient.setAmount(generate1DecimalPlaceRandom(10, 5000));
+            ingredient.setBeer(beer);
             ingredients.add(ingredient);
             ingredientService.add(ingredient);
         }
