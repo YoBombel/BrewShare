@@ -65,7 +65,7 @@ class BeerServiceTest {
         beerService.add(beer);
 
         //THEN
-        verify(ingredientService).addAllFromList(ingredients, beer);
+        verify(ingredientService).addAllFromList(beer);
         verify(beerRepository).save(beer);
 
     }
@@ -96,6 +96,7 @@ class BeerServiceTest {
     void shouldUpdate() {
         //GIVEN
         given(beerRepository.save(beer)).willReturn(beer);
+        given(beerRepository.findById(id)).willReturn(Optional.ofNullable(beer));
 
         //WHEN
         beerService.update(id, beer);

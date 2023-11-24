@@ -1,7 +1,6 @@
 package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
-import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +25,9 @@ public class BeerService {
     public Beer add(Beer beer) {
         log.info("Saving beer: {}", beer.getName());
         beer = beerRepository.save(beer);
-        setIngredientsForNewBeer(beer);
+        ingredientService.addAllFromList(beer);
         return beer;
     }
-
 
     public List<Beer> findAll() {
         log.info("Finding all beers");
@@ -41,10 +39,12 @@ public class BeerService {
         return beerRepository.findById(id).orElseThrow(() -> new BeerNotFoundException(id));
     }
 
-    public void update(Long id, Beer editedBeer) {
+    public Beer update(Long id, Beer updatedBeer) {
+        Beer oldBeer = findById(id);
         log.info("Updating beer id: {}", id);
-        editedBeer.setId(id);
-        beerRepository.save(editedBeer);
+        updatedBeer.setId(id);
+        ingredientService.updateIngredientsForBeer(oldBeer, updatedBeer);
+        return beerRepository.save(updatedBeer);
     }
 
     public void deleteById(Long id) {
@@ -58,15 +58,6 @@ public class BeerService {
     public void deleteAll() {
         log.info("Deleting all beers");
         beerRepository.deleteAll();
-    }
-
-    //TODO: REPURPOSE METHOD TO NEW BEER? MAYBE
-    private void setIngredientsForNewBeer(Beer beer) {
-        List<Ingredient> ingredients = beer.getIngredients();
-        if (!ingredients.isEmpty()) {
-            log.info("Saving ingredients for beer");
-            ingredientService.addAllFromList(ingredients, beer);
-        }
     }
 
 }

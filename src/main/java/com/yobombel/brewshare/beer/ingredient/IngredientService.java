@@ -4,10 +4,14 @@ import com.yobombel.brewshare.beer.Beer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class IngredientService {
 
     private final IngredientRepository ingredientRepository;
@@ -18,9 +22,8 @@ public class IngredientService {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public Long add(Ingredient entity) {
-        return ingredientRepository.save(entity)
-                .getId();
+    public Ingredient add(Ingredient entity) {
+        return ingredientRepository.save(entity);
     }
 
     public List<Ingredient> findAll() {
@@ -28,10 +31,32 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public void addAllFromList(List<Ingredient> ingredients, Beer beer) {
-        setIngredientToBeerReference(ingredients, beer);
+    public void addAllFromList(Beer beer) {
+        setIngredientToBeerReference(beer.getIngredients(), beer);
         log.info("Saving all ingredients from list");
-        ingredientRepository.saveAll(ingredients);
+        ingredientRepository.saveAll(beer.getIngredients());
+    }
+
+    public void updateIngredientsForBeer(Beer oldBeer, Beer editedBeer) {
+        List<Ingredient> oldIngredients = oldBeer.getIngredients();
+        List<Ingredient> newIngredients = editedBeer.getIngredients();
+
+        removeUnusedIngredients(oldIngredients, newIngredients);
+        ingredientRepository.saveAll(newIngredients);
+    }
+
+    public void delete(Ingredient ingredient) {
+        log.info("Deleting ingredient, id: {}", ingredient.getId());
+        ingredientRepository.delete(ingredient);
+    }
+
+    private void removeUnusedIngredients(List<Ingredient> oldIngredients, List<Ingredient> newIngredients) {
+        List<Long> usedIds = newIngredients.stream()
+                .map(Ingredient::getId)
+                .toList();
+        oldIngredients.stream()
+                .filter(i -> !usedIds.contains(i.getId()))
+                .forEach(this::delete);
     }
 
     public void deleteAllFromList(List<Ingredient> ingredients) {

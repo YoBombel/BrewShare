@@ -53,7 +53,7 @@ public class Beer {
     @Column(name = COLUMN_PREFIX + "color")
     private double color;
 
-    @OneToMany(mappedBy = "beer")
+    @OneToMany(mappedBy = "beer", fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
 
     public Beer() {
