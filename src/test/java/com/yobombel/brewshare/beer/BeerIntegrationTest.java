@@ -1,6 +1,7 @@
 package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
+import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import com.yobombel.brewshare.beer.ingredient.IngredientRepository;
 import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.junit.jupiter.api.AfterAll;
@@ -18,7 +19,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BeerIntegrationTest {
@@ -57,30 +57,48 @@ class BeerIntegrationTest {
 
     Long id;
     Beer beer;
+    Ingredient ingredient;
+    List<Ingredient> ingredients;
 
     @BeforeEach
     void setUp() {
-        beerRepository.deleteAll();
         ingredientRepository.deleteAll();
+        beerRepository.deleteAll();
         beer = new Beer();
         beer.setName("Test Beer");
-        beer.setId(1L);
-        id = beerService.add(beer);
+        ingredient = new Ingredient();
+        ingredients = List.of(ingredient);
     }
 
     @Test
     void shouldAddBeer() {
         //GIVEN
         //WHEN
+        beerService.add(beer);
         List<Beer> beerList = beerRepository.findAll();
         //THEN
-        assertNotNull(id);
         assertThat(beerList).hasSize(1);
+    }
+
+    @Test
+    void shouldAddBeerWithIngredients() {
+        //GIVEN
+        beer.setIngredients(ingredients);
+
+        //WHEN
+        Beer result = beerService.add(beer);
+        List<Beer> beerList = beerRepository.findAll();
+
+
+        //THEN
+        assertThat(beerList).hasSize(1);
+        assertThat(result.getIngredients()).isNotEmpty();
     }
 
     @Test
     void shouldDeleteById() {
         //GIVEN
+        Long id = beerService.add(beer).getId();
         //WHEN
         beerService.deleteById(id);
         List<Beer> beerList = beerRepository.findAll();
@@ -92,6 +110,7 @@ class BeerIntegrationTest {
     @Test
     void shouldUpdate() {
         //GIVEN
+        Long id = beerService.add(beer).getId();
         Beer updatedBeer = beerService.findById(id);
         String updatedName = "UpdatedName";
         updatedBeer.setName(updatedName);
@@ -109,7 +128,9 @@ class BeerIntegrationTest {
     @Test
     void shouldThrowBeerNotFoundException() {
         //GIVEN
+        id = 1L;
         String expectedExceptionMessage = "Beer not found, id: " + id;
+        beerService.add(beer);
         beerRepository.deleteAll();
         //WHEN
         Throwable thrown = catchThrowable(() -> beerService.findById(id));
@@ -122,8 +143,8 @@ class BeerIntegrationTest {
     @Test
     void shouldThrowBeerToDeleteNotFoundException() {
         //GIVEN
+        id = 1L;
         String expectedExceptionMessage = "Beer not found, id: " + id;
-        beerRepository.deleteAll();
         //WHEN
         Throwable thrown = catchThrowable(() -> beerService.deleteById(id));
         //THEN

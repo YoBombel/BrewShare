@@ -1,6 +1,7 @@
 package com.yobombel.brewshare.beer;
 
 import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
+import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BeerServiceTest {
@@ -37,6 +37,7 @@ class BeerServiceTest {
     void init() {
         id = 1L;
         beer = new Beer();
+        beer.setId(id);
         beer.setName("TestBeer");
     }
 
@@ -53,7 +54,24 @@ class BeerServiceTest {
     }
 
     @Test
-    void shouldFindAll(){
+    void shouldAddWithIngredients() {
+        //GIVEN
+        when(beerRepository.save(any(Beer.class))).thenReturn(beer);
+        Ingredient ingredient = new Ingredient();
+        List<Ingredient> ingredients = List.of(ingredient);
+        beer.setIngredients(ingredients);
+
+        //WHEN
+        beerService.add(beer);
+
+        //THEN
+        verify(ingredientService).addAllFromList(ingredients, beer);
+        verify(beerRepository).save(beer);
+
+    }
+
+    @Test
+    void shouldFindAll() {
         //GIVEN
         given(beerRepository.findAll()).willReturn(List.of(beer));
         //WHEN
@@ -117,7 +135,7 @@ class BeerServiceTest {
     }
 
     @Test
-    void shouldDeleteAll(){
+    void shouldDeleteAll() {
         //GIVEN
         //WHEN
         beerService.deleteAll();

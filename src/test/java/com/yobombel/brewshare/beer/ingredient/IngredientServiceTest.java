@@ -1,18 +1,16 @@
 package com.yobombel.brewshare.beer.ingredient;
 
-import com.yobombel.brewshare.beer.Beer;
-import com.yobombel.brewshare.beer.BeerRepository;
-import com.yobombel.brewshare.beer.BeerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,7 +35,7 @@ class IngredientServiceTest {
     }
 
     @Test
-    void shouldDeleteAllFromList(){
+    void shouldDeleteAllFromList() {
         //GIVEN
         //WHEN
         ingredientService.deleteAllFromList(ingredients);

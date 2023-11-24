@@ -3,7 +3,6 @@ package com.yobombel.brewshare.beer.ingredient;
 import com.yobombel.brewshare.beer.Beer;
 import com.yobombel.brewshare.beer.BeerRepository;
 import com.yobombel.brewshare.beer.BeerService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +17,6 @@ import org.testcontainers.containers.MySQLContainer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -72,7 +70,7 @@ class IngredientIntegrationTest {
         ingredient = new Ingredient();
 
         beer.setName("Test Beer");
-        Long beerId = beerService.add(beer);
+        Long beerId = beerService.add(beer).getId();
 
         ingredient.setBeer(beerService.findById(beerId));
         ingredient.setName("Test Ingredient");
@@ -86,7 +84,7 @@ class IngredientIntegrationTest {
     }
 
     @Test
-    void shouldFindAllIngredients(){
+    void shouldFindAllIngredients() {
         //GIVEN
         //WHEN
         List<Ingredient> result = ingredientService.findAll();
@@ -96,7 +94,7 @@ class IngredientIntegrationTest {
     }
 
     @Test
-    void shouldDeleteAllIngredientsFromList(){
+    void shouldDeleteAllIngredientsFromList() {
         //GIVEN
         //WHEN
         ingredientService.deleteAllFromList(ingredients);

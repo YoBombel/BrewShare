@@ -41,7 +41,7 @@ public class BeerController {
     @PostMapping("new")
     public String newBeer(@Valid Beer beer) {
         log.info("Request to post new beer, name: {}", beer.getName());
-        Long id = beerService.add(beer);
+        Long id = beerService.add(beer).getId();
         return "redirect:/beer/id/" + id;
     }
 

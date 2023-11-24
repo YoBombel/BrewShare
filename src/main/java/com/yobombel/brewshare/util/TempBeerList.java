@@ -37,7 +37,7 @@ public class TempBeerList {
         for (int i = 1; i <= 10; i++) {
             Beer beer = new Beer();
             beer.setName("TestBeer" + i);
-            Long id = beerService.add(beer);
+            Long id = beerService.add(beer).getId();
             beer.setStyle("TestStyle" + i);
             beer.setBatchSize(generate1DecimalPlaceRandom(19, 23));
             beer.setOriginalGravity(generate1DecimalPlaceRandom(7, 30));
