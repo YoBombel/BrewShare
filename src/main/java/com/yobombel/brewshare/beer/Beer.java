@@ -54,11 +54,7 @@ public class Beer {
     private double color;
 
     @OneToMany(mappedBy = "beer", fetch = FetchType.EAGER)
-    private List<Ingredient> ingredients;
-
-    public Beer() {
-        this.ingredients = new ArrayList<>();
-    }
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     public Long getId() {
         return id;

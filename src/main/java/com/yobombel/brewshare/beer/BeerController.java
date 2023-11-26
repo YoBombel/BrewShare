@@ -1,10 +1,12 @@
 package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -32,19 +34,6 @@ public class BeerController {
         return "beerDetails";
     }
 
-    @GetMapping("new")
-    public String newBeer() {
-        log.info("New beer form request");
-        return "newBeer";
-    }
-
-    @PostMapping("new")
-    public String newBeer(@Valid Beer beer) {
-        log.info("Request to post new beer, name: {}", beer.getName());
-        Long id = beerService.add(beer).getId();
-        return "redirect:/beer/id/" + id;
-    }
-
     @DeleteMapping("id/{id}")
     public String deleteBeerById(@PathVariable Long id) {
         log.info("Request to delete beer, id: {}", id);
@@ -64,6 +53,34 @@ public class BeerController {
         log.info("Request to edit beer, id: {}", id);
         beerService.update(id, editedBeer);
         return "redirect:/beer/id/" + id;
+    }
+
+    @GetMapping("new")
+    public String newBeerForm(Beer beer) {
+        log.info("New beer form request");
+        return "newBeer";
+    }
+
+    @PostMapping("new")
+    public String newBeer(@Valid Beer beer) {
+        log.info("Request to post new beer, name: {}", beer.getName());
+        Long id = beerService.add(beer).getId();
+        return "redirect:/beer/id/" + id;
+    }
+
+    @PostMapping(value="/new", params={"addIngredient"})
+    public String addRow(Beer beer, BindingResult bindingResult) {
+        beer.getIngredients().add(new Ingredient());
+        return "newBeer";
+    }
+
+    @PostMapping(value="/new", params={"removeIngredient"})
+    public String removeIngredient(
+            Beer beer,
+            BindingResult bindingResult,
+            @RequestParam(value = "removeIngredient", required = false) Integer ingredientId) {
+        beer.getIngredients().remove(ingredientId.intValue());
+        return "newBeer";
     }
 
 }

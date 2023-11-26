@@ -17,34 +17,68 @@
     <div th:insert="~{fragments/header}"></div>
 
     <form th:object="${beer}" th:method="post" th:action="@{/beer/new}">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="name">Beer name</label>
+                <input id="name" type="text" th:name="name" th:field="*{name}" maxlength="64" required
+                       class="form-control" placeholder="Item name" aria-label="Beer name">
 
-        <label for="name">Beer name</label>
-        <input id="name" type="text" th:name="name" maxlength="64" required
-               class="form-control" placeholder="Item name" aria-label="Beer name<">
+                <label for="style">Style</label>
+                <input id="style" type="text" th:name="style" th:field="*{style}" maxlength="64"
+                       class="form-control" placeholder="Style" aria-label="Style">
 
-        <label for="style">Style</label>
-        <input id="style" type="text" th:name="style" maxlength="64"
-               class="form-control" placeholder="Style" aria-label="Style">
+                <label for="batchSize">Batch size</label>
+                <input id="batchSize" type="number" th:name="batchSize" th:field="*{batchSize}" step=".01" min="0"
+                       value="0"
+                       class="form-control" placeholder="Batch size" aria-label="Batch size">
 
-        <label for="batchSize">Batch size</label>
-        <input id="batchSize" type="number" th:name="batchSize" step=".01" min="0" value="0"
-               class="form-control" placeholder="Batch size" aria-label="Batch size">
+                <label for="originalGravity">Original gravity</label>
+                <input id="originalGravity" type="number" th:name="originalGravity" th:field="*{originalGravity}"
+                       step=".01" min="0" max="99.9"
+                       value="0"
+                       class="form-control" placeholder="Original gravity" aria-label="Original gravity">
 
-        <label for="originalGravity">Original gravity</label>
-        <input id="originalGravity" type="number" th:name="originalGravity" step=".01" min="0" max="99.9" value="0"
-               class="form-control" placeholder="Original gravity" aria-label="Original gravity">
+                <label for="abv">ABV</label>
+                <input id="abv" type="number" th:name="abv" th:field="*{abv}" step=".01" min="0" max="96" value="0"
+                       class="form-control" placeholder="ABV" aria-label="ABV">
 
-        <label for="abv">ABV</label>
-        <input id="abv" type="number" th:name="abv" step=".01" min="0" max="96" value="0"
-               class="form-control" placeholder="ABV" aria-label="ABV">
+                <label for="ibu">IBU</label>
+                <input id="ibu" type="number" th:name="ibu" th:field="*{ibu}" step=".01" min="0" value="0"
+                       class="form-control" placeholder="IBU" aria-label="IBU">
 
-        <label for="ibu">IBU</label>
-        <input id="ibu" type="number" th:name="ibu" step=".01" min="0" value="0"
-               class="form-control" placeholder="IBU" aria-label="IBU">
+                <label for="color">Color</label>
+                <input id="color" type="number" th:name="color" th:field="*{color}" step=".01" min="0" value="0"
+                       class="form-control" placeholder="Color" aria-label="Color">
+            </div>
+            <div class="col-md-6">
 
-        <label for="color">Color</label>
-        <input id="color" type="number" th:name="color" step=".01" min="0" value="0"
-               class="form-control" placeholder="Color" aria-label="Color">
+                <div class="row">
+                    <div class="col-md-6">
+                        Name
+                    </div>
+                    <div class="col-md-6">
+                        Amount
+                        <button type="submit" name="addIngredient" class="btn btn-outline-light">Add ingredient</button>
+
+                    </div>
+                </div>
+                <div class="row" th:each="ingredient,iStat : *{ingredients}">
+                    <div class="col-md-6">
+                        <input type="text" th:field="*{ingredients[__${iStat.index}__].name}"
+                               class="form-control" th:errorclass="fieldError"/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" th:field="*{ingredients[__${iStat.index}__].amount}"
+                               class="form-control" th:errorclass="fieldError"/>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" name="removeIngredient" th:value="${iStat.index}"
+                                class="btn btn-outline-danger">Remove</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <button type="submit" class="btn btn-success">Add beer</button>
     </form>
