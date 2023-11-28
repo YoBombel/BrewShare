@@ -51,7 +51,6 @@
                        class="form-control" placeholder="Color" aria-label="Color">
             </div>
             <div class="col-md-6">
-
                 <div class="row">
                     <div class="col-md-6">
                         Name
@@ -59,7 +58,6 @@
                     <div class="col-md-6">
                         Amount
                         <button type="submit" name="addIngredient" class="btn btn-outline-light">Add ingredient</button>
-
                     </div>
                 </div>
                 <div class="row" th:each="ingredient,iStat : *{ingredients}">
@@ -76,10 +74,8 @@
                                 class="btn btn-outline-danger">Remove</button>
                     </div>
                 </div>
-
             </div>
         </div>
-
         <button type="submit" class="btn btn-success">Add beer</button>
     </form>
 </div>

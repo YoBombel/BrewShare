@@ -20,6 +20,7 @@ public class BeerController {
         this.beerService = beerService;
     }
 
+    //READ
     @GetMapping("all")
     public String allBeers(Model model) {
         log.info("Request for all beers");
@@ -34,13 +35,37 @@ public class BeerController {
         return "beerDetails";
     }
 
-    @DeleteMapping("id/{id}")
-    public String deleteBeerById(@PathVariable Long id) {
-        log.info("Request to delete beer, id: {}", id);
-        beerService.deleteById(id);
-        return "redirect:/beer/all";
+
+    //CREATE
+    @GetMapping("new")
+    public String newBeerForm(Beer beer) {
+        log.info("New beer form request");
+        return "newBeer";
     }
 
+    @PostMapping("new")
+    public String newBeer(@Valid Beer beer) {
+        log.info("Request to post new beer, name: {}", beer.getName());
+        Long id = beerService.add(beer).getId();
+        return "redirect:/beer/id/" + id;
+    }
+
+    @PostMapping(value = "/new", params = {"addIngredient"})
+    public String addRow(Beer beer, BindingResult bindingResult) {
+        beer.getIngredients().add(new Ingredient());
+        return "newBeer";
+    }
+
+    @PostMapping(value = "/new", params = {"removeIngredient"})
+    public String removeIngredient(
+            Beer beer,
+            BindingResult bindingResult,
+            @RequestParam(value = "removeIngredient", required = false) Integer ingredientId) {
+        beer.getIngredients().remove(ingredientId.intValue());
+        return "newBeer";
+    }
+
+    //EDIT
     @GetMapping("edit/{id}")
     public String editBeer(Model model, @PathVariable Long id) {
         log.info("Edit beer form request, id: {}", id);
@@ -55,32 +80,27 @@ public class BeerController {
         return "redirect:/beer/id/" + id;
     }
 
-    @GetMapping("new")
-    public String newBeerForm(Beer beer) {
-        log.info("New beer form request");
-        return "newBeer";
-    }
-
-    @PostMapping("new")
-    public String newBeer(@Valid Beer beer) {
-        log.info("Request to post new beer, name: {}", beer.getName());
-        Long id = beerService.add(beer).getId();
-        return "redirect:/beer/id/" + id;
-    }
-
-    @PostMapping(value="/new", params={"addIngredient"})
-    public String addRow(Beer beer, BindingResult bindingResult) {
+    @PutMapping(value = "/edit/{id}", params = {"addEditIngredient"})
+    public String editAddIngredient(@PathVariable Long id, Beer beer, BindingResult bindingResult) {
         beer.getIngredients().add(new Ingredient());
-        return "newBeer";
+        return "editBeer";
     }
 
-    @PostMapping(value="/new", params={"removeIngredient"})
-    public String removeIngredient(
-            Beer beer,
-            BindingResult bindingResult,
-            @RequestParam(value = "removeIngredient", required = false) Integer ingredientId) {
+    @PutMapping(value = "/edit/{id}", params = {"removeEditIngredient"})
+    public String editRemoveIngredient(@PathVariable Long id,
+                                       Beer beer,
+                                       BindingResult bindingResult,
+                                       @RequestParam(value = "removeEditIngredient", required = false) Integer ingredientId) {
         beer.getIngredients().remove(ingredientId.intValue());
-        return "newBeer";
+        return "editBeer";
+    }
+
+    //DELETE
+    @DeleteMapping("id/{id}")
+    public String deleteBeerById(@PathVariable Long id) {
+        log.info("Request to delete beer, id: {}", id);
+        beerService.deleteById(id);
+        return "redirect:/beer/all";
     }
 
 }

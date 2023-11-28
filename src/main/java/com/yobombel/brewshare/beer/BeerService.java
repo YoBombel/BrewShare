@@ -43,7 +43,7 @@ public class BeerService {
         Beer oldBeer = findById(id);
         log.info("Updating beer id: {}", id);
         updatedBeer.setId(id);
-        ingredientService.updateIngredientsForBeer(oldBeer, updatedBeer);
+        ingredientService.updateEditedIngredients(oldBeer, updatedBeer);
         return beerRepository.save(updatedBeer);
     }
 

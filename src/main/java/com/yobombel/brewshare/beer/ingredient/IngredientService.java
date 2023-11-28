@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -37,26 +35,15 @@ public class IngredientService {
         ingredientRepository.saveAll(beer.getIngredients());
     }
 
-    public void updateIngredientsForBeer(Beer oldBeer, Beer editedBeer) {
-        List<Ingredient> oldIngredients = oldBeer.getIngredients();
-        List<Ingredient> newIngredients = editedBeer.getIngredients();
-
-        removeUnusedIngredients(oldIngredients, newIngredients);
-        ingredientRepository.saveAll(newIngredients);
+    public void updateEditedIngredients(Beer oldBeer, Beer editedBeer) {
+        deleteAllFromList(oldBeer.getIngredients());
+        setIngredientToBeerReference(editedBeer.getIngredients(), editedBeer);
+        ingredientRepository.saveAll(editedBeer.getIngredients());
     }
 
     public void delete(Ingredient ingredient) {
         log.info("Deleting ingredient, id: {}", ingredient.getId());
         ingredientRepository.delete(ingredient);
-    }
-
-    private void removeUnusedIngredients(List<Ingredient> oldIngredients, List<Ingredient> newIngredients) {
-        List<Long> usedIds = newIngredients.stream()
-                .map(Ingredient::getId)
-                .toList();
-        oldIngredients.stream()
-                .filter(i -> !usedIds.contains(i.getId()))
-                .forEach(this::delete);
     }
 
     public void deleteAllFromList(List<Ingredient> ingredients) {

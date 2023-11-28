@@ -2,10 +2,13 @@ package com.yobombel.brewshare.beer.ingredient;
 
 import com.yobombel.brewshare.beer.Beer;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.Comparator;
 
 @Entity
 @Table(name = Ingredient.TABLE_NAME)
-public class Ingredient {
+public class Ingredient implements Comparable<Ingredient>{
 
     public static final String TABLE_NAME = "ingredient";
     public static final String COLUMN_PREFIX = "i_";
@@ -56,4 +59,29 @@ public class Ingredient {
         this.amount = amount;
     }
 
+    @Override
+    public int compareTo(@NotNull Ingredient ingredient) {
+        return Comparator.comparing(Ingredient::getName)
+                .thenComparing(Ingredient::getAmount)
+                .compare(this, ingredient);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient that)) return false;
+
+        if (Double.compare(that.getAmount(), getAmount()) != 0) return false;
+        return getName() != null ? getName().equals(that.getName()) : that.getName() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getName() != null ? getName().hashCode() : 0;
+        temp = Double.doubleToLongBits(getAmount());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

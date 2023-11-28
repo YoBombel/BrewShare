@@ -124,7 +124,7 @@ class IngredientIntegrationTest {
         editedBeer.setIngredients(List.of(editedIngredient));
 
         //WHEN
-        ingredientService.updateIngredientsForBeer(beer, editedBeer);
+        ingredientService.updateEditedIngredients(beer, editedBeer);
         String resultName = beerService.findById(editedBeer.getId()).getIngredients().get(0).getName();
 
         //THEN
@@ -144,7 +144,7 @@ class IngredientIntegrationTest {
         editedBeer.setIngredients(List.of(editedIngredient));
 
         //WHEN
-        ingredientService.updateIngredientsForBeer(beer, editedBeer);
+        ingredientService.updateEditedIngredients(beer, editedBeer);
         List<Ingredient> resultDbIngredients = ingredientService.findAll();
 
         //THEN
