@@ -29,7 +29,7 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public void addAllFromList(Beer beer) {
+    public void addAllForBeer(Beer beer) {
         setIngredientToBeerReference(beer.getIngredients(), beer);
         log.info("Saving all ingredients from list");
         ingredientRepository.saveAll(beer.getIngredients());
@@ -51,7 +51,7 @@ public class IngredientService {
         ingredientRepository.deleteAll(ingredients);
     }
 
-    //TODO - temporary method, delete after implementing better beer examples
+    //TODO: temporary method, delete after implementing better beer examples
     public void deleteAllIngredients() {
         ingredientRepository.deleteAll();
     }

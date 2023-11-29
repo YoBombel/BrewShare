@@ -27,7 +27,7 @@ public class BeerService {
     public Beer add(Beer beer) {
         log.info("Saving beer: {}", beer.getName());
         beer = beerRepository.save(beer);
-        ingredientService.addAllFromList(beer);
+        ingredientService.addAllForBeer(beer);
         return beer;
     }
 

@@ -67,7 +67,7 @@ class BeerServiceTest {
         beerService.add(beer);
 
         //THEN
-        verify(ingredientService).addAllFromList(beer);
+        verify(ingredientService).addAllForBeer(beer);
         verify(beerRepository).save(beer);
 
     }

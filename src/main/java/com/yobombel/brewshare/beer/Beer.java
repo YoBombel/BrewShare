@@ -127,4 +127,41 @@ public class Beer {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Beer beer)) return false;
+
+        if (Double.compare(beer.getBatchSize(), getBatchSize()) != 0) return false;
+        if (Double.compare(beer.getOriginalGravity(), getOriginalGravity()) != 0) return false;
+        if (Double.compare(beer.getAbv(), getAbv()) != 0) return false;
+        if (Double.compare(beer.getIbu(), getIbu()) != 0) return false;
+        if (Double.compare(beer.getColor(), getColor()) != 0) return false;
+        if (getId() != null ? !getId().equals(beer.getId()) : beer.getId() != null) return false;
+        if (getName() != null ? !getName().equals(beer.getName()) : beer.getName() != null) return false;
+        if (getStyle() != null ? !getStyle().equals(beer.getStyle()) : beer.getStyle() != null) return false;
+        return getIngredients() != null ? getIngredients().equals(beer.getIngredients()) : beer.getIngredients() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getStyle() != null ? getStyle().hashCode() : 0);
+        temp = Double.doubleToLongBits(getBatchSize());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getOriginalGravity());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getAbv());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getIbu());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getColor());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (getIngredients() != null ? getIngredients().hashCode() : 0);
+        return result;
+    }
 }
