@@ -32,21 +32,23 @@
         </div>
     </div>
 
-    <nav aria-label="my-custom-pagination" class="mb-5">
+    <nav aria-label="my-custom-pagination" class="flex-row d-flex justify-content-center">
         <ul class="pagination">
             <li th:class="${beers.isFirst()} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:text="'&laquo;'"
-                   th:href="@{all(page=${beers.previousOrFirstPageable().getPageNumber()+1})}"></a>
+                <a class="btn btn-outline-light" th:text="'&laquo;'"
+                   th:href="@{all?page=1}"></a>
             </li>
+<!--            th:href="@{all(page=${beers.previousOrFirstPageable().getPageNumber()+1})}"></a>-->
+
 
             <li th:each="actPageNumb : ${threeClosestPages}"
                 th:class="${beers.getNumber()+1 == actPageNumb} ? 'page-item active' : 'page-item'">
-                <a class="page-link" th:text="${actPageNumb}" th:href="@{all(page=${actPageNumb})}"></a>
+                <a class="btn btn-outline-light" th:text="${actPageNumb}" th:href="@{all(page=${actPageNumb})}"></a>
             </li>
 
             <li th:class="${beers.isLast()} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:text="'&raquo;'"
-                   th:href="@{all(page=${beers.nextOrLastPageable().getPageNumber()+1})}"></a>
+                <a class="btn btn-outline-light" th:text="'&raquo;'"
+                   th:href="@{all(page=${beers.getTotalPages()})}"></a>
             </li>
         </ul>
     </nav>
