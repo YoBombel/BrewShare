@@ -1,20 +1,13 @@
 <a name="readme-top"></a>
-<div align="center">
-
 <h1 align="center">BrewShare</h1>
-</div>
 
 ### About The Project
 BrewShare lets you access and share your brew recipes with friends and your homebrew club via shareable links.
 BrewShare was created in a dire need for quick and easy way to share beer recipe details with fellow homebrewers for free.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Frontend links
-View all beers http://localhost:8080/beer/all
-
-View beer with id  http://localhost:8080/beer/id/
-
-New beer form http://localhost:8080/beer/new/
+### Features
+- Create quick view of beer specification and it's ingredients
 
 ### Built With
 [![Java][Java.com]][Java-url]
@@ -24,6 +17,10 @@ New beer form http://localhost:8080/beer/new/
 [![Thymeleaf][Thymeleaf.com]][Thymeleaf-url]
 [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Screenshots
+<img src="screenshot_1.png" alt="App screenshot" />
+<img src="screenshot_2.png" alt="App screenshot"  />
 
 ## Getting Started
 To get a local copy up and running follow these simple example steps.
@@ -62,9 +59,16 @@ You can stop the app by running the following command in the project directory:
 docker-compose down
   ```
 
-<!-- Screenshots -->
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Frontend links
+View all beers http://localhost:8081/beer/all
+
+View beer with {id}  http://localhost:8081/beer/id/{id}
+
+New beer form http://localhost:8081/beer/new/
+
+Edit beer with {id} http://localhost:8081/beer/edit/{id}
 
 <!-- LICENSE -->
 
@@ -75,12 +79,9 @@ Distributed under the GNU GPLv3  License. See `LICENSE.txt` for more information
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Project
-Link: [https://github.com/YoBombel/BrewSharel](https://github.com/YoBombel/BrewShare)
+Link: [https://github.com/YoBombel/BrewShare](https://github.com/YoBombel/BrewShare)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/BienkowskiTomasz/Home-Supplies-Monitor.svg?style=for-the-badge
 [contributors-url]: https://github.com/BienkowskiTomasz/Home-Supplies-Monitor/graphs/contributors
@@ -103,7 +104,7 @@ Link: [https://github.com/YoBombel/BrewSharel](https://github.com/YoBombel/BrewS
 [MySQL-url]: https://www.mysql.com/
 [Docker.com]: https://img.shields.io/badge/Docker-0DB7ED?style=for-the-badge&logo=docker&logoColor=white
 [Docker-url]: https://www.docker.com/
-[Thymeleaf.com]: https://img.shields.io/badge/Thymeleaf-7B56C0?style=for-the-badge&logo=thymeleaf&logoColor=white
+[Thymeleaf.com]: https://img.shields.io/badge/Thymeleaf-40cc12?style=for-the-badge&logo=thymeleaf&logoColor=white
 [Thymeleaf-url]: https://www.thymeleaf.org/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
