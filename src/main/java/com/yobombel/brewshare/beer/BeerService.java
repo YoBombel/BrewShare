@@ -56,7 +56,7 @@ public class BeerService {
         beerRepository.deleteById(id);
     }
 
-    public Page<Beer> fingBeerPage(Integer page, Integer size){
+    public Page<Beer> findBeerPage(Integer page, Integer size){
         log.info("Finding beer page: {}, size: {}", page, size);
         return beerRepository.findAll(PageRequest.of(page, size));
     }

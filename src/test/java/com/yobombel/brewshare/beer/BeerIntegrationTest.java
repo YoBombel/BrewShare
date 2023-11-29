@@ -153,4 +153,21 @@ class BeerIntegrationTest {
                 .hasMessage(expectedExceptionMessage);
     }
 
+    @Test
+    void shouldFindBeerPage(){
+        //GIVEN
+        beerService.add(beer);
+        //WHEN
+        final var result = beerService.findBeerPage(0, 10);
+        final var firstElement = result.iterator().next();
+        //THEN
+        assertThat(result)
+                .hasSize(1)
+                .hasExactlyElementsOfTypes(Beer.class);
+        assertThat(firstElement)
+                .usingRecursiveComparison()
+                .comparingOnlyFields("name")
+                .isEqualTo(beer);
+    }
+
 }

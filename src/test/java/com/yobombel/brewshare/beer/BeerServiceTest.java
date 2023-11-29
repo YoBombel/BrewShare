@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -133,6 +135,22 @@ class BeerServiceTest {
                 .isExactlyInstanceOf(BeerNotFoundException.class)
                 .hasMessage(expectedExceptionMessage);
         verify(beerRepository).findById(id);
+    }
+
+    @Test
+    void shouldFindBeerPage(){
+        //GIVEN
+        PageImpl<Beer> page = new PageImpl<>(List.of(beer));
+        given(beerRepository.findAll(any(PageRequest.class))).willReturn(page);
+        //WHEN
+        final var result = beerService.findBeerPage(0, 1);
+        final var firstElement = result.iterator().next();
+        //THEN
+        assertThat(result)
+                .hasSize(1)
+                .hasExactlyElementsOfTypes(Beer.class);
+        assertThat(firstElement).usingRecursiveComparison().comparingOnlyFields("name").isEqualTo(beer);
+        verify(beerRepository).findAll((any(PageRequest.class)));
     }
 
     @Test

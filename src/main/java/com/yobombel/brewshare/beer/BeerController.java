@@ -30,7 +30,7 @@ public class BeerController {
     public String allBeers(Model model, @RequestParam(defaultValue = "1") Integer page) {
         log.info("Request for all beers");
         if(page < 1) page = 1;
-        Page<Beer> beers = beerService.fingBeerPage(page - 1, BEERS_PER_PAGE);
+        Page<Beer> beers = beerService.findBeerPage(page - 1, BEERS_PER_PAGE);
         model.addAttribute("beers", beers);
         model.addAttribute("threeClosestPages", getClosestPages(page, beers));
         return "allBeers";
