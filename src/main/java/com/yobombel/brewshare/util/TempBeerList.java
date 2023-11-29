@@ -39,7 +39,7 @@ public class TempBeerList {
 
         log.info("Creating temporary beer list");
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 100; i++) {
             Beer beer = new Beer();
             beer.setName("TestBeer" + i);
             Long id = beerService.add(beer).getId();

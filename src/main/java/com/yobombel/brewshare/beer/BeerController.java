@@ -4,14 +4,19 @@ import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/beer/")
 public class BeerController {
+
+    private static final int BEERS_PER_PAGE = 10;
 
     private final BeerService beerService;
     private static final Logger log = LoggerFactory.getLogger(BeerController.class);
@@ -22,9 +27,12 @@ public class BeerController {
 
     //READ
     @GetMapping("all")
-    public String allBeers(Model model) {
+    public String allBeers(Model model, @RequestParam(defaultValue = "1") Integer page) {
         log.info("Request for all beers");
-        model.addAttribute("allBeers", beerService.findAll());
+        if(page < 1) page = 1;
+        Page<Beer> beers = beerService.fingBeerPage(page - 1, BEERS_PER_PAGE);
+        model.addAttribute("beers", beers);
+        model.addAttribute("threeClosestPages", getClosestPages(page, beers));
         return "allBeers";
     }
 
@@ -103,4 +111,18 @@ public class BeerController {
         return "redirect:/beer/all";
     }
 
+    private List<Integer> getClosestPages(Integer page, Page<Beer> beers) {
+        int totalPages = beers.getTotalPages();
+        List<Integer> threeClosestPage;
+        if (beers.getTotalPages() < 3) {
+            threeClosestPage = List.of(1, 2);
+        } else if (page == 1) {
+            threeClosestPage = List.of(page, page + 1, page + 2);
+        } else if (page >= totalPages) {
+            threeClosestPage = List.of(totalPages - 2, totalPages - 1, totalPages);
+        } else {
+            threeClosestPage = List.of(page - 1, page, page + 1);
+        }
+        return threeClosestPage;
+    }
 }

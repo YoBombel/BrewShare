@@ -4,6 +4,8 @@ import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
 import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +54,11 @@ public class BeerService {
         ingredientService.deleteAllFromList(beer.getIngredients());
         log.info("Deleting beer by id: {}", id);
         beerRepository.deleteById(id);
+    }
+
+    public Page<Beer> fingBeerPage(Integer page, Integer size){
+        log.info("Finding beer page: {}, size: {}", page, size);
+        return beerRepository.findAll(PageRequest.of(page, size));
     }
 
     //TODO: temporary method, delete after implementing better beer examples
