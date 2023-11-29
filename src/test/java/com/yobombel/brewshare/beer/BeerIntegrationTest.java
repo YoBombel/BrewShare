@@ -170,4 +170,15 @@ class BeerIntegrationTest {
                 .isEqualTo(beer);
     }
 
+    @Test
+    void shouldDeleteAll(){
+        //GIVEN
+        beerService.add(beer);
+        //WHEN
+        beerService.deleteAll();
+        final var result = beerService.findAll();
+        //THEN
+        assertThat(result).isEmpty();
+    }
+
 }

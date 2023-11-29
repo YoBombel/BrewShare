@@ -15,7 +15,7 @@ import org.testcontainers.containers.MySQLContainer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -148,7 +148,28 @@ class IngredientIntegrationTest {
         List<Ingredient> resultDbIngredients = ingredientService.findAll();
 
         //THEN
-        assertThat(resultDbIngredients.size()).isEqualTo(1);
+        assertThat(resultDbIngredients).hasSize(1);
+    }
+
+    @Test
+    void shouldDelete(){
+        //GIVEN
+        //WHEN
+        ingredientService.delete(ingredient);
+        final var result = ingredientService.findAll();
+        //THEN
+        assertFalse(result.contains(ingredient));
+    }
+
+    //TODO: temporary method, delete after implementing better beer examples
+    @Test
+    void shouldDeleteAll(){
+        //GIVEN
+        //WHEN
+        ingredientService.deleteAllIngredients();
+        final var result = ingredientService.findAll();
+        //THEN
+        assertThat(result).isEmpty();
     }
 
 }
