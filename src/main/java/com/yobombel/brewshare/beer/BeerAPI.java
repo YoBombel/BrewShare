@@ -36,6 +36,12 @@ public class BeerAPI {
         beerService.add(beer);
     }
 
+    @PostMapping("addMany")
+    public List<Beer> addBeers(@RequestBody List<Beer> beers){
+        log.info("POST request add beers, count: {}", beers.size());
+        return beerService.addAll(beers);
+    }
+
     @DeleteMapping("id/{id}")
     public void deleteById(@PathVariable Long id){
         log.info("DELETE request beer, id: {}", id);

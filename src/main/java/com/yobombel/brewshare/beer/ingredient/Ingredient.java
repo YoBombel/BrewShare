@@ -1,5 +1,6 @@
 package com.yobombel.brewshare.beer.ingredient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yobombel.brewshare.beer.Beer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ public class Ingredient implements Comparable<Ingredient>{
     @Column(name = COLUMN_PREFIX + "id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     private Beer beer;
 

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,6 +30,13 @@ public class BeerService {
         beer = beerRepository.save(beer);
         ingredientService.addAllForBeer(beer);
         return beer;
+    }
+
+    public List<Beer> addAll(List<Beer> beers){
+        log.info("Saving list of beers.");
+        List<Beer> savedBeers = new ArrayList<>();
+        beers.forEach(beer -> savedBeers.add(add(beer)));
+        return savedBeers;
     }
 
     public List<Beer> findAll() {

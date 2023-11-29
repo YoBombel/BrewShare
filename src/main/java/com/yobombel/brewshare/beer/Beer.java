@@ -53,7 +53,7 @@ public class Beer {
     @Column(name = COLUMN_PREFIX + "color")
     private double color;
 
-    @OneToMany(mappedBy = "beer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "beer", fetch = FetchType.LAZY)
     private List<Ingredient> ingredients = new ArrayList<>();
 
     public Long getId() {
