@@ -1,9 +1,9 @@
-package com.yobombel.brewshare.beersmith3adapter.domain;
+package com.yobombel.brewshare.imports.beersmith3.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Bs3Beer {
+public class BeersmithRecipe {
 
     private String name;
     private String style;
@@ -14,7 +14,7 @@ public class Bs3Beer {
     private double ibu;
 
     private double efficiency; //batch efficiency
-    private List<Bs3Ingredient> ingredientList;
+    private List<BeersmithIngredient> ingredientList;
 
     public String getName() {
         return name;
@@ -80,11 +80,11 @@ public class Bs3Beer {
         this.efficiency = efficiency;
     }
 
-    public List<Bs3Ingredient> getIngredientList() {
+    public List<BeersmithIngredient> getIngredientList() {
         return ingredientList;
     }
 
-    public void setIngredientList(List<Bs3Ingredient> ingredientList) {
+    public void setIngredientList(List<BeersmithIngredient> ingredientList) {
         this.ingredientList = ingredientList;
     }
 }

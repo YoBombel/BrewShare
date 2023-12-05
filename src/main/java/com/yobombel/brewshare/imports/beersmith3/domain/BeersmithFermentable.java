@@ -1,8 +1,8 @@
-package com.yobombel.brewshare.beersmith3adapter.domain;
+package com.yobombel.brewshare.imports.beersmith3.domain;
 
 import java.math.BigDecimal;
 
-public class Bs3Fermentable extends Bs3Ingredient {
+public class BeersmithFermentable extends BeersmithIngredient {
 
     private String name;
     private BigDecimal amount; //grams

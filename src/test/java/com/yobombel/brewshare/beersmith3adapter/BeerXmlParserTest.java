@@ -1,29 +1,30 @@
 package com.yobombel.brewshare.beersmith3adapter;
 
-import com.yobombel.brewshare.beersmith3adapter.domain.Bs3Beer;
+import com.yobombel.brewshare.imports.beersmith3.BeerXmlParser;
+import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.stream.XMLStreamException;
-import java.nio.file.Path;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BeerXmlParserTest {
 
-    private String testFilePath;
+    private InputStream inputStream;
     private BeerXmlParser beerXmlParser;
 
-    private Bs3Beer testPilsner;
+    private BeersmithRecipe testPilsner;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws FileNotFoundException {
         beerXmlParser = new BeerXmlParser();
-        testFilePath = "src/test/resources/testBeers.bsmx";
-        testPilsner = new Bs3Beer();
+        inputStream = new FileInputStream(new File("src/test/resources/testBeers.bsmx"));
+        testPilsner = new BeersmithRecipe();
         testPilsner.setName("TestPilsner");
     }
 
@@ -31,7 +32,7 @@ class BeerXmlParserTest {
     void shouldReturnCorrectNumberOfBeers() {
         //GIVEN
         //WHEN
-        List<Bs3Beer> result = beerXmlParser.parse(testFilePath);
+        List<BeersmithRecipe> result = beerXmlParser.parse(inputStream);
         //THEN
         assertThat(result).hasSize(2);
     }
