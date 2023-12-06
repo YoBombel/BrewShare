@@ -1,11 +1,9 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
-import java.math.BigDecimal;
-
-public class BeersmithIngredient {
+public abstract class BeersmithIngredient extends BeerXmlObject{
 
     private String name;
-    private BigDecimal amount; //grams
+    private double amount; //grams
 
     public String getName() {
         return name;
@@ -15,11 +13,11 @@ public class BeersmithIngredient {
         this.name = name;
     }
 
-    public BigDecimal getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 }

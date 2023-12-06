@@ -2,8 +2,10 @@ package com.yobombel.brewshare.imports.beersmith3;
 
 import com.yobombel.brewshare.beer.Beer;
 import com.yobombel.brewshare.beer.ingredient.Ingredient;
+import com.yobombel.brewshare.imports.beersmith3.domain.BeerXmlObject;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithIngredient;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
+import com.yobombel.brewshare.util.UnitConversion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -20,11 +22,11 @@ public class BeersmithRecipeToBeerMapper {
         Beer beer = new Beer();
         beer.setName(beersmithRecipe.getName());
         beer.setStyle(beersmithRecipe.getStyle());
-        beer.setBatchSize(beersmithRecipe.getBatchSize().doubleValue());
-        beer.setOriginalGravity(beersmithRecipe.getOriginalGravity());
-        beer.setColor(beersmithRecipe.getColor());
-        beer.setAbv(beersmithRecipe.getAbv());
-        beer.setIngredients(mapIngredients(beersmithRecipe.getIngredientList()));
+        beer.setBatchSize(
+                UnitConversion.ouncesToLiters(beersmithRecipe.getBatchVolume()));
+        beer.setOriginalGravity(
+                UnitConversion.gravityToPlato(beersmithRecipe.getDesiredOriginalGravity()));
+        beer.setIngredients(mapIngredients(beersmithRecipe.getIngredients()));
         return beer;
     }
 
@@ -38,7 +40,7 @@ public class BeersmithRecipeToBeerMapper {
         log.trace("Mapping ingredient: {}", beersmithIngredient.getName());
         Ingredient ingredient = new Ingredient();
         ingredient.setName(beersmithIngredient.getName());
-        ingredient.setAmount(beersmithIngredient.getAmount().doubleValue());
+        ingredient.setAmount(beersmithIngredient.getAmount());
         return ingredient;
     }
 }

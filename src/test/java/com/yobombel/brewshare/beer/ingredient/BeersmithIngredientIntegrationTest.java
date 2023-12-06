@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class IngredientIntegrationTest {
+class BeersmithIngredientIntegrationTest {
 
     @LocalServerPort
     private Integer port;

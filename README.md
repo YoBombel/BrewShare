@@ -2,8 +2,8 @@
 <h1 align="center">BrewShare</h1>
 
 ### About The Project
-BrewShare lets you access and share your brew recipes with friends and your homebrew club via shareable links.
-BrewShare was created in a dire need for quick and easy way to share beer recipe details with fellow homebrewers for free.
+BrewShare lets you access and share your brew beersmithRecipes with friends and your homebrew club via shareable links.
+BrewShare was created in a dire need for quick and easy way to share beer beersmithRecipe details with fellow homebrewers for free.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Features

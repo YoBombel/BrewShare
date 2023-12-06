@@ -1,7 +1,6 @@
 package com.yobombel.brewshare.beersmith3adapter;
 
 import com.yobombel.brewshare.imports.beersmith3.BeerXmlParser;
-import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

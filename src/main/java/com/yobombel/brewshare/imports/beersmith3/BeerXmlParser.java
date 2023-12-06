@@ -1,9 +1,6 @@
 package com.yobombel.brewshare.imports.beersmith3;
 
-import com.yobombel.brewshare.imports.beersmith3.domain.Beersmith3Hop;
-import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithFermentable;
-import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithIngredient;
-import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
+import com.yobombel.brewshare.imports.beersmith3.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,104 +10,127 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 //TODO: refactor this spaghetti class
 @Component
 public class BeerXmlParser {
 
-    private final double OUNCES_TO_LITERS_MULTIPLIER = 0.0295735;
-    private final double OUNCES_TO_GRAMS_MULTIPLIER = 28.3495;
+    private final XMLInputFactory xmlInputFactory;
+    Logger logger = LoggerFactory.getLogger(BeerXmlParser.class);
 
-    private static final Logger log = LoggerFactory.getLogger(BeerXmlParser.class);
+    public BeerXmlParser() {
+        this.xmlInputFactory = XMLInputFactory.newInstance();
+        xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, false);
+    }
 
     public List<BeersmithRecipe> parse(InputStream inputStream) {
+        XMLEvent event;
         List<BeersmithRecipe> beersmithRecipes = new ArrayList<>();
-        BeersmithRecipe beersmithRecipe = new BeersmithRecipe();
-
-        XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-        xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, false);
 
         try {
             XMLEventReader reader = xmlInputFactory.createXMLEventReader(inputStream);
-            log.info("Parsing file");
+
             while (reader.hasNext()) {
-                XMLEvent event = reader.nextEvent();
-                event.isEntityReference(); //IGNORE ENTITY REFERENCES
+                event = getXmlEvent(reader);
 
                 if (event.isStartElement()) {
                     String startElementString = event.asStartElement().getName().toString();
 
-                    switch (startElementString) {
-                        case "Recipe" -> {
-                            beersmithRecipe = new BeersmithRecipe();
-                            beersmithRecipes.add(beersmithRecipe);
-                            log.trace("Parsing new recipe");
-                        }
-                        case "F_R_NAME" -> beersmithRecipe.setName(getData(reader));
-                        case "F_S_NAME" -> beersmithRecipe.setStyle(getData(reader));
-                        case "F_E_BATCH_VOL" -> beersmithRecipe.setBatchSize(
-                                BigDecimal.valueOf(Double.parseDouble(getData(reader)) * OUNCES_TO_LITERS_MULTIPLIER)
-                                        .setScale(2, RoundingMode.HALF_EVEN));
-                        case "Ingredients" -> beersmithRecipe.setIngredientList(parseIngredients(reader));
+                    if ("Recipe".equals(startElementString)) {
+                        BeersmithRecipe beersmithRecipe = parseRecipe(reader);
+                        logger.info("New recipe parsed: {}", beersmithRecipe.getName());
+                        beersmithRecipes.add(beersmithRecipe);
                     }
                 }
             }
         } catch (
-                XMLStreamException xse) {
-            log.error("XMLStreamException");
-            xse.printStackTrace();
+                Exception e) {
+            e.printStackTrace();
         }
-        log.info("Parsing complete, returning Beersmith recipe list");
+        logger.info("All recipes parsed, count: {}", beersmithRecipes.size());
         return beersmithRecipes;
     }
 
-    private static String getData(XMLEventReader reader) throws XMLStreamException {
-        return reader.nextEvent().asCharacters().getData();
+    private BeersmithRecipe parseRecipe(XMLEventReader reader) throws XMLStreamException {
+        BeersmithRecipe beersmithRecipe = new BeersmithRecipe();
+        mapRecipeToObjectFields(reader, beersmithRecipe);
+        return beersmithRecipe;
+    }
+
+    private void mapRecipeToObjectFields(XMLEventReader reader, BeersmithRecipe beersmithRecipe) throws XMLStreamException {
+        while (reader.hasNext()) {
+            XMLEvent event = getXmlEvent(reader);
+
+            if (checkIngredientsStart(event)) beersmithRecipe.setIngredients(parseIngredients(reader));
+
+            if (checkEndOfBlock(event, beersmithRecipe.getEndReaderLoopElements())) break;
+
+            if (event.isStartElement()) {
+                String startElementString = event.asStartElement().getName().toString();
+                if (beersmithRecipe.getXmlElementsDictionary().containsKey(startElementString))
+                    beersmithRecipe.getXmlElementsDictionary().get(startElementString).accept(getData(reader));
+            }
+        }
+    }
+
+    private BeerXmlObject mapXmlToObjectFields(XMLEventReader reader, BeerXmlObject beerXmlObject) throws XMLStreamException {
+        while (reader.hasNext()) {
+            XMLEvent event = getXmlEvent(reader);
+
+            if (checkEndOfBlock(event, beerXmlObject.getEndReaderLoopElements())) break;
+
+            if (event.isStartElement()) {
+                String startElementString = event.asStartElement().getName().toString();
+                if (beerXmlObject.getXmlElementsDictionary().containsKey(startElementString))
+                    beerXmlObject.getXmlElementsDictionary().get(startElementString).accept(getData(reader));
+            }
+        }
+        return beerXmlObject;
+    }
+
+    private boolean checkIngredientsStart(XMLEvent event) {
+        return event.isStartElement() && event.toString().equals("<Ingredients>");
     }
 
     private ArrayList<BeersmithIngredient> parseIngredients(XMLEventReader reader) throws XMLStreamException {
-        log.trace("Parsing ingredients");
-        BeersmithFermentable fermentable = new BeersmithFermentable();
-        Beersmith3Hop hop = new Beersmith3Hop();
         ArrayList<BeersmithIngredient> ingredients = new ArrayList<>();
+        HashSet<String> ingredientsEndElement = new HashSet<>();
+        ingredientsEndElement.add("Ingredients");
 
         while (reader.hasNext()) {
-            XMLEvent event = reader.nextEvent();
-            event.isEntityReference(); //IGNORE ENTITY REFERENCES
+            XMLEvent event = getXmlEvent(reader);
 
-            if (event.isEndElement() && event.asEndElement().getName().toString().equals("Ingredients")) break;
+            if (checkEndOfBlock(event, ingredientsEndElement)) break;
 
             if (event.isStartElement()) {
                 String startElementString = event.asStartElement().getName().toString();
 
                 switch (startElementString) {
-                    case "Grain" -> {
-                        fermentable = new BeersmithFermentable();
-                        ingredients.add(fermentable);
-                    }
-                    case "F_G_NAME" -> fermentable.setName(getData(reader));
-                    case "F_G_AMOUNT" -> fermentable.setAmount(
-                            BigDecimal.valueOf(Double.parseDouble(getData(reader)) * OUNCES_TO_GRAMS_MULTIPLIER)
-                                    .setScale(2, RoundingMode.HALF_EVEN));
-                    case "F_G_COLOR" -> fermentable.setColor(Double.parseDouble(getData(reader)));
-                    case "F_G_YIELD" -> fermentable.setYield(Double.parseDouble(getData(reader)));
-                    case "Hops" -> {
-                        hop = new Beersmith3Hop();
-                        ingredients.add(hop);
-                    }
-                    case "F_H_NAME" -> hop.setName(getData(reader));
-                    case "F_H_AMOUNT" -> hop.setAmount(
-                            BigDecimal.valueOf(Double.parseDouble(getData(reader)) * OUNCES_TO_GRAMS_MULTIPLIER)
-                                    .setScale(2, RoundingMode.HALF_EVEN));
-                    case "F_H_ALPHA" -> hop.setAlpha(Double.parseDouble(getData(reader)));
+                    case "Grain" -> ingredients.add((BeersmithIngredient) mapXmlToObjectFields((reader), new Fermentable()));
+                    case "Hops" -> ingredients.add((BeersmithIngredient) mapXmlToObjectFields((reader), new Hop()));
+                    case "Yeast" -> ingredients.add((BeersmithIngredient) mapXmlToObjectFields((reader), new Yeast()));
                 }
             }
         }
-        log.trace("Ingredients parse finished");
         return ingredients;
     }
+
+
+    private boolean checkEndOfBlock(XMLEvent event, HashSet<String> endXmlAttributes) {
+        return event.isEndElement() && endXmlAttributes.contains(event.asEndElement().getName().toString());
+    }
+
+    private static String getData(XMLEventReader reader) throws XMLStreamException {
+        return reader.nextEvent().toString();
+    }
+
+    private static XMLEvent getXmlEvent(XMLEventReader reader) throws XMLStreamException {
+        XMLEvent event = reader.nextEvent();
+        event.isEntityReference(); //IGNORE ENTITY REFERENCES
+        return event;
+    }
+
 }
