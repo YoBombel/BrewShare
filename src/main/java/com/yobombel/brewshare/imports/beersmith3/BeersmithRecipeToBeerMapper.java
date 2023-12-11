@@ -5,6 +5,7 @@ import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeerXmlObject;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithIngredient;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
+import com.yobombel.brewshare.imports.beersmith3.domain.Hop;
 import com.yobombel.brewshare.util.UnitConversion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +26,22 @@ public class BeersmithRecipeToBeerMapper {
         beer.setBatchSize(
                 UnitConversion.ouncesToLiters(beersmithRecipe.getBatchVolume()));
         beer.setOriginalGravity(
-                UnitConversion.gravityToPlato(beersmithRecipe.getDesiredOriginalGravity()));
+                UnitConversion.gravityToPlato(beersmithRecipe.getOriginalGravityMeasured()));
         beer.setIngredients(mapIngredients(beersmithRecipe.getIngredients()));
+        beer.setAbv(calculateAbv(beersmithRecipe));
+        beer.setIbu(calculateIbu(beersmithRecipe));
         return beer;
+    }
+
+    private double calculateIbu(BeersmithRecipe beersmithRecipe) {
+        return beersmithRecipe.getIngredients().stream()
+                .filter(i -> i instanceof Hop)
+                .map(h -> ((Hop) h).getIbuContribution())
+                .reduce(0.0, Double::sum);
+    }
+
+    private double calculateAbv(BeersmithRecipe beersmithRecipe) {
+        return (beersmithRecipe.getOriginalGravityMeasured() - beersmithRecipe.getFinishingGravityMeasured()) * 131.25;
     }
 
     private List<Ingredient> mapIngredients(List<BeersmithIngredient> beersmithIngredients) {
