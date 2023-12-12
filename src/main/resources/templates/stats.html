@@ -10,14 +10,14 @@
   <meta charset="UTF-8">
   <title>BrewShare</title>
 </head>
-<body class="mx-auto bg-dark">
+<body class="mx-auto bg-secondary-subtle">
 <div class="container fs-4">
 
   <!-- HEADER -->
   <div th:insert="~{fragments/header}"></div>
 
-  <div class="row fs-6">
-    <div class="border border-light-subtle rounded col-md-5 mb-3 py-1 mx-auto">
+  <div class="row fs-6 my-2">
+    <div class="border border-dark rounded col-md-5 mb-3 py-1 mx-auto">
         <h4 class="my-0">Statistics: </h4>
         <ul class="list-unstyled my-0">
           <li>Beers: <span th:text="${stats.beerCount}"></span></li>
