@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Controller
 @RequestMapping("import/")
 public class ImportsController {
@@ -33,7 +35,7 @@ public class ImportsController {
     }
 
     @PostMapping("beersmith")
-    public String uploadBeersmithFile(Model model, @RequestParam("beersmithFile") MultipartFile file) {
+    public String uploadBeersmithFile(Model model, @RequestParam("beersmithFile") MultipartFile file) throws IOException {
         log.info("POST request - upload beersmith file");
         beerService.addAll(
                 beersmithService.readBeersFromXmlFile(file));

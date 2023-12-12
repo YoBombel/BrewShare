@@ -2,7 +2,6 @@ package com.yobombel.brewshare.imports.beersmith3;
 
 import com.yobombel.brewshare.beer.Beer;
 import com.yobombel.brewshare.beer.ingredient.Ingredient;
-import com.yobombel.brewshare.imports.beersmith3.domain.BeerXmlObject;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithIngredient;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
 import com.yobombel.brewshare.util.UnitConversion;

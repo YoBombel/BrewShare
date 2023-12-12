@@ -26,18 +26,16 @@ public class ErrorHandlingController implements ErrorController {
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
                 log.error("Page not found 404");
                 return "error404";
+            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+                log.error("Server error");
+                return "error-500";
+            } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
+                log.error("Someone tried enter to restricted area. User not logged in.");
+                return "error-403";
             }
-//            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-//                //log.error("Server error");
-//                return "error-500";
-//            } else if (statusCode == HttpStatus.FORBIDDEN.value()){
-//                //log.error("Someone tried enter to restricted area. User not logged in.");
-//                return "error-403";
-//            }
+            log.error("Other error, please contact with support: 666-999-666");
+            return "error";
         }
-        log.error("Other error, please contact with support: 666-999-666");
         return "error";
-
     }
-
 }

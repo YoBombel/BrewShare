@@ -1,10 +1,9 @@
 package com.yobombel.brewshare.util;
 
-import com.yobombel.brewshare.beer.BeerService;
-import com.yobombel.brewshare.beer.ErrorHandlingController;
-import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import com.yobombel.brewshare.beer.Beer;
+import com.yobombel.brewshare.beer.BeerService;
 import com.yobombel.brewshare.beer.ingredient.Ingredient;
+import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-@Profile("prod")
+@Profile("liveTest")
 public class TempBeerList {
 
     private final BeerService beerService;

@@ -24,7 +24,7 @@ public class BeersmithService {
         this.mapper = mapper;
     }
 
-    public List<Beer> readBeersFromXmlFile(MultipartFile file) {
+    public List<Beer> readBeersFromXmlFile(MultipartFile file) throws IOException {
         log.info("Reading file: {}", file.getName());
         try {
             if (file.isEmpty()) {
@@ -37,9 +37,8 @@ public class BeersmithService {
                         .map(beersmithRecipe -> mapper.map(beersmithRecipe))
                         .toList();
             }
-
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e);
         }
     }
 }

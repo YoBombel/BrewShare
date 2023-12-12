@@ -15,7 +15,6 @@ public class Yeast extends BeersmithIngredient {
         getXmlElementsDictionary().put("F_Y_AMOUNT", s -> this.setAmount(Double.parseDouble(s)));
         getXmlElementsDictionary().put("F_Y_MIN_ATTENUATION", s -> this.setMinAttenuation(Double.parseDouble(s)));
         getXmlElementsDictionary().put("F_Y_MAX_ATTENUATION", s -> this.setMaxAttenuation(Double.parseDouble(s)));
-
     }
 
     public String getLab() {
