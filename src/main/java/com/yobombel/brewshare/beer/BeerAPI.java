@@ -13,7 +13,6 @@ public class BeerAPI {
     private final BeerService beerService;
     private static final Logger log = LoggerFactory.getLogger(BeerAPI.class);
 
-
     public BeerAPI(BeerService beerService) {
         this.beerService = beerService;
     }

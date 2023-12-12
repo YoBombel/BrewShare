@@ -15,5 +15,4 @@ public class BeerNotFoundAdvice {
     public String beerNotFoundHandler(BeerNotFoundException exception){
         return exception.getMessage();
     }
-
 }

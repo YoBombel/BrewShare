@@ -10,14 +10,14 @@
     <meta charset="UTF-8">
     <title>BrewShare</title>
 </head>
-<body class="mx-auto bg-dark">
+<body class="mx-auto bg-secondary-subtle">
 <div class="container fs-4">
 
     <!-- HEADER -->
     <div th:insert="~{fragments/header}"></div>
 
     <form th:object="${beer}" th:method="post" th:action="@{/beer/new}">
-        <div class="row">
+        <div class="row my-2">
             <div class="col-md-6">
                 <label for="name">Beer name</label>
                 <input id="name" type="text" th:name="name" th:field="*{name}" maxlength="64" required
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-md-6">
                         Amount
-                        <button type="submit" name="addIngredient" class="btn btn-outline-light">Add ingredient</button>
+                        <button type="submit" name="addIngredient" class="btn btn-outline-dark">Add ingredient</button>
                     </div>
                 </div>
                 <div class="row" th:each="ingredient,iStat : *{ingredients}">

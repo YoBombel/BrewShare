@@ -141,5 +141,4 @@ public class BeersmithRecipe extends BeerXmlObject {
         this.ingredients = ingredients;
     }
 
-
 }

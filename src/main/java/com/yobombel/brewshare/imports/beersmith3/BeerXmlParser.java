@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //TODO: refactor this spaghetti class
 @Component
@@ -46,8 +47,7 @@ public class BeerXmlParser {
                     }
                 }
             }
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         logger.info("All recipes parsed, count: {}", beersmithRecipes.size());
@@ -109,7 +109,8 @@ public class BeerXmlParser {
                 String startElementString = event.asStartElement().getName().toString();
 
                 switch (startElementString) {
-                    case "Grain" -> ingredients.add((BeersmithIngredient) mapXmlToObjectFields((reader), new Fermentable()));
+                    case "Grain" ->
+                            ingredients.add((BeersmithIngredient) mapXmlToObjectFields((reader), new Fermentable()));
                     case "Hops" -> ingredients.add((BeersmithIngredient) mapXmlToObjectFields((reader), new Hop()));
                     case "Yeast" -> ingredients.add((BeersmithIngredient) mapXmlToObjectFields((reader), new Yeast()));
                 }
@@ -119,7 +120,7 @@ public class BeerXmlParser {
     }
 
 
-    private boolean checkEndOfBlock(XMLEvent event, HashSet<String> endXmlAttributes) {
+    private boolean checkEndOfBlock(XMLEvent event, Set<String> endXmlAttributes) {
         return event.isEndElement() && endXmlAttributes.contains(event.asEndElement().getName().toString());
     }
 

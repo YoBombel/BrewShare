@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 @Entity
 @Table(name = Ingredient.TABLE_NAME)
-public class Ingredient implements Comparable<Ingredient>{
+public class Ingredient implements Comparable<Ingredient> {
 
     public static final String TABLE_NAME = "ingredient";
     public static final String COLUMN_PREFIX = "i_";

@@ -7,10 +7,8 @@ public class BeerNotFoundException extends RuntimeException{
 
     private static final Logger log = LoggerFactory.getLogger(BeerNotFoundException.class);
 
-
     public BeerNotFoundException(Long id){
         super("Beer not found, id: " + id);
         log.info("Beer not found, id: {}", id);
     }
-
 }
