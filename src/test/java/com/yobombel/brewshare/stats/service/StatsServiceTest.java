@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -17,8 +16,6 @@ class StatsServiceTest {
 
     @Mock
     BeerRepository beerRepository;
-    @Mock
-    GravityStatsService gravityStatsService;
 
     @Spy
     @InjectMocks
@@ -30,8 +27,9 @@ class StatsServiceTest {
         //WHEN
         Stats stats = statsService.getStats();
         //THEN
+        verify(beerRepository).findAllByBatchSizeIsNotNull();
+        verify(beerRepository).count();
         verify(beerRepository).findBatchSizes();
-        verify(gravityStatsService).createGravityStats();
     }
 
 }

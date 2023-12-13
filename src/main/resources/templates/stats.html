@@ -26,10 +26,16 @@
         </ul>
       <h4>Original gravity: </h4>
         <ul>
-          <li>Average: <span th:text="${stats.gravityStats.averageOriginalGravity}"></span> °Plato</li>
-          <li>Max: <span th:text="${stats.gravityStats.maxOriginalGravity}"></span> °Plato</li>
-          <li>Min: <span th:text="${stats.gravityStats.minOriginalGravity}"></span> °Plato</li>
+          <li>Average: <span th:text="${stats.gravityStats.average}"></span> °Plato</li>
+          <li>Max: <span th:text="${stats.gravityStats.max}"></span> °Plato</li>
+          <li>Min: <span th:text="${stats.gravityStats.min}"></span> °Plato</li>
         </ul>
+      <h4>Alcohol by volume: </h4>
+      <ul>
+        <li>Average: <span th:text="${stats.alcoholStats.average}"></span>%</li>
+        <li>Max: <span th:text="${stats.alcoholStats.max}"></span>%</li>
+        <li>Min: <span th:text="${stats.alcoholStats.min}"></span>%</li>
+      </ul>
     </div>
   </div>
 </div>

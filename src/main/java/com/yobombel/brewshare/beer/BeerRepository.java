@@ -1,5 +1,6 @@
 package com.yobombel.brewshare.beer;
 
+import com.yobombel.brewshare.beer.dto.BeerStatsDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,7 @@ public interface BeerRepository extends JpaRepository<Beer, Long> {
 
     @Query("SELECT b.originalGravity FROM Beer b")
     List<Double> findOriginalGravities();
+
+    List<BeerStatsDto> findAllByBatchSizeIsNotNull();
 
 }
