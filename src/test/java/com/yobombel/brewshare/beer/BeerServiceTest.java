@@ -56,6 +56,22 @@ class BeerServiceTest {
     }
 
     @Test
+    void shouldAddAll(){
+        //GIVEN
+        List<Beer> beers = List.of(beer);
+        given(beerRepository.save(beer)).willReturn(beer);
+        //WHEN
+        List<Beer> result = beerService.addAll(beers);
+        //THEN
+        verify(beerService).add(beer);
+        verify(beerRepository).save(beer);
+        verify(ingredientService).addAllForBeer(beer);
+        assertThat(result)
+                .hasSize(1)
+                .contains(beer);
+    }
+
+    @Test
     void shouldAddWithIngredients() {
         //GIVEN
         when(beerRepository.save(any(Beer.class))).thenReturn(beer);

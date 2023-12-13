@@ -1,8 +1,11 @@
-package com.yobombel.brewshare.beer.ingredient;
+package com.yobombel.brewshare.integration;
 
 import com.yobombel.brewshare.beer.Beer;
 import com.yobombel.brewshare.beer.BeerRepository;
 import com.yobombel.brewshare.beer.BeerService;
+import com.yobombel.brewshare.beer.ingredient.Ingredient;
+import com.yobombel.brewshare.beer.ingredient.IngredientRepository;
+import com.yobombel.brewshare.beer.ingredient.IngredientService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

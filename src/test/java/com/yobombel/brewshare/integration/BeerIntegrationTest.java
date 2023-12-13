@@ -1,5 +1,8 @@
-package com.yobombel.brewshare.beer;
+package com.yobombel.brewshare.integration;
 
+import com.yobombel.brewshare.beer.Beer;
+import com.yobombel.brewshare.beer.BeerRepository;
+import com.yobombel.brewshare.beer.BeerService;
 import com.yobombel.brewshare.beer.exception.BeerNotFoundException;
 import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import com.yobombel.brewshare.beer.ingredient.IngredientRepository;

@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeersmithSpecCalculations {
 
+    double calculateAbv(BeersmithRecipe beersmithRecipe) {
+        return (beersmithRecipe.getOriginalGravityMeasured() - beersmithRecipe.getFinishingGravityMeasured()) * 131.25;
+    }
+
     double calculateIbu(BeersmithRecipe beersmithRecipe) {
         return beersmithRecipe.getIngredients().stream()
                 .filter(Hop.class::isInstance)
                 .map(h -> ((Hop) h).getIbuContribution())
                 .reduce(0.0, Double::sum);
-    }
-
-    double calculateAbv(BeersmithRecipe beersmithRecipe) {
-        return (beersmithRecipe.getOriginalGravityMeasured() - beersmithRecipe.getFinishingGravityMeasured()) * 131.25;
     }
 
     //MCU = (Weight of grain in lbs) * (Color of grain in degrees lovibond) / (volume in gallons)
