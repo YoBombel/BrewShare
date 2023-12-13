@@ -1,6 +1,7 @@
-package com.yobombel.brewshare.stats;
+package com.yobombel.brewshare.stats.service;
 
 import com.yobombel.brewshare.beer.BeerRepository;
+import com.yobombel.brewshare.stats.model.Stats;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -9,9 +10,11 @@ import java.math.BigDecimal;
 public class StatsService {
 
     BeerRepository beerRepository;
+    GravityStatsService gravityStatsService;
 
-    public StatsService(BeerRepository beerRepository) {
+    public StatsService(BeerRepository beerRepository, GravityStatsService gravityStatsService) {
         this.beerRepository = beerRepository;
+        this.gravityStatsService = gravityStatsService;
     }
 
     public Stats getStats() {
@@ -20,6 +23,8 @@ public class StatsService {
                 countBeers());
         stats.setTotalVolume(
                 countTotalVolume());
+        stats.setGravityStats(gravityStatsService
+                .createGravityStats());
         return stats;
     }
 

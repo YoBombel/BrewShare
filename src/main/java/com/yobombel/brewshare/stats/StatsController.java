@@ -1,5 +1,6 @@
 package com.yobombel.brewshare.stats;
 
+import com.yobombel.brewshare.stats.service.StatsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

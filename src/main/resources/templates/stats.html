@@ -18,14 +18,20 @@
 
   <div class="row fs-6 my-2">
     <div class="border border-dark rounded col-md-5 mb-3 py-1 mx-auto">
-        <h4 class="my-0">Statistics: </h4>
-        <ul class="list-unstyled my-0">
+      <h2>Statistics</h2>
+        <h4>Overall: </h4>
+        <ul>
           <li>Beers: <span th:text="${stats.beerCount}"></span></li>
           <li>Total volume: <span th:text="${stats.totalVolume}"></span> liters</li>
         </ul>
+      <h4>Original gravity: </h4>
+        <ul>
+          <li>Average: <span th:text="${stats.gravityStats.averageOriginalGravity}"></span> °Plato</li>
+          <li>Max: <span th:text="${stats.gravityStats.maxOriginalGravity}"></span> °Plato</li>
+          <li>Min: <span th:text="${stats.gravityStats.minOriginalGravity}"></span> °Plato</li>
+        </ul>
     </div>
   </div>
-
 </div>
 
 <div class="px-3" th:insert="~{fragments/footer}"></div>

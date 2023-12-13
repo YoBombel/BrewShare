@@ -12,4 +12,7 @@ public interface BeerRepository extends JpaRepository<Beer, Long> {
     @Query("SELECT b.batchSize FROM Beer b")
     List<Double> findBatchSizes();
 
+    @Query("SELECT b.originalGravity FROM Beer b")
+    List<Double> findOriginalGravities();
+
 }

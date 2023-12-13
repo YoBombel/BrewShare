@@ -1,4 +1,4 @@
-package com.yobombel.brewshare.stats;
+package com.yobombel.brewshare.stats.model;
 
 import java.math.BigDecimal;
 
@@ -6,6 +6,7 @@ public class Stats {
 
     private int beerCount;
     private BigDecimal totalVolume;
+    private GravityStats gravityStats;
 
     public int getBeerCount() {
         return beerCount;
@@ -21,5 +22,13 @@ public class Stats {
 
     public void setTotalVolume(BigDecimal totalVolume) {
         this.totalVolume = totalVolume;
+    }
+
+    public GravityStats getGravityStats() {
+        return gravityStats;
+    }
+
+    public void setGravityStats(GravityStats gravityStats) {
+        this.gravityStats = gravityStats;
     }
 }
