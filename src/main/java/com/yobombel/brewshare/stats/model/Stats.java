@@ -1,7 +1,9 @@
 package com.yobombel.brewshare.stats.model;
 
 import com.yobombel.brewshare.stats.model.SpecificStats.AlcoholStats;
+import com.yobombel.brewshare.stats.model.SpecificStats.ColorStats;
 import com.yobombel.brewshare.stats.model.SpecificStats.GravityStats;
+import com.yobombel.brewshare.stats.model.SpecificStats.IbuStats;
 
 import java.math.BigDecimal;
 
@@ -11,6 +13,8 @@ public class Stats {
     private BigDecimal totalVolume;
     private GravityStats gravityStats;
     private AlcoholStats alcoholStats;
+    private IbuStats ibuStats;
+    private ColorStats colorStats;
 
     public int getBeerCount() {
         return beerCount;
@@ -42,5 +46,21 @@ public class Stats {
 
     public void setAlcoholStats(AlcoholStats alcoholStats) {
         this.alcoholStats = alcoholStats;
+    }
+
+    public IbuStats getIbuStats() {
+        return ibuStats;
+    }
+
+    public void setIbuStats(IbuStats ibuStats) {
+        this.ibuStats = ibuStats;
+    }
+
+    public ColorStats getColorStats() {
+        return colorStats;
+    }
+
+    public void setColorStats(ColorStats colorStats) {
+        this.colorStats = colorStats;
     }
 }

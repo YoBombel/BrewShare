@@ -30,11 +30,23 @@
           <li>Max: <span th:text="${stats.gravityStats.max}"></span> °Plato</li>
           <li>Min: <span th:text="${stats.gravityStats.min}"></span> °Plato</li>
         </ul>
-      <h4>Alcohol by volume: </h4>
+      <h4>Alcohol: </h4>
       <ul>
-        <li>Average: <span th:text="${stats.alcoholStats.average}"></span>%</li>
-        <li>Max: <span th:text="${stats.alcoholStats.max}"></span>%</li>
-        <li>Min: <span th:text="${stats.alcoholStats.min}"></span>%</li>
+        <li>Average: <span th:text="${stats.alcoholStats.average}"></span>% ABV</li>
+        <li>Max: <span th:text="${stats.alcoholStats.max}"></span>% ABV</li>
+        <li>Min: <span th:text="${stats.alcoholStats.min}"></span>% ABV</li>
+      </ul>
+      <h4>IBU: </h4>
+      <ul>
+        <li>Average: <span th:text="${stats.ibuStats.average}"></span></li>
+        <li>Max: <span th:text="${stats.ibuStats.max}"></span></li>
+        <li>Min: <span th:text="${stats.ibuStats.min}"></span></li>
+      </ul>
+      <h4>Color: </h4>
+      <ul>
+        <li>Average: <span th:text="${stats.colorStats.average}"></span> EBC</li>
+        <li>Max: <span th:text="${stats.colorStats.max}"></span> EBC</li>
+        <li>Min: <span th:text="${stats.colorStats.min}"></span> EBC</li>
       </ul>
     </div>
   </div>
