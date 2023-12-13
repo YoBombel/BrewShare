@@ -17,12 +17,12 @@ import java.util.Set;
 
 //TODO: refactor this spaghetti class
 @Component
-public class BeerXmlParser {
+public class BeersmithParser {
 
     private final XMLInputFactory xmlInputFactory;
-    Logger logger = LoggerFactory.getLogger(BeerXmlParser.class);
+    Logger logger = LoggerFactory.getLogger(BeersmithParser.class);
 
-    public BeerXmlParser() {
+    public BeersmithParser() {
         this.xmlInputFactory = XMLInputFactory.newInstance();
         xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, false);
     }

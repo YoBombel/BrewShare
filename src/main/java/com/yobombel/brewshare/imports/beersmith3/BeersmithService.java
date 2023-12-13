@@ -15,12 +15,12 @@ import java.util.List;
 @Service
 public class BeersmithService {
 
-    BeerXmlParser beerXmlParser;
-    BeersmithRecipeToBeerMapper mapper;
+    BeersmithParser beersmithParser;
+    BeersmithMapper mapper;
     private static final Logger log = LoggerFactory.getLogger(BeersmithService.class);
 
-    public BeersmithService(BeerXmlParser beerXmlParser, BeersmithRecipeToBeerMapper mapper) {
-        this.beerXmlParser = beerXmlParser;
+    public BeersmithService(BeersmithParser beersmithParser, BeersmithMapper mapper) {
+        this.beersmithParser = beersmithParser;
         this.mapper = mapper;
     }
 
@@ -32,7 +32,7 @@ public class BeersmithService {
             }
 
             try (InputStream inputStream = file.getInputStream()) {
-                List<BeersmithRecipe> beersmithRecipes = beerXmlParser.parse(inputStream);
+                List<BeersmithRecipe> beersmithRecipes = beersmithParser.parse(inputStream);
                 return beersmithRecipes.stream()
                         .map(beersmithRecipe -> mapper.map(beersmithRecipe))
                         .toList();

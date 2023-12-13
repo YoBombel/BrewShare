@@ -1,6 +1,7 @@
 package com.yobombel.brewshare.beersmith3adapter;
 
-import com.yobombel.brewshare.imports.beersmith3.BeerXmlParser;
+import com.yobombel.brewshare.imports.beersmith3.BeersmithParser;
+import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,16 +13,16 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BeerXmlParserTest {
+class BeersmithParserTest {
 
     private InputStream inputStream;
-    private BeerXmlParser beerXmlParser;
+    private BeersmithParser beersmithParser;
 
     private BeersmithRecipe testPilsner;
 
     @BeforeEach
     void setUp() throws FileNotFoundException {
-        beerXmlParser = new BeerXmlParser();
+        beersmithParser = new BeersmithParser();
         inputStream = new FileInputStream(new File("src/test/resources/testBeers.bsmx"));
         testPilsner = new BeersmithRecipe();
         testPilsner.setName("TestPilsner");
@@ -31,7 +32,7 @@ class BeerXmlParserTest {
     void shouldReturnCorrectNumberOfBeers() {
         //GIVEN
         //WHEN
-        List<BeersmithRecipe> result = beerXmlParser.parse(inputStream);
+        List<BeersmithRecipe> result = beersmithParser.parse(inputStream);
         //THEN
         assertThat(result).hasSize(2);
     }

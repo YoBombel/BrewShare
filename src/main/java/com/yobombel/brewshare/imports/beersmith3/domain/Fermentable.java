@@ -2,7 +2,7 @@ package com.yobombel.brewshare.imports.beersmith3.domain;
 
 public class Fermentable extends BeersmithIngredient {
 
-    private double color;
+    private double color; //SRM
     private double yield;
 
     public Fermentable() {
