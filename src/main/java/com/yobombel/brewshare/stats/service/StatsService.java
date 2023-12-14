@@ -36,8 +36,8 @@ public class StatsService {
     public Stats getStats() {
         List<BeerStatsDto> beerStatsDtos = beerRepository.findAllByBatchSizeIsNotNull();
         Stats stats = new Stats();
-        stats.setBeerCount(countBeers());
-        stats.setTotalVolume(countTotalVolume());
+        stats.setBeerCount(beerStatsDtos.size());
+        stats.setTotalVolume(countTotalVolume(beerStatsDtos));
         stats.setGravityStats((GravityStats) gravityStatsService.calculateStats(beerStatsDtos, BeerStatsDto::originalGravity));
         stats.setAlcoholStats((AlcoholStats) alcoholStatsService.calculateStats(beerStatsDtos, BeerStatsDto::abv));
         stats.setIbuStats((IbuStats) ibuStatsService.calculateStats(beerStatsDtos, BeerStatsDto::ibu));
@@ -45,14 +45,13 @@ public class StatsService {
         return stats;
     }
 
-    private int countBeers() {
-        return (int) beerRepository.count();
-    }
-
-    private BigDecimal countTotalVolume() {
-        return beerRepository.findBatchSizes().stream()
+    private BigDecimal countTotalVolume(List<BeerStatsDto> beerStatsDtos) {
+        return beerStatsDtos.stream()
+                .map(BeerStatsDto::batchSize)
                 .map(BigDecimal::valueOf)
-                .reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO);
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+
+
     }
 }

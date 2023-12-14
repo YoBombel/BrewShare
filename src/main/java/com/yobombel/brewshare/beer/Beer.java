@@ -53,7 +53,8 @@ public class Beer {
     @Column(name = COLUMN_PREFIX + "color")
     private double color;
 
-    @OneToMany(mappedBy = "beer", fetch = FetchType.LAZY)
+    //TODO FIX - EAGER only for tests
+    @OneToMany(mappedBy = "beer", fetch = FetchType.EAGER)
     private List<Ingredient> ingredients = new ArrayList<>();
 
     public Long getId() {

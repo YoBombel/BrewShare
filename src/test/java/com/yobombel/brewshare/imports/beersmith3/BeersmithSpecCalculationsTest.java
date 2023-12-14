@@ -6,14 +6,10 @@ import com.yobombel.brewshare.imports.beersmith3.domain.Hop;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BeersmithSpecCalculationsTest {
 
@@ -21,7 +17,7 @@ class BeersmithSpecCalculationsTest {
     BeersmithRecipe recipe;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         beersmithSpecCalculations = new BeersmithSpecCalculations();
         recipe = new BeersmithRecipe();
 
@@ -40,7 +36,7 @@ class BeersmithSpecCalculationsTest {
     }
 
     @Test
-    void shouldCalculateAbv(){
+    void shouldCalculateAbv() {
         //GIVEN
         double expected = 5.25;
         recipe.setOriginalGravityMeasured(1.048);
@@ -52,7 +48,7 @@ class BeersmithSpecCalculationsTest {
     }
 
     @Test
-    void shouldCalculateIbu(){
+    void shouldCalculateIbu() {
         //GIVEN
         double expected = 25.0;
         //WHEN
@@ -62,7 +58,7 @@ class BeersmithSpecCalculationsTest {
     }
 
     @Test
-    void shouldCalculateColor(){
+    void shouldCalculateColor() {
         //GIVEN
         recipe.setBatchVolume(743.9);
         double expected = 8.3;
