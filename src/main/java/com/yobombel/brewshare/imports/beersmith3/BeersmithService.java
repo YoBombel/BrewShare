@@ -38,6 +38,7 @@ public class BeersmithService {
                         .toList();
             }
         } catch (IOException e) {
+            //TODO REFACTOR THIS NONSENSE
             throw new IOException(e);
         }
     }
