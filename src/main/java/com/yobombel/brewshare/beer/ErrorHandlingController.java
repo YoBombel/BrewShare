@@ -28,10 +28,10 @@ public class ErrorHandlingController implements ErrorController {
                 return "error404";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 log.error("Server error");
-                return "error-500";
+                return "error500";
             } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
                 log.error("Someone tried enter to restricted area. User not logged in.");
-                return "error-403";
+                return "error403";
             }
             log.error("Other error, please contact with support: 666-999-666");
             return "error";

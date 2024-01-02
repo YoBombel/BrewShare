@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/beer/")
+@RequestMapping("beer")
 public class BeerController {
 
     private static final int BEERS_PER_PAGE = 10;
@@ -58,13 +58,13 @@ public class BeerController {
         return "redirect:/beer/id/" + id;
     }
 
-    @PostMapping(value = "/new", params = {"addIngredient"})
+    @PostMapping(value = "new", params = {"addIngredient"})
     public String addRow(Beer beer, BindingResult bindingResult) {
         beer.getIngredients().add(new Ingredient());
         return "newBeer";
     }
 
-    @PostMapping(value = "/new", params = {"removeIngredient"})
+    @PostMapping(value = "new", params = {"removeIngredient"})
     public String removeIngredient(
             Beer beer,
             BindingResult bindingResult,
@@ -88,13 +88,13 @@ public class BeerController {
         return "redirect:/beer/id/" + id;
     }
 
-    @PutMapping(value = "/edit/{id}", params = {"addEditIngredient"})
+    @PutMapping(value = "edit/{id}", params = {"addEditIngredient"})
     public String editAddIngredient(@PathVariable Long id, Beer beer, BindingResult bindingResult) {
         beer.getIngredients().add(new Ingredient());
         return "editBeer";
     }
 
-    @PutMapping(value = "/edit/{id}", params = {"removeEditIngredient"})
+    @PutMapping(value = "edit/{id}", params = {"removeEditIngredient"})
     public String editRemoveIngredient(@PathVariable Long id,
                                        Beer beer,
                                        BindingResult bindingResult,

@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("import/")
+@RequestMapping("import")
 public class ImportsController {
 
     BeerService beerService;

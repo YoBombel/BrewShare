@@ -1,12 +1,15 @@
 #### Stage 1: Build the application
-FROM azul/zulu-openjdk:17-latest
+FROM azul/zulu-openjdk:17.0.8 AS build
 
 # Set the current working directory inside the image
 WORKDIR /app
 
-# Copy maven executable and pom.xml to the image
+# Copy maven executable to the image
+COPY mvnw .
 COPY .mvn .mvn
-COPY mvnw pom.xml ./
+
+# Copy the pom.xml file
+COPY pom.xml .
 
 # Build all the dependencies in preparation to go offline.
 # This is a separate step so the dependencies will be cached unless
@@ -14,14 +17,14 @@ COPY mvnw pom.xml ./
 RUN ./mvnw dependency:go-offline -B
 
 # Copy the project source
-COPY src ./src
+COPY src src
 
 # Package the application
 RUN ./mvnw package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 #### Stage 2: A minimal docker image with command to run the app
-FROM azul/zulu-openjdk:17-jre-latest
+FROM azul/zulu-openjdk:17.0.8-jre
 
 ARG DEPENDENCY=/app/target/dependency
 
@@ -30,4 +33,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","com/yobombel/brewshare/BrewShareApplication.java"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.yobombel.brewshare.BrewShareApplication"]
