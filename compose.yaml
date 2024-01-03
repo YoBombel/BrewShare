@@ -8,7 +8,8 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/brewshare_db?createDatabaseIfNotExist=true&serverTimezone=UTC&useLegacyDatetimeCode=false
       SPRING_DATASOURCE_USERNAME: user
@@ -27,6 +28,10 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: brewshare_db
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 12
     ports:
       - "3306:3306"
     networks:
