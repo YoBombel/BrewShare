@@ -4,6 +4,7 @@ import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,8 @@ import java.util.List;
 @RequestMapping("beer")
 public class BeerController {
 
-    private static final int BEERS_PER_PAGE = 10;
+    @Value("${beers.per.page}")
+    private int beersPerPage;
 
     private final BeerService beerService;
     private static final Logger log = LoggerFactory.getLogger(BeerController.class);
@@ -30,7 +32,7 @@ public class BeerController {
     public String allBeers(Model model, @RequestParam(defaultValue = "1") Integer page) {
         log.info("Request for all beers");
         if(page < 1) page = 1;
-        Page<Beer> beers = beerService.findBeerPage(page - 1, BEERS_PER_PAGE);
+        Page<Beer> beers = beerService.findBeerPage(page - 1, beersPerPage);
         model.addAttribute("beers", beers);
         model.addAttribute("threeClosestPages", getClosestPages(page, beers));
         return "allBeers";
