@@ -3,31 +3,36 @@ package com.yobombel.brewshare.stats.service.specificStatsServices;
 import com.yobombel.brewshare.beer.dto.BeerStatsDto;
 import com.yobombel.brewshare.stats.model.SpecificStats.SpecificStats;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
-import java.util.function.ToDoubleFunction;
+import java.util.function.Function;
 
 public abstract class AbstractSpecificStatsService {
 
-    public abstract SpecificStats createSpecificStats(double average, double max, double min);
+    public abstract SpecificStats createSpecificStats(BigDecimal average, BigDecimal max, BigDecimal min);
 
-    public SpecificStats calculateStats(List<BeerStatsDto> beerStatsDto, ToDoubleFunction<BeerStatsDto> valueExtractor) {
+    public SpecificStats calculateStats(List<BeerStatsDto> beerStatsDto, Function<BeerStatsDto, BigDecimal> valueExtractor) {
+        if(beerStatsDto.isEmpty())
+            return createSpecificStats(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+
         DoubleSummaryStatistics values = beerStatsDto.stream()
-                .mapToDouble(valueExtractor)
+                .map(valueExtractor)
+                .mapToDouble(BigDecimal::doubleValue)
                 .summaryStatistics();
 
-        SpecificStats specificStats = createSpecificStats(values.getAverage(),
-                values.getMax(),
-                values.getMin());
+        double max = swapInfinityValuesToZero(values.getMax());
+        double min = swapInfinityValuesToZero(values.getMin());
 
-        swapInfiniteValuesToZero(specificStats);
-        return specificStats;
+       return createSpecificStats(BigDecimal.valueOf(values.getAverage()).setScale(2, RoundingMode.HALF_UP),
+                BigDecimal.valueOf(max).setScale(2, RoundingMode.HALF_UP),
+                BigDecimal.valueOf(min).setScale(2, RoundingMode.HALF_UP));
     }
 
-    private void swapInfiniteValuesToZero(SpecificStats specificStats) {
-        if (specificStats.getMax() == Double.NEGATIVE_INFINITY)
-            specificStats.setMax(0.0);
-        if (specificStats.getMin() == Double.POSITIVE_INFINITY)
-            specificStats.setMin(0.0);
+    private double swapInfinityValuesToZero(double d) {
+        if(d == Double.NEGATIVE_INFINITY || d == Double.POSITIVE_INFINITY)
+            return 0.0;
+        return d;
     }
 }

@@ -48,10 +48,6 @@ public class StatsService {
     private BigDecimal countTotalVolume(List<BeerStatsDto> beerStatsDtos) {
         return beerStatsDtos.stream()
                 .map(BeerStatsDto::batchSize)
-                .map(BigDecimal::valueOf)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-
-
     }
 }

@@ -1,8 +1,10 @@
 package com.yobombel.brewshare.stats.model.SpecificStats;
 
+import java.math.BigDecimal;
+
 public class AlcoholStats extends SpecificStats{
 
-    public AlcoholStats(double average, double max, double min) {
+    public AlcoholStats(BigDecimal average, BigDecimal max, BigDecimal min) {
         super(average, max, min);
     }
 

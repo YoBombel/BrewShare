@@ -1,20 +1,23 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Yeast extends BeersmithIngredient {
 
     private String lab;
     private String productId;
-    private double minAttenuation;
-    private double maxAttenuation;
+    private BigDecimal minAttenuation;
+    private BigDecimal maxAttenuation;
 
     public Yeast() {
         getEndReaderLoopElements().add("Yeast");
         getXmlElementsDictionary().put("F_Y_NAME", this::setName);
         getXmlElementsDictionary().put("F_Y_LAB", this::setLab);
         getXmlElementsDictionary().put("F_Y_PRODUCT_ID", this::setProductId);
-        getXmlElementsDictionary().put("F_Y_AMOUNT", s -> this.setAmount(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_Y_MIN_ATTENUATION", s -> this.setMinAttenuation(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_Y_MAX_ATTENUATION", s -> this.setMaxAttenuation(Double.parseDouble(s)));
+        getXmlElementsDictionary().put("F_Y_AMOUNT", s -> this.setAmount(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_Y_MIN_ATTENUATION", s -> this.setMinAttenuation(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_Y_MAX_ATTENUATION", s -> this.setMaxAttenuation(BigDecimal.valueOf(Double.parseDouble(s))));
     }
 
     public String getLab() {
@@ -33,19 +36,19 @@ public class Yeast extends BeersmithIngredient {
         this.productId = productId;
     }
 
-    public double getMinAttenuation() {
+    public BigDecimal getMinAttenuation() {
         return minAttenuation;
     }
 
-    public void setMinAttenuation(double minAttenuation) {
-        this.minAttenuation = minAttenuation;
+    public void setMinAttenuation(BigDecimal minAttenuation) {
+        this.minAttenuation = minAttenuation.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getMaxAttenuation() {
+    public BigDecimal getMaxAttenuation() {
         return maxAttenuation;
     }
 
-    public void setMaxAttenuation(double maxAttenuation) {
-        this.maxAttenuation = maxAttenuation;
+    public void setMaxAttenuation(BigDecimal maxAttenuation) {
+        this.maxAttenuation = maxAttenuation.setScale(2, RoundingMode.HALF_UP);
     }
 }

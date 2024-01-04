@@ -1,5 +1,7 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +12,14 @@ public class BeersmithRecipe extends BeerXmlObject {
     private String style;
     private String brewer;
     private LocalDate date;
-    private double batchVolume;
-    private double volumeMeasured;
-    private double finalVolumeMeasured;
-    private double desiredOriginalGravity;
-    private double originalGravityMeasured;
-    private double finishingGravityMeasured;
-    private double boilVolumeMeasured;
-    private double efficiency;
+    private BigDecimal batchVolume;
+    private BigDecimal volumeMeasured;
+    private BigDecimal finalVolumeMeasured;
+    private BigDecimal desiredOriginalGravity;
+    private BigDecimal originalGravityMeasured;
+    private BigDecimal finishingGravityMeasured;
+    private BigDecimal boilVolumeMeasured;
+    private BigDecimal efficiency;
     private List<BeersmithIngredient> ingredients;
 
     public BeersmithRecipe() {
@@ -27,14 +29,14 @@ public class BeersmithRecipe extends BeerXmlObject {
         getXmlElementsDictionary().put("F_S_NAME", this::setStyle);
         getXmlElementsDictionary().put("F_R_BREWER", this::setBrewer);
         getXmlElementsDictionary().put("F_R_DATE", d -> this.setDate(LocalDate.parse(d)));
-        getXmlElementsDictionary().put("F_R_VOLUME_MEASURED", s -> this.setVolumeMeasured(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_R_FINAL_VOL_MEASURED", s -> this.setFinalVolumeMeasured(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_R_OG_MEASURED", s -> this.setOriginalGravityMeasured(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_R_FG_MEASURED", s -> this.setFinishingGravityMeasured(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_R_BOIL_VOL_MEASURED", s -> this.setBoilVolumeMeasured(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_R_DESIRED_OG", s -> this.setDesiredOriginalGravity(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_E_BATCH_VOL", s -> this.setBatchVolume(Double.parseDouble(s)));
-        getXmlElementsDictionary().put("F_E_EFFICIENCY", s -> this.setEfficiency(Double.parseDouble(s)));
+        getXmlElementsDictionary().put("F_R_VOLUME_MEASURED", s -> this.setVolumeMeasured(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_R_FINAL_VOL_MEASURED", s -> this.setFinalVolumeMeasured(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_R_OG_MEASURED", s -> this.setOriginalGravityMeasured(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_R_FG_MEASURED", s -> this.setFinishingGravityMeasured(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_R_BOIL_VOL_MEASURED", s -> this.setBoilVolumeMeasured(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_R_DESIRED_OG", s -> this.setDesiredOriginalGravity(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_E_BATCH_VOL", s -> this.setBatchVolume(BigDecimal.valueOf(Double.parseDouble(s))));
+        getXmlElementsDictionary().put("F_E_EFFICIENCY", s -> this.setEfficiency(BigDecimal.valueOf(Double.parseDouble(s))));
     }
 
     public String getName() {
@@ -69,68 +71,68 @@ public class BeersmithRecipe extends BeerXmlObject {
         this.date = date;
     }
 
-    public double getVolumeMeasured() {
+    public BigDecimal getVolumeMeasured() {
         return volumeMeasured;
     }
 
-    public void setVolumeMeasured(double volumeMeasured) {
-        this.volumeMeasured = volumeMeasured;
+    public void setVolumeMeasured(BigDecimal volumeMeasured) {
+        this.volumeMeasured = volumeMeasured.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getFinalVolumeMeasured() {
+    public BigDecimal getFinalVolumeMeasured() {
         return finalVolumeMeasured;
     }
 
-    public void setFinalVolumeMeasured(double finalVolumeMeasured) {
-        this.finalVolumeMeasured = finalVolumeMeasured;
+    public void setFinalVolumeMeasured(BigDecimal finalVolumeMeasured) {
+        this.finalVolumeMeasured = finalVolumeMeasured.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getOriginalGravityMeasured() {
+    public BigDecimal getOriginalGravityMeasured() {
         return originalGravityMeasured;
     }
 
-    public void setOriginalGravityMeasured(double originalGravityMeasured) {
-        this.originalGravityMeasured = originalGravityMeasured;
+    public void setOriginalGravityMeasured(BigDecimal originalGravityMeasured) {
+        this.originalGravityMeasured = originalGravityMeasured.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getFinishingGravityMeasured() {
+    public BigDecimal getFinishingGravityMeasured() {
         return finishingGravityMeasured;
     }
 
-    public void setFinishingGravityMeasured(double finishingGravityMeasured) {
-        this.finishingGravityMeasured = finishingGravityMeasured;
+    public void setFinishingGravityMeasured(BigDecimal finishingGravityMeasured) {
+        this.finishingGravityMeasured = finishingGravityMeasured.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getBoilVolumeMeasured() {
+    public BigDecimal getBoilVolumeMeasured() {
         return boilVolumeMeasured;
     }
 
-    public void setBoilVolumeMeasured(double boilVolumeMeasured) {
-        this.boilVolumeMeasured = boilVolumeMeasured;
+    public void setBoilVolumeMeasured(BigDecimal boilVolumeMeasured) {
+        this.boilVolumeMeasured = boilVolumeMeasured.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getDesiredOriginalGravity() {
+    public BigDecimal getDesiredOriginalGravity() {
         return desiredOriginalGravity;
     }
 
-    public void setDesiredOriginalGravity(double desiredOriginalGravity) {
-        this.desiredOriginalGravity = desiredOriginalGravity;
+    public void setDesiredOriginalGravity(BigDecimal desiredOriginalGravity) {
+        this.desiredOriginalGravity = desiredOriginalGravity.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getBatchVolume() {
+    public BigDecimal getBatchVolume() {
         return batchVolume;
     }
 
-    public void setBatchVolume(double batchVolume) {
-        this.batchVolume = batchVolume;
+    public void setBatchVolume(BigDecimal batchVolume) {
+        this.batchVolume = batchVolume.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getEfficiency() {
+    public BigDecimal getEfficiency() {
         return efficiency;
     }
 
-    public void setEfficiency(double efficiency) {
-        this.efficiency = efficiency;
+    public void setEfficiency(BigDecimal efficiency) {
+        this.efficiency = efficiency.setScale(2, RoundingMode.HALF_UP);
     }
 
     public List<BeersmithIngredient> getIngredients() {

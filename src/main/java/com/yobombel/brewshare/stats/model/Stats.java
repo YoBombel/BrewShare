@@ -6,6 +6,7 @@ import com.yobombel.brewshare.stats.model.SpecificStats.GravityStats;
 import com.yobombel.brewshare.stats.model.SpecificStats.IbuStats;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Stats {
 
@@ -29,7 +30,7 @@ public class Stats {
     }
 
     public void setTotalVolume(BigDecimal totalVolume) {
-        this.totalVolume = totalVolume;
+        this.totalVolume = totalVolume.setScale(2, RoundingMode.HALF_UP);
     }
 
     public GravityStats getGravityStats() {

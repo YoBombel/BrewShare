@@ -5,6 +5,8 @@ import com.yobombel.brewshare.beer.Beer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 
 @Entity
@@ -27,7 +29,7 @@ public class Ingredient implements Comparable<Ingredient> {
     private String name;
 
     @Column(name = COLUMN_PREFIX + "amount")
-    private double amount;
+    private BigDecimal amount;
 
     public Long getId() {
         return id;
@@ -53,12 +55,12 @@ public class Ingredient implements Comparable<Ingredient> {
         this.name = name;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount.setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override
@@ -73,17 +75,18 @@ public class Ingredient implements Comparable<Ingredient> {
         if (this == o) return true;
         if (!(o instanceof Ingredient that)) return false;
 
-        if (Double.compare(that.getAmount(), getAmount()) != 0) return false;
-        return getName() != null ? getName().equals(that.getName()) : that.getName() == null;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getBeer() != null ? !getBeer().equals(that.getBeer()) : that.getBeer() != null) return false;
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
+        return getAmount() != null ? getAmount().equals(that.getAmount()) : that.getAmount() == null;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = getName() != null ? getName().hashCode() : 0;
-        temp = Double.doubleToLongBits(getAmount());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getBeer() != null ? getBeer().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getAmount() != null ? getAmount().hashCode() : 0);
         return result;
     }
 }
