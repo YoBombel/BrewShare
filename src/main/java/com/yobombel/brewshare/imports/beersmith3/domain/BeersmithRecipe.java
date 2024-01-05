@@ -76,7 +76,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setVolumeMeasured(BigDecimal volumeMeasured) {
-        this.volumeMeasured = volumeMeasured.setScale(2, RoundingMode.HALF_UP);
+        this.volumeMeasured = volumeMeasured;
     }
 
     public BigDecimal getFinalVolumeMeasured() {
@@ -84,7 +84,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setFinalVolumeMeasured(BigDecimal finalVolumeMeasured) {
-        this.finalVolumeMeasured = finalVolumeMeasured.setScale(2, RoundingMode.HALF_UP);
+        this.finalVolumeMeasured = finalVolumeMeasured;
     }
 
     public BigDecimal getOriginalGravityMeasured() {
@@ -92,7 +92,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setOriginalGravityMeasured(BigDecimal originalGravityMeasured) {
-        this.originalGravityMeasured = originalGravityMeasured.setScale(2, RoundingMode.HALF_UP);
+        this.originalGravityMeasured = originalGravityMeasured;
     }
 
     public BigDecimal getFinishingGravityMeasured() {
@@ -100,7 +100,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setFinishingGravityMeasured(BigDecimal finishingGravityMeasured) {
-        this.finishingGravityMeasured = finishingGravityMeasured.setScale(2, RoundingMode.HALF_UP);
+        this.finishingGravityMeasured = finishingGravityMeasured;
     }
 
     public BigDecimal getBoilVolumeMeasured() {
@@ -108,7 +108,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setBoilVolumeMeasured(BigDecimal boilVolumeMeasured) {
-        this.boilVolumeMeasured = boilVolumeMeasured.setScale(2, RoundingMode.HALF_UP);
+        this.boilVolumeMeasured = boilVolumeMeasured;
     }
 
     public BigDecimal getDesiredOriginalGravity() {
@@ -116,7 +116,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setDesiredOriginalGravity(BigDecimal desiredOriginalGravity) {
-        this.desiredOriginalGravity = desiredOriginalGravity.setScale(2, RoundingMode.HALF_UP);
+        this.desiredOriginalGravity = desiredOriginalGravity;
     }
 
     public BigDecimal getBatchVolume() {
@@ -124,7 +124,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setBatchVolume(BigDecimal batchVolume) {
-        this.batchVolume = batchVolume.setScale(2, RoundingMode.HALF_UP);
+        this.batchVolume = batchVolume;
     }
 
     public BigDecimal getEfficiency() {
@@ -132,7 +132,7 @@ public class BeersmithRecipe extends BeerXmlObject {
     }
 
     public void setEfficiency(BigDecimal efficiency) {
-        this.efficiency = efficiency.setScale(2, RoundingMode.HALF_UP);
+        this.efficiency = efficiency;
     }
 
     public List<BeersmithIngredient> getIngredients() {

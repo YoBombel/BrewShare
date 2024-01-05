@@ -21,7 +21,9 @@ public class UnitConversion {
         return ounces.multiply(BigDecimal.valueOf(28.3495));    }
 
     public static BigDecimal gravityToPlato(BigDecimal gravity) {
-        return BigDecimal.valueOf(-616.868D + 1111.14D * gravity.doubleValue() - 630.262 * Math.pow(gravity.doubleValue(), 2) + 135.997 * Math.pow(gravity.doubleValue(), 3)).setScale(2, RoundingMode.HALF_UP);
+        double gravityDouble = gravity.doubleValue();
+        double platoGravity = -616.868D + 1111.14D * gravityDouble - 630.262 * Math.pow(gravityDouble, 2) + 135.997 * Math.pow(gravityDouble, 3);
+        return BigDecimal.valueOf(platoGravity);
     }
 
     public static BigDecimal ouncesToPounds(BigDecimal ounces) {

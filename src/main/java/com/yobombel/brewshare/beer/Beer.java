@@ -88,7 +88,7 @@ public class Beer {
     }
 
     public void setBatchSize(BigDecimal batchSize) {
-        this.batchSize = batchSize.setScale(2, RoundingMode.HALF_UP);
+        this.batchSize = batchSize.setScale(1, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getOriginalGravity() {
@@ -96,7 +96,7 @@ public class Beer {
     }
 
     public void setOriginalGravity(BigDecimal originalGravity) {
-        this.originalGravity = originalGravity.setScale(2, RoundingMode.HALF_UP);
+        this.originalGravity = originalGravity.setScale(1, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getAbv() {
@@ -112,7 +112,7 @@ public class Beer {
     }
 
     public void setIbu(BigDecimal ibu) {
-        this.ibu = ibu.setScale(2, RoundingMode.HALF_UP);
+        this.ibu = ibu.setScale(1, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getColor() {
@@ -120,7 +120,7 @@ public class Beer {
     }
 
     public void setColor(BigDecimal color) {
-        this.color = color.setScale(2, RoundingMode.HALF_UP);
+        this.color = color.setScale(1, RoundingMode.HALF_UP);
     }
 
     public List<Ingredient> getIngredients() {
