@@ -27,33 +27,33 @@ public class Beer {
     @NotBlank(message = "Name cannot be blank")
     @Size(max = 64, message = "Name cannot be longer than 64 characters")
     @Column(name = COLUMN_PREFIX + "name")
-    private String name;
+    private String name = "";
 
     @Size(max = 64, message = "Style cannot be longer than 64 characters")
     @Column(name = COLUMN_PREFIX + "style")
-    private String style;
+    private String style = "";
 
     @DecimalMin(value = "0.0", message = "Batch size cannot be negative")
     @Column(name = COLUMN_PREFIX + "batchSize")
-    private BigDecimal batchSize;
+    private BigDecimal batchSize = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Original gravity cannot be negative")
     @DecimalMax(value = "99.9", message = "Original gravity cannot exceed 99.9")
     @Column(name = COLUMN_PREFIX + "originalGravity")
-    private BigDecimal originalGravity;
+    private BigDecimal originalGravity = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Alcohol content cannot be negative")
     @DecimalMax(value = "96", message = "Alcohol content cannot exceed 96")
     @Column(name = COLUMN_PREFIX + "abv")
-    private BigDecimal abv;
+    private BigDecimal abv = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "IBU cannot be negative")
     @Column(name = COLUMN_PREFIX + "ibu")
-    private BigDecimal ibu;
+    private BigDecimal ibu = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Color cannot be negative")
     @Column(name = COLUMN_PREFIX + "color")
-    private BigDecimal color;
+    private BigDecimal color = BigDecimal.ZERO;
 
     //TODO FIX - EAGER only for tests
     @OneToMany(mappedBy = "beer", fetch = FetchType.EAGER)

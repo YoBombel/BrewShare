@@ -1,25 +1,24 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BeersmithRecipe extends BeerXmlObject {
 
-    private String name;
-    private String style;
-    private String brewer;
-    private LocalDate date;
-    private BigDecimal batchVolume;
-    private BigDecimal volumeMeasured;
-    private BigDecimal finalVolumeMeasured;
-    private BigDecimal desiredOriginalGravity;
-    private BigDecimal originalGravityMeasured;
-    private BigDecimal finishingGravityMeasured;
-    private BigDecimal boilVolumeMeasured;
-    private BigDecimal efficiency;
+    private String name = "";
+    private String style = "";
+    private String brewer = "";
+    private LocalDate date = LocalDate.of(1,1,1);
+    private BigDecimal batchVolume = BigDecimal.ZERO;
+    private BigDecimal volumeMeasured = BigDecimal.ZERO;
+    private BigDecimal finalVolumeMeasured = BigDecimal.ZERO;
+    private BigDecimal desiredOriginalGravity = BigDecimal.ZERO;
+    private BigDecimal originalGravityMeasured = BigDecimal.ZERO;
+    private BigDecimal finishingGravityMeasured = BigDecimal.ZERO;
+    private BigDecimal boilVolumeMeasured = BigDecimal.ZERO;
+    private BigDecimal efficiency = BigDecimal.ZERO;
     private List<BeersmithIngredient> ingredients;
 
     public BeersmithRecipe() {

@@ -5,10 +5,10 @@ import java.math.RoundingMode;
 
 public class Yeast extends BeersmithIngredient {
 
-    private String lab;
-    private String productId;
-    private BigDecimal minAttenuation;
-    private BigDecimal maxAttenuation;
+    private String lab = "";
+    private String productId = "";
+    private BigDecimal minAttenuation = BigDecimal.ZERO;
+    private BigDecimal maxAttenuation = BigDecimal.ZERO;
 
     public Yeast() {
         getEndReaderLoopElements().add("Yeast");

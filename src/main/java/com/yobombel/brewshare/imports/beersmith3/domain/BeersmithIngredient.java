@@ -5,8 +5,8 @@ import java.math.RoundingMode;
 
 public abstract class BeersmithIngredient extends BeerXmlObject{
 
-    private String name;
-    private BigDecimal amount; //ounces
+    private String name = "";
+    private BigDecimal amount = BigDecimal.ZERO; //ounces
 
     public String getName() {
         return name;

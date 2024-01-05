@@ -5,11 +5,11 @@ import java.math.RoundingMode;
 
 public class Hop extends BeersmithIngredient {
 
-    private BigDecimal alpha;
-    private BigDecimal ibuContribution;
-    private BigDecimal boilTime;
+    private BigDecimal alpha = BigDecimal.ZERO;
+    private BigDecimal ibuContribution = BigDecimal.ZERO;
+    private BigDecimal boilTime = BigDecimal.ZERO;
     private boolean isDryAddition;
-    private BigDecimal dryHopTime;
+    private BigDecimal dryHopTime = BigDecimal.ZERO;
 
     public Hop() {
         getEndReaderLoopElements().add("Hops");

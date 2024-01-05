@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 public class Stats {
 
     private int beerCount;
-    private BigDecimal totalVolume;
+    private BigDecimal totalVolume = BigDecimal.ZERO;
     private GravityStats gravityStats;
     private AlcoholStats alcoholStats;
     private IbuStats ibuStats;

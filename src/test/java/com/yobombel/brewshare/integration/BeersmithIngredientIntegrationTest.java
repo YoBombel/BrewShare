@@ -15,6 +15,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,11 +78,11 @@ class BeersmithIngredientIntegrationTest {
 
         ingredient.setBeer(beerService.findById(beerId));
         ingredient.setName("Test Ingredient");
-        ingredient.setAmount(1234.56D);
+        ingredient.setAmount(BigDecimal.valueOf(1234.56D));
 
         ingredient.setBeer(beerService.findById(beerId));
         ingredient.setName("Test Ingredient2");
-        ingredient.setAmount(1.0D);
+        ingredient.setAmount(BigDecimal.valueOf(1.0D));
 
         ingredients.add(ingredient);
         ingredients.add(ingredient2);

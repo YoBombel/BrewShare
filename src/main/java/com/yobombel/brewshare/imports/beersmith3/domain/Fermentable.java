@@ -5,8 +5,8 @@ import java.math.RoundingMode;
 
 public class Fermentable extends BeersmithIngredient {
 
-    private BigDecimal color; //SRM
-    private BigDecimal yield;
+    private BigDecimal color = BigDecimal.ZERO; //SRM
+    private BigDecimal yield = BigDecimal.ZERO;
 
     public Fermentable() {
         getEndReaderLoopElements().add("Grain");
