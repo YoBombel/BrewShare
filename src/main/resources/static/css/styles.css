@@ -1,5 +1,6 @@
 body {
     color: #383838;
+    background-color: snow;
 }
 
 a {
@@ -10,4 +11,8 @@ a {
 .link-orange-hover:hover{
     color: darkorange; !important;
     text-decoration-color: darkorange; !important;
+}
+
+.min-height-250{
+    min-height: 250px;
 }

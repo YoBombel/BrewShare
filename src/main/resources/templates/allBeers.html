@@ -10,25 +10,31 @@
     <meta charset="UTF-8">
     <title>BrewShare</title>
 </head>
-<body class="mx-auto bg-secondary-subtle">
+<body>
 <div class="container fs-4">
 
     <!-- HEADER -->
     <div th:insert="~{fragments/header}"></div>
 
     <div class="row fs-6 m-2">
-        <div th:each="beer : ${beers}" class="border border-dark rounded col-md py-1 m-2">
-            <a th:href="@{/beer/id/{id}(id = ${beer.id})}" class="link-orange-hover">
-            <h4 class="my-0" th:text="${beer.name}"></h4>
-            <ul class="list-unstyled my-0">
-                <li>Style: <span th:text="${beer.style}"></span></li>
-                <li>Batch size: <span th:text="${beer.batchSize}"></span></li>
-                <li>OG: <span th:text="${beer.originalGravity}"></span></li>
-                <li>ABV: <span th:text="${beer.abv}"></span></li>
-                <li>IBU: <span th:text="${beer.ibu}"></span></li>
-                <li>Color: <span th:text="${beer.color}"></span></li>
-            </ul>
-            </a>
+        <div th:each="beer : ${beers}" class="col-md-3 my-2">
+            <div class="border border-dark rounded min-height-250 overflow-hidden">
+                <a th:href="@{/beer/id/{id}(id = ${beer.id})}" class="link-orange-hover">
+                    <div class="border-bottom border-dark mb-2 bg-warning bg-opacity-75 p-2">
+                        <h5 class="" th:text="${beer.name}"></h5>
+                    </div>
+                    <div class="px-2">
+                    <ul class="list-unstyled my-0">
+                        <li>Style: <span th:text="${beer.style}"></span></li>
+                        <li>Batch size: <span th:text="${beer.batchSize}"></span></li>
+                        <li>OG: <span th:text="${beer.originalGravity}"></span></li>
+                        <li>ABV: <span th:text="${beer.abv}"></span></li>
+                        <li>IBU: <span th:text="${beer.ibu}"></span></li>
+                        <li>Color: <span th:text="${beer.color}"></span></li>
+                    </ul>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -38,14 +44,10 @@
                 <a class="btn btn-outline-dark" th:text="'&laquo;'"
                    th:href="@{all?page=1}"></a>
             </li>
-<!--            th:href="@{all(page=${beers.previousOrFirstPageable().getPageNumber()+1})}"></a>-->
-
-
             <li th:each="actPageNumb : ${threeClosestPages}"
                 th:class="${beers.getNumber()+1 == actPageNumb} ? 'page-item active' : 'page-item'">
                 <a class="btn btn-outline-dark" th:text="${actPageNumb}" th:href="@{all(page=${actPageNumb})}"></a>
             </li>
-
             <li th:class="${beers.isLast()} ? 'page-item disabled' : 'page-item'">
                 <a class="btn btn-outline-dark" th:text="'&raquo;'"
                    th:href="@{all(page=${beers.getTotalPages()})}"></a>
