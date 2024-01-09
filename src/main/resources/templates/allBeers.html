@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <div th:insert="~{fragments/header}"></div>
 
-    <div class="row fs-6 m-2">
+    <div class="row fs-6 m-2 w-auto">
         <div th:each="beer : ${beers}" class="col-md-3 my-2">
             <div class="border border-dark rounded min-height-250 overflow-hidden">
                 <a th:href="@{/beer/id/{id}(id = ${beer.id})}" class="link-orange-hover">
