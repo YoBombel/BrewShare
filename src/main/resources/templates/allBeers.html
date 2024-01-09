@@ -13,28 +13,34 @@
 <body>
 <div class="container fs-4">
 
-    <!-- HEADER -->
     <div th:insert="~{fragments/header}"></div>
 
     <div class="row fs-6 m-2 w-auto">
         <div th:each="beer : ${beers}" class="col-md-3 my-2">
-            <div class="border border-dark rounded min-height-250 overflow-hidden">
+
+            <div class="border border-dark rounded overflow-hidden">
                 <a th:href="@{/beer/id/{id}(id = ${beer.id})}" class="link-orange-hover">
                     <div class="border-bottom border-dark mb-2 bg-warning bg-opacity-75 p-2">
                         <h5 class="" th:text="${beer.name}"></h5>
                     </div>
                     <div class="px-2">
-                    <ul class="list-unstyled my-0">
-                        <li>Style: <span th:text="${beer.style}"></span></li>
-                        <li>Batch size: <span th:text="${beer.batchSize}"></span></li>
-                        <li>OG: <span th:text="${beer.originalGravity}"></span></li>
-                        <li>ABV: <span th:text="${beer.abv}"></span></li>
-                        <li>IBU: <span th:text="${beer.ibu}"></span></li>
-                        <li>Color: <span th:text="${beer.color}"></span></li>
-                    </ul>
+                        <ul class="list-unstyled my-0">
+                            <li>Style: <span th:text="${beer.style}"></span></li>
+                            <li>Batch size: <span th:text="${beer.batchSize}"></span></li>
+                            <li>OG: <span th:text="${beer.originalGravity}"></span></li>
+                            <li>ABV: <span th:text="${beer.abv}"></span></li>
+                            <li>IBU: <span th:text="${beer.ibu}"></span></li>
+                            <li>Color: <span th:text="${beer.color}"></span></li>
+                        </ul>
                     </div>
                 </a>
+                <div class="border-top border-dark bg-info">
+                    <button class="w-100 btn btn-info btn-sm fst-italic"
+                            th:onclick="'copyLink(\'' + ${beer.id} + '\', this)'">Copy link
+                    </button>
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -60,6 +66,7 @@
 <div class="px-3" th:insert="~{fragments/footer}"></div>
 
 <script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>
 
 </body>
 </html>
