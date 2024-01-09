@@ -33,6 +33,9 @@
                 </li>
             </ol>
             <div class="d-flex justify-content-end m-2">
+                <button class=" btn btn-outline-info"
+                        th:onclick="'copyLink(\'' + ${beer.id} + '\', this)'">Copy link
+                </button>
                 <a th:href="@{/beer/edit/{id}(id = ${beer.id})}">
                     <button class="btn btn-outline-dark mx-2">Edit</button>
                 </a>
@@ -48,6 +51,7 @@
 <div class="px-3" th:insert="~{fragments/footer}"></div>
 
 <script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>
 
 </body>
 </html>

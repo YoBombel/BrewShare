@@ -1,6 +1,6 @@
 function copyLink(id, button) {
     var currentLink = window.location.href;
-    currentLink = currentLink.replace("all", "");
+    currentLink = currentLink.replace(/\/beer\/.*$/, "/beer/");
     const modifiedLink = currentLink + "id/" + id;
 
     var textarea = document.createElement('textarea');
