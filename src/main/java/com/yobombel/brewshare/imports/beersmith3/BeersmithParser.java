@@ -83,7 +83,7 @@ public class BeersmithParser {
             if (checkEndOfBlock(event, beerXmlObject.getEndReaderLoopElements())) break;
 
             if (event.isStartElement()) {
-                String startElementString = event.asStartElement().getName().toString();
+                String startElementString = event.asStartElement().getName().toString(); //TODO - TRAIN WRECK
                 if (beerXmlObject.getXmlElementsDictionary().containsKey(startElementString))
                     beerXmlObject.getXmlElementsDictionary().get(startElementString).accept(getData(reader));
             }

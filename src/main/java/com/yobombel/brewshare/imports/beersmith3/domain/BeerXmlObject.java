@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 
 public abstract class BeerXmlObject {
 
+    //TODO - change this variable name
     @JsonIgnore
     private final HashSet<String> endReaderLoopElements;
     @JsonIgnore

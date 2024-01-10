@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -43,7 +44,7 @@ class StatsServiceTest {
     @Test
     void shouldCallAllStatServices(){
         //GIVEN
-        given(beerRepository.findAllByBatchSizeIsNotNull()).willReturn(List.of(new BeerStatsDto(0.0,0.0,0.0,0.0,0.0)));
+        given(beerRepository.findAllByBatchSizeIsNotNull()).willReturn(List.of(new BeerStatsDto(BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO)));
         //WHEN
         Stats stats = statsService.getStats();
         //THEN

@@ -1,8 +1,10 @@
 package com.yobombel.brewshare.stats.model.SpecificStats;
 
+import java.math.BigDecimal;
+
 public class ColorStats extends SpecificStats{
 
-    public ColorStats(double average, double max, double min) {
+    public ColorStats(BigDecimal average, BigDecimal max, BigDecimal min) {
         super(average, max, min);
     }
 

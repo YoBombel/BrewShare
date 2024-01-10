@@ -1,8 +1,10 @@
 package com.yobombel.brewshare.beer.dto;
 
+import java.math.BigDecimal;
+
 public record BeerStatsDto
-        (double batchSize,
-         double originalGravity,
-         double abv,
-         double ibu,
-         double color) {}
+        (BigDecimal batchSize,
+         BigDecimal originalGravity,
+         BigDecimal abv,
+         BigDecimal ibu,
+         BigDecimal color) {}

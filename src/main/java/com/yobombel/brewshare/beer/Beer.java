@@ -7,6 +7,8 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,33 +27,33 @@ public class Beer {
     @NotBlank(message = "Name cannot be blank")
     @Size(max = 64, message = "Name cannot be longer than 64 characters")
     @Column(name = COLUMN_PREFIX + "name")
-    private String name;
+    private String name = "";
 
     @Size(max = 64, message = "Style cannot be longer than 64 characters")
     @Column(name = COLUMN_PREFIX + "style")
-    private String style;
+    private String style = "";
 
     @DecimalMin(value = "0.0", message = "Batch size cannot be negative")
     @Column(name = COLUMN_PREFIX + "batchSize")
-    private double batchSize;
+    private BigDecimal batchSize = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Original gravity cannot be negative")
     @DecimalMax(value = "99.9", message = "Original gravity cannot exceed 99.9")
     @Column(name = COLUMN_PREFIX + "originalGravity")
-    private double originalGravity;
+    private BigDecimal originalGravity = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Alcohol content cannot be negative")
     @DecimalMax(value = "96", message = "Alcohol content cannot exceed 96")
     @Column(name = COLUMN_PREFIX + "abv")
-    private double abv;
+    private BigDecimal abv = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "IBU cannot be negative")
     @Column(name = COLUMN_PREFIX + "ibu")
-    private double ibu;
+    private BigDecimal ibu = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Color cannot be negative")
     @Column(name = COLUMN_PREFIX + "color")
-    private double color;
+    private BigDecimal color = BigDecimal.ZERO;
 
     //TODO FIX - EAGER only for tests
     @OneToMany(mappedBy = "beer", fetch = FetchType.EAGER)
@@ -81,44 +83,44 @@ public class Beer {
         this.style = style;
     }
 
-    public double getBatchSize() {
+    public BigDecimal getBatchSize() {
         return batchSize;
     }
 
-    public void setBatchSize(double batchSize) {
-        this.batchSize = batchSize;
+    public void setBatchSize(BigDecimal batchSize) {
+        this.batchSize = batchSize.setScale(1, RoundingMode.HALF_UP);
     }
 
-    public double getOriginalGravity() {
+    public BigDecimal getOriginalGravity() {
         return originalGravity;
     }
 
-    public void setOriginalGravity(double originalGravity) {
-        this.originalGravity = originalGravity;
+    public void setOriginalGravity(BigDecimal originalGravity) {
+        this.originalGravity = originalGravity.setScale(1, RoundingMode.HALF_UP);
     }
 
-    public double getAbv() {
+    public BigDecimal getAbv() {
         return abv;
     }
 
-    public void setAbv(double abv) {
-        this.abv = abv;
+    public void setAbv(BigDecimal abv) {
+        this.abv = abv.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public double getIbu() {
+    public BigDecimal getIbu() {
         return ibu;
     }
 
-    public void setIbu(double ibu) {
-        this.ibu = ibu;
+    public void setIbu(BigDecimal ibu) {
+        this.ibu = ibu.setScale(1, RoundingMode.HALF_UP);
     }
 
-    public double getColor() {
+    public BigDecimal getColor() {
         return color;
     }
 
-    public void setColor(double color) {
-        this.color = color;
+    public void setColor(BigDecimal color) {
+        this.color = color.setScale(1, RoundingMode.HALF_UP);
     }
 
     public List<Ingredient> getIngredients() {
@@ -134,34 +136,29 @@ public class Beer {
         if (this == o) return true;
         if (!(o instanceof Beer beer)) return false;
 
-        if (Double.compare(beer.getBatchSize(), getBatchSize()) != 0) return false;
-        if (Double.compare(beer.getOriginalGravity(), getOriginalGravity()) != 0) return false;
-        if (Double.compare(beer.getAbv(), getAbv()) != 0) return false;
-        if (Double.compare(beer.getIbu(), getIbu()) != 0) return false;
-        if (Double.compare(beer.getColor(), getColor()) != 0) return false;
         if (getId() != null ? !getId().equals(beer.getId()) : beer.getId() != null) return false;
-        if (getName() != null ? !getName().equals(beer.getName()) : beer.getName() != null) return false;
+        if (!getName().equals(beer.getName())) return false;
         if (getStyle() != null ? !getStyle().equals(beer.getStyle()) : beer.getStyle() != null) return false;
+        if (getBatchSize() != null ? !getBatchSize().equals(beer.getBatchSize()) : beer.getBatchSize() != null)
+            return false;
+        if (getOriginalGravity() != null ? !getOriginalGravity().equals(beer.getOriginalGravity()) : beer.getOriginalGravity() != null)
+            return false;
+        if (getAbv() != null ? !getAbv().equals(beer.getAbv()) : beer.getAbv() != null) return false;
+        if (getIbu() != null ? !getIbu().equals(beer.getIbu()) : beer.getIbu() != null) return false;
+        if (getColor() != null ? !getColor().equals(beer.getColor()) : beer.getColor() != null) return false;
         return getIngredients() != null ? getIngredients().equals(beer.getIngredients()) : beer.getIngredients() == null;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + getName().hashCode();
         result = 31 * result + (getStyle() != null ? getStyle().hashCode() : 0);
-        temp = Double.doubleToLongBits(getBatchSize());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getOriginalGravity());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getAbv());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getIbu());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getColor());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (getBatchSize() != null ? getBatchSize().hashCode() : 0);
+        result = 31 * result + (getOriginalGravity() != null ? getOriginalGravity().hashCode() : 0);
+        result = 31 * result + (getAbv() != null ? getAbv().hashCode() : 0);
+        result = 31 * result + (getIbu() != null ? getIbu().hashCode() : 0);
+        result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
         result = 31 * result + (getIngredients() != null ? getIngredients().hashCode() : 0);
         return result;
     }
