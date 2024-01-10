@@ -18,8 +18,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/css/**", "/img/**", "/js/**", "/","/beer/all", "/stats", "/about").permitAll()
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/css/**",
+                                "/img/**",
+                                "/js/**",
+                                "/",
+                                "/beer/all",
+                                "/stats",
+                                "/about",
+                                "/beer/id/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

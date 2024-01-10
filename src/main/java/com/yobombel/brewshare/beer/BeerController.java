@@ -106,7 +106,7 @@ public class BeerController {
     }
 
     //DELETE
-    @DeleteMapping("id/{id}")
+    @DeleteMapping("delete/{id}")
     public String deleteBeerById(@PathVariable Long id) {
         log.info("Request to delete beer, id: {}", id);
         beerService.deleteById(id);

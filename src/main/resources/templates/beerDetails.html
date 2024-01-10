@@ -39,7 +39,7 @@
                 <a th:href="@{/beer/edit/{id}(id = ${beer.id})}">
                     <button class="btn btn-outline-dark mx-2">Edit</button>
                 </a>
-                <form th:action="@{/beer/id/{id}(id = ${beer.id})}" th:method="delete">
+                <form th:action="@{/beer/delete/{id}(id = ${beer.id})}" th:method="delete">
                     <button class="btn btn-outline-danger">Delete</button>
                 </form>
             </div>
