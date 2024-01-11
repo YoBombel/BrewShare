@@ -4,12 +4,13 @@ import com.yobombel.brewshare.beer.Beer;
 import com.yobombel.brewshare.beer.ingredient.Ingredient;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithIngredient;
 import com.yobombel.brewshare.imports.beersmith3.domain.BeersmithRecipe;
-import com.yobombel.brewshare.util.UnitConversion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static com.yobombel.brewshare.util.UnitConversion.*;
 
 @Component
 public class BeersmithMapper {
@@ -27,14 +28,17 @@ public class BeersmithMapper {
         beer.setName(beersmithRecipe.getName());
         beer.setStyle(beersmithRecipe.getStyle());
         beer.setBatchSize(
-                UnitConversion.fluidOuncesToLiters(beersmithRecipe.getBatchVolume()));
+                fluidOuncesToLiters(beersmithRecipe.getBatchVolume()));
         beer.setOriginalGravity(
-                UnitConversion.gravityToPlato(beersmithRecipe.getOriginalGravityMeasured()));
+                gravityToPlato(beersmithRecipe.getOriginalGravityMeasured()));
         beer.setIngredients(mapIngredients(beersmithRecipe.getIngredients()));
-        beer.setAbv(specCalculations.calculateAbv(beersmithRecipe));
-        beer.setIbu(specCalculations.calculateIbu(beersmithRecipe));
+        beer.setAbv(
+                specCalculations.calculateAbv(beersmithRecipe));
+        beer.setIbu(
+                specCalculations.calculateIbu(beersmithRecipe));
         beer.setColor(
-                UnitConversion.srmToEbc(specCalculations.calculateColor(beersmithRecipe)));
+                srmToEbc(
+                        specCalculations.calculateColor(beersmithRecipe)));
         return beer;
     }
 
@@ -48,7 +52,8 @@ public class BeersmithMapper {
         log.trace("Mapping ingredient: {}", beersmithIngredient.getName());
         Ingredient ingredient = new Ingredient();
         ingredient.setName(beersmithIngredient.getName());
-        ingredient.setAmount(beersmithIngredient.getAmount());
+        ingredient.setAmount(
+                ouncesToGrams(beersmithIngredient.getAmount()));
         return ingredient;
     }
 }

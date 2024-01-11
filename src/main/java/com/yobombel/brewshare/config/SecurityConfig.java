@@ -26,7 +26,8 @@ public class SecurityConfig {
                                 "/beer/all",
                                 "/stats",
                                 "/about",
-                                "/beer/id/**").permitAll()
+                                "/beer/id/**",
+                                "error**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
