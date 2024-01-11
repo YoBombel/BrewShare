@@ -57,35 +57,18 @@
             </div>
             <div class="col-md-6">
                 <h2>Specs</h2>
-                <h4>Original gravity: </h4>
-                <ul>
-                    <li>Average: <span th:text="${stats.gravityStats.average}"></span> °Plato</li>
-                    <li>Max: <span th:text="${stats.gravityStats.max}"></span> °Plato</li>
-                    <li>Min: <span th:text="${stats.gravityStats.min}"></span> °Plato</li>
-                </ul>
-                <h4>Alcohol: </h4>
-                <ul>
-                    <li>Average: <span th:text="${stats.alcoholStats.average}"></span>% ABV</li>
-                    <li>Max: <span th:text="${stats.alcoholStats.max}"></span>% ABV</li>
-                    <li>Min: <span th:text="${stats.alcoholStats.min}"></span>% ABV</li>
-                </ul>
-                <h4>IBU: </h4>
-                <ul>
-                    <li>Average: <span th:text="${stats.ibuStats.average}"></span></li>
-                    <li>Max: <span th:text="${stats.ibuStats.max}"></span></li>
-                    <li>Min: <span th:text="${stats.ibuStats.min}"></span></li>
-                </ul>
-                <h4>Color: </h4>
-                <ul>
-                    <li>Average: <span th:text="${stats.colorStats.average}"></span> EBC</li>
-                    <li>Max: <span th:text="${stats.colorStats.max}"></span> EBC</li>
-                    <li>Min: <span th:text="${stats.colorStats.min}"></span> EBC</li>
-                </ul>
+                <div th:each="aggregateStat : ${stats.aggregateStats}">
+                    <h4 th:text="${aggregateStat.statType.value}"></h4>
+                    <ul>
+                        <li>Min: <span th:text="${aggregateStat.minMaxAvg[0]}"></span> <span th:text="${aggregateStat.statType.unit}"></span></li>
+                        <li>Max: <span th:text="${aggregateStat.minMaxAvg[1]}"></span> <span th:text="${aggregateStat.statType.unit}"></span></li>
+                        <li>Avg: <span th:text="${aggregateStat.minMaxAvg[2]}"></span> <span th:text="${aggregateStat.statType.unit}"></span></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="px-3" th:insert="~{fragments/footer}"></div>
 

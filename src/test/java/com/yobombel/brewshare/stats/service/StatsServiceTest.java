@@ -1,13 +1,8 @@
 package com.yobombel.brewshare.stats.service;
 
-import com.yobombel.brewshare.beer.Beer;
 import com.yobombel.brewshare.beer.BeerRepository;
-import com.yobombel.brewshare.beer.dto.BeerStatsDto;
+import com.yobombel.brewshare.stats.model.BeerStatsDto;
 import com.yobombel.brewshare.stats.model.Stats;
-import com.yobombel.brewshare.stats.service.specificStatsServices.AlcoholStatsService;
-import com.yobombel.brewshare.stats.service.specificStatsServices.ColorStatsService;
-import com.yobombel.brewshare.stats.service.specificStatsServices.GravityStatsService;
-import com.yobombel.brewshare.stats.service.specificStatsServices.IbuStatsService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,7 +41,7 @@ class StatsServiceTest {
         //GIVEN
         given(beerRepository.findAllByBatchSizeIsNotNull()).willReturn(List.of(new BeerStatsDto(BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO)));
         //WHEN
-        Stats stats = statsService.getStats();
+        Stats stats = statsService.createStats();
         //THEN
         verify(beerRepository).findAllByBatchSizeIsNotNull();
         verify(gravityStatsService).calculateStats(anyList(), any());

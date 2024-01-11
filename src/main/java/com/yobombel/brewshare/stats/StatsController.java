@@ -17,8 +17,8 @@ public class StatsController {
     }
 
     @GetMapping("")
-    public String getStats(Model model){
-        model.addAttribute("stats", statsService.getStats());
+    public String getStats(Model model) {
+        model.addAttribute("stats", statsService.createStats());
         return "stats";
     }
 
