@@ -130,7 +130,7 @@ public class BeersmithParser {
 
     private static XMLEvent getXmlEvent(XMLEventReader reader) throws XMLStreamException {
         XMLEvent event = reader.nextEvent();
-        event.isEntityReference(); //IGNORE ENTITY REFERENCES
+        //event.isEntityReference(); //IGNORE ENTITY REFERENCES TODO - REFACTOR, THIS CLASS SEEMS UNNECESSARY NOW
         return event;
     }
 
