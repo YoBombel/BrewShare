@@ -9,6 +9,7 @@ public class Stats {
     private int beerCount;
     private BigDecimal totalVolume = BigDecimal.ZERO;
     private List<AggregateStat> aggregateStats;
+    private StyleStats styleStats;
 
     public int getBeerCount() {
         return beerCount;
@@ -32,5 +33,13 @@ public class Stats {
 
     public void setAggregateStats(List<AggregateStat> aggregateStats) {
         this.aggregateStats = aggregateStats;
+    }
+
+    public StyleStats getStyleStats() {
+        return styleStats;
+    }
+
+    public void setStyleStats(StyleStats styleStats) {
+        this.styleStats = styleStats;
     }
 }

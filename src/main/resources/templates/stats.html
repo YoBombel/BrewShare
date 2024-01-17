@@ -30,25 +30,19 @@
                     <li>Total volume: <span th:text="${stats.totalVolume}"></span> liters</li>
                 </ul>
                 <!-- percentage + amount -->
-                <h4>Top 3 style families</h4>
-                <ol>
-                    <li>Pils - xx% (xx beers)</li>
-                    <li>Stout - xx% (xx beers)</li>
-                    <li>Sour - xx% (xx beers)</li>
-                </ol>
+                <h4>Style families</h4>
+                <ul>
+                    <li th:each="entry : ${stats.styleStats.familiesPercentage}"><span th:text="${entry.key}"></span> - <span th:text="${entry.value}"></span>%</li>
+                </ul>
                 <h4>Color</h4>
                 <ul>
-                    <li>Pale - 50% (50 beers)</li>
-                    <li>Amber - 25% (25 beers)</li>
-                    <li>Dark - 25% (25 beers)</li>
+                    <li th:each="entry : ${stats.styleStats.colorsPercentage}"><span th:text="${entry.key}"></span> - <span th:text="${entry.value}"></span>%</li>
                 </ul>
                 <h4>Fermentation type</h4>
                 <ul>
-                    <li>Ale - 50% (50 beers)</li>
-                    <li>Lager - 40% (40 beers)</li>
-                    <li>Sour/wild - 10% (10 beers)</li>
+                    <li th:each="entry : ${stats.styleStats.fermentationTypePercentage}"><span th:text="${entry.key}"></span> - <span th:text="${entry.value}"></span>%</li>
                 </ul>
-                <h4>Balance</h4>
+                <h4>MOCK Balance</h4>
                 <ul>
                     <li>Hoppy - 50% (50 beers)</li>
                     <li>Balanced - 40% (40 beers)</li>

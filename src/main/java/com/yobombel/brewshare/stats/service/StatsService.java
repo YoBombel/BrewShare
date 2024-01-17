@@ -13,10 +13,12 @@ public class StatsService {
 
     BeerRepository beerRepository;
     AggregateStatsService aggregateStatsService;
+    StyleStatsService styleStatsService;
 
-    public StatsService(BeerRepository beerRepository, AggregateStatsService aggregateStatsService) {
+    public StatsService(BeerRepository beerRepository, AggregateStatsService aggregateStatsService, StyleStatsService styleStatsService) {
         this.beerRepository = beerRepository;
         this.aggregateStatsService = aggregateStatsService;
+        this.styleStatsService = styleStatsService;
     }
 
     public Stats createStats() {
@@ -28,6 +30,9 @@ public class StatsService {
 
         stats.setAggregateStats(
                 aggregateStatsService.createAggregateStats(beerStatsDtos));
+
+        stats.setStyleStats(
+                styleStatsService.createStyleStats(beerStatsDtos));
 
         return stats;
     }

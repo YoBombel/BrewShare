@@ -1,0 +1,466 @@
+[
+  {
+    "name": "Altbier",
+    "tags": "standard-strength, amber-color, top-fermented, lagered, central-europe, traditional-style, amber-ale-family, bitter"
+  },
+  {
+    "name": "Alternative Grain Beer",
+    "tags": "specialty-beer"
+  },
+  {
+    "name": "Alternative Sugar Beer",
+    "tags": "specialty-beer"
+  },
+  {
+    "name": "American Amber Ale",
+    "tags": "standard-strength, amber-color, top-fermented, northamerica, craft-style, amber-ale-family, balanced, hoppy"
+  },
+  {
+    "name": "American Barleywine",
+    "tags": "very-high-strength, amber-color, top-fermented, northamerica, craft-style, strong-ale-family, bitter, hoppy"
+  },
+  {
+    "name": "American Brown Ale",
+    "tags": "standard-strength, dark-color, top-fermented, northamerica, craft-style, brown-ale-family, balanced, hoppy"
+  },
+  {
+    "name": "American IPA",
+    "tags": "high-strength, pale-color, top-fermented, north america, craft-style, ipa-family, bitter, hoppy"
+  },
+  {
+    "name": "American Lager",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, north-america, traditional-style, pale-lager-family, balanced"
+  },
+  {
+    "name": "American Light Lager",
+    "tags": "session-strength, pale-color, bottom-fermented, lagered, north-america, traditional-style, pale-lager-family, balanced"
+  },
+  {
+    "name": "American Pale Ale",
+    "tags": "standard-strength, pale-color, top-fermented, northamerica, craft-style, pale-ale-family, bitter, hoppy"
+  },
+  {
+    "name": "American Porter",
+    "tags": "standard-strength, dark-color, top-fermented, northamerica, craft-style, porter-family, bitter, roasty, hoppy"
+  },
+  {
+    "name": "American Stout",
+    "tags": "high-strength, dark-color, top-fermented, northamerica, craft-style, stout-family, bitter, roasty, hoppy"
+  },
+  {
+    "name": "American Strong Ale",
+    "tags": "high-strength, amber-color, top-fermented, northamerica, craft-style, strong-ale-family, bitter, hoppy"
+  },
+  {
+    "name": "American Wheat Beer",
+    "tags": "standard-strength, pale-color, top-fermented, northamerica, craft-style, wheat-beer-family, balanced"
+  },
+  {
+    "name": "Australian Sparkling Ale",
+    "tags": "standard-strength, pale-color, top-fermented, pacific, traditional-style, pale-ale-family, bitter"
+  },
+  {
+    "name": "Autumn Seasonal Beer",
+    "tags": "specialty-beer, spice"
+  },
+  {
+    "name": "Baltic Porter",
+    "tags": "high-strength, dark-color, bottom-fermented, lagered, eastern-europe, traditional-style, porter-family, malty"
+  },
+  {
+    "name": "Belgian Blond Ale",
+    "tags": "high-strength, pale-color, top-fermented, western europe, traditional-style, balanced"
+  },
+  {
+    "name": "Belgian Dark Strong Ale",
+    "tags": "very-high-strength, amber-color, top-fermented, western-europe, traditional-style, malty"
+  },
+  {
+    "name": "Belgian Dubbel",
+    "tags": "high-strength, amber-color, top-fermented, westerneurope, traditional-style, malty"
+  },
+  {
+    "name": "Belgian Golden Strong Ale",
+    "tags": "very-high-strength, pale-color, top-fermented, westerneurope, traditional-style, bitter"
+  },
+  {
+    "name": "Belgian Pale Ale",
+    "tags": "standard-strength, amber-color, top-fermented, western-europe, traditional-style, pale-ale-family, balanced"
+  },
+  {
+    "name": "Belgian Single",
+    "tags": "standard-strength, pale-color, top-fermented, westerneurope, craft-style, bitter, hoppy"
+  },
+  {
+    "name": "Belgian Tripel",
+    "tags": "high-strength, pale-color, top-fermented, westerneurope, traditional-style, bitter"
+  },
+  {
+    "name": "Berliner Weisse",
+    "tags": "session-strength, pale-color, top-fermented, centraleurope, traditional-style, wheat-beer-family, sour"
+  },
+  {
+    "name": "Best Bitter",
+    "tags": "standard-strength, amber-color, top-fermented, britishisles, traditional-style, amber-ale-family, bitter"
+  },
+  {
+    "name": "Bière de Garde",
+    "tags": "high-strength, pale-color, amber-color, any fermentation, lagered, western-europe, traditional-style, amber-ale-family, malty"
+  },
+  {
+    "name": "Blonde Ale",
+    "tags": "standard-strength, pale-color, top-fermented, northamerica, craft-style, pale-ale-family, balanced"
+  },
+  {
+    "name": "Brett Beer",
+    "tags": "wild-fermentation, north-america, craft-style, specialtybeer"
+  },
+  {
+    "name": "British Brown Ale",
+    "tags": "standard-strength, amber-color, top-fermented, britishisles, traditional-style, brown-ale-family, malty"
+  },
+  {
+    "name": "British Golden Ale",
+    "tags": "standard-strength, pale-color, top-fermented, britishisles, craft-style, pale-ale-family, bitter, hoppy"
+  },
+  {
+    "name": "British Strong Ale",
+    "tags": "high-strength, amber-color, top-fermented, british-isles, traditional-style, strong-ale-family, malty"
+  },
+  {
+    "name": "California Common",
+    "tags": "standard-strength, amber-color, bottom-fermented, north-america, traditional-style, amber-lager-family, bitter, hoppy"
+  },
+  {
+    "name": "Classic Style Smoked Beer",
+    "tags": "specialty-beer, smoke"
+  },
+  {
+    "name": "Commercial Specialty Beer",
+    "tags": "specialty-beer"
+  },
+  {
+    "name": "Cream Ale",
+    "tags": "standard-strength, pale-color, top-fermented, northamerica, traditional-style, pale-ale-family, balanced"
+  },
+  {
+    "name": "Czech Amber Lager",
+    "tags": "standard-strength, amber-color, bottom-fermented, lagered, central-europe, traditional-style, amber-lager-family, balanced"
+  },
+  {
+    "name": "Czech Dark Lager",
+    "tags": "standard-strength, dark-color, bottom-fermented, lagered, central-europe, traditional-style, dark-lager-family, balanced"
+  },
+  {
+    "name": "Czech Pale Lager",
+    "tags": "session-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, pale-lager-family, bitter, hoppy"
+  },
+  {
+    "name": "Czech Premium Pale Lager",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, pilsner-family, balanced, hoppy"
+  },
+  {
+    "name": "Dark Mild",
+    "tags": "session-strength, dark-color, top-fermented, britishisles, traditional-style, brown-ale-family, malty"
+  },
+  {
+    "name": "Doppelbock",
+    "tags": "high-strength, amber-color, pale-color, bottom fermented, lagered, central-europe, traditional-style, bockfamily, malty"
+  },
+  {
+    "name": "Double IPA",
+    "tags": "very-high-strength, pale-color, top-fermented, northamerica, craft-style, ipa-family, bitter, hoppy"
+  },
+  {
+    "name": "Dunkles Bock",
+    "tags": "high-strength, amber-color, bottom-fermented, lagered, central-europe, traditional-style, bock-family, malty"
+  },
+  {
+    "name": "Dunkles Weissbier",
+    "tags": "standard-strength, amber-color, top-fermented, centraleurope, traditional-style, wheat-beer-family, malty"
+  },
+  {
+    "name": "Eisbock",
+    "tags": "very-high-strength, amber-color, bottom-fermented, lagered, central-europe, traditional-style, bock-family, malty"
+  },
+  {
+    "name": "English Barley Wine",
+    "tags": "very-high-strength, amber-color, top-fermented, britishisles, traditional-style, strong-ale-family, malty"
+  },
+  {
+    "name": "English IPA",
+    "tags": "high-strength, pale-color, top-fermented, british-isles, traditional-style, ipa-family, bitter, hoppy"
+  },
+  {
+    "name": "English Porter",
+    "tags": "standard-strength, dark-color, top-fermented, britishisles, traditional-style, porter-family, malty, roasty"
+  },
+  {
+    "name": "Experimental Beer",
+    "tags": "specialty-beer"
+  },
+  {
+    "name": "Festbier",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, pale-lager-family, malty"
+  },
+  {
+    "name": "Flanders Red Ale",
+    "tags": "standard-strength, amber-color, top-fermented, western-europe, traditional-style, balanced, sour, wood"
+  },
+  {
+    "name": "Foreign Extra Stout",
+    "tags": "high-strength, dark-color, top-fermented, british-isles, traditional-style, stout-family, balanced, roasty"
+  },
+  {
+    "name": "Fruit Beer",
+    "tags": "specialty-beer, fruit"
+  },
+  {
+    "name": "Fruit Lambic",
+    "tags": "standard-strength, pale-color, wild-fermentation, westerneurope, traditional-style, wheat-beer-family, sour, fruit"
+  },
+  {
+    "name": "Fruit and Spice Beer",
+    "tags": "specialty-beer, fruit, spice"
+  },
+  {
+    "name": "German Helles Exportbier",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, pale-lager-family, balanced"
+  },
+  {
+    "name": "German Leichtbier",
+    "tags": "session-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, pale-lager-family, bitter, hoppy"
+  },
+  {
+    "name": "German Pils",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, pilsner-family, bitter, hoppy"
+  },
+  {
+    "name": "Gose",
+    "tags": "standard-strength, pale-color, top-fermented, centraleurope, historical-style, wheat-beer-family, sour, spice"
+  },
+  {
+    "name": "Grape Ale",
+    "tags": "specialty-beer, fruit"
+  },
+  {
+    "name": "Gueuze",
+    "tags": "high-strength, pale-color, wild-fermentation, westerneurope, traditional-style, wheat-beer-family, aged, sour"
+  },
+  {
+    "name": "Hazy IPA",
+    "tags": "high-strength, pale-color, top-fermented, northamerica, craft-style, ipa-family, bitter, hoppy"
+  },
+  {
+    "name": "Helles Bock",
+    "tags": "high-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, bock-family, malty"
+  },
+  {
+    "name": "Historical Beer: Kellerbier",
+    "tags": "standard-strength, bottom-fermented, central-europe, traditional-style, balanced"
+  },
+  {
+    "name": "Historical Beer: Kentucky Common",
+    "tags": "standard-strength, amber-color, top-fermented, northamerica, historical-style, balanced"
+  },
+  {
+    "name": "Historical Beer: Lichtenhainer",
+    "tags": "standard-strength, pale-color, top-fermented, centraleurope, historical-style, wheat-beer-family, sour, smoke"
+  },
+  {
+    "name": "Historical Beer: London Brown Ale",
+    "tags": "session-strength, dark-color, top-fermented, britishisles, historical-style, brown-ale-family, malty, sweet"
+  },
+  {
+    "name": "Historical Beer: Piwo Grodziskie",
+    "tags": "session-strength, pale-color, top-fermented, centraleurope, historical-style, wheat-beer-family, bitter, smoke"
+  },
+  {
+    "name": "Historical Beer: Pre-Prohibition Lager",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, north-america, historical-style, pilsner-family, bitter, hoppy"
+  },
+  {
+    "name": "Historical Beer: Pre-Prohibition Porter",
+    "tags": "standard-strength, dark-color, any-fermentation, northamerica, historical-style, porter-family, malty"
+  },
+  {
+    "name": "Historical Beer: Roggenbier",
+    "tags": "standard-strength, amber-color, top-fermented, centraleurope, historical-style, wheat-beer-family"
+  },
+  {
+    "name": "Historical Beer: Sahti",
+    "tags": "high-strength, amber-color, top-fermented, centraleurope, historical-style, spice"
+  },
+  {
+    "name": "Imperial Stout",
+    "tags": "very-high-strength, dark-color, top-fermented, britishisles, north-america, traditional-style, craft-style, stout-family, malty, bitter, roasty"
+  },
+  {
+    "name": "International Amber Lager",
+    "tags": "standard-strength, amber-color, bottom-fermented, lagered, traditional-style, amber-lager-family, malty"
+  },
+  {
+    "name": "International Dark Lager",
+    "tags": "standard-strength, dark-color, bottom-fermented, lagered, traditional-style, dark-lager-family, malty"
+  },
+  {
+    "name": "International Pale Lager",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, traditional-style, pale-lager-family, balanced"
+  },
+  {
+    "name": "Irish Extra Stout",
+    "tags": "high-strength, dark-color, top-fermented, british-isles, traditional-style, stout-family, bitter, roasty"
+  },
+  {
+    "name": "Irish Red Ale",
+    "tags": "standard-strength, amber-color, top-fermented, britishisles, traditional-style, amber-ale-family, balanced"
+  },
+  {
+    "name": "Irish Stout",
+    "tags": "standard-strength, dark-color, top-fermented, britishisles, traditional-style, stout-family, bitter, roasty"
+  },
+  {
+    "name": "Kolsch",
+    "tags": "standard-strength, pale-color, top-fermented, lagered, central-europe, traditional-style, pale-ale-family, balanced"
+  },
+  {
+    "name": "Lambic",
+    "tags": "standard-strength, pale-color, wild-fermentation, westerneurope, traditional-style, wheat-beer-family, sour"
+  },
+  {
+    "name": "Marzen",
+    "tags": "standard-strength, amber-color, bottom-fermented, lagered, central-europe, traditional-style, amber-lager-family, malty"
+  },
+  {
+    "name": "Mixed-Fermentation Sour Beer",
+    "tags": "wild-fermentation, north-america, craft-style, specialtybeer, sour"
+  },
+  {
+    "name": "Mixed-Style Beer",
+    "tags": "specialty-beer"
+  },
+  {
+    "name": "Munich Dunkel",
+    "tags": "standard-strength, dark-color, bottom-fermented, lagered, central-europe, traditional-style, malty, dark-lager-family"
+  },
+  {
+    "name": "Munich Helles",
+    "tags": "standard-strength, pale-color, bottom-fermented, lagered, central-europe, traditional-style, pale-lager-family, malty"
+  },
+  {
+    "name": "Oatmeal Stout",
+    "tags": "standard-strength, dark-color, top-fermented, britishisles, traditional-style, stout-family, balanced, roasty"
+  },
+  {
+    "name": "Old Ale",
+    "tags": "high-strength, amber-color, top-fermented, british-isles, traditional-style, strong-ale-family, malty, aged"
+  },
+  {
+    "name": "Ordinary Bitter",
+    "tags": "session-strength, amber-color, top-fermented, britishisles, traditional-style, amber-ale-family, bitter"
+  },
+  {
+    "name": "Oud Bruin",
+    "tags": "standard-strength, dark-color, top-fermented, westerneurope, traditional-style, malty, sour"
+  },
+  {
+    "name": "Rauchbier",
+    "tags": "standard-strength, amber-color, bottom-fermented, lagered, central-europe, traditional-style, amber-lager-family, malty, smoke"
+  },
+  {
+    "name": "Saison",
+    "tags": "standard-strength, pale-color, top-fermented, westerneurope, traditional-style, bitter"
+  },
+  {
+    "name": "Schwarzbier",
+    "tags": "standard-strength, dark-color, bottom-fermented, lagered, central-europe, traditional-style, balanced, dark-lager-family"
+  },
+  {
+    "name": "Scottish Export",
+    "tags": "standard-strength, amber-color, top-fermented, britishisles, traditional-style, amber-ale-family, malty"
+  },
+  {
+    "name": "Scottish Heavy",
+    "tags": "session-strength, amber-color, top-fermented, britishisles, traditional-style, amber-ale-family, malty"
+  },
+  {
+    "name": "Scottish Light",
+    "tags": "session-strength, amber-color, top-fermented, britishisles, traditional-style, amber-ale-family, malty"
+  },
+  {
+    "name": "Specialty Fruit Beer",
+    "tags": "specialty-beer, fruit"
+  },
+  {
+    "name": "Specialty IPA",
+    "tags": "high-strength, pale-color, top-fermented, north america, craft-style, ipa-family, specialty-family, bitter, hoppy"
+  },
+  {
+    "name": "Specialty Smoked Beer",
+    "tags": "specialty-beer, smoke"
+  },
+  {
+    "name": "Specialty Spice Beer",
+    "tags": "specialty-beer, spice"
+  },
+  {
+    "name": "Specialty Wood-Aged Beer",
+    "tags": "specialty-beer, wood"
+  },
+  {
+    "name": "Spice, Herb, or Vegetable Beer",
+    "tags": "specialty-beer, spice"
+  },
+  {
+    "name": "Straight Sour Beer",
+    "tags": "pale-color, top-fermented, sour"
+  },
+  {
+    "name": "Strong Bitter",
+    "tags": "standard-strength, amber-color, top-fermented, britishisles, traditional-style, amber-ale-family, bitter"
+  },
+  {
+    "name": "Sweet Stout",
+    "tags": "standard-strength, dark-color, top-fermented, britishisles, traditional-style, stout-family, malty, roasty, sweet"
+  },
+  {
+    "name": "Tropical Stout",
+    "tags": "high-strength, dark-color, top-fermented, british-isles, traditional-style, stout-family, malty, roasty, sweet"
+  },
+  {
+    "name": "Vienna Lager",
+    "tags": "standard-strength, amber-color, bottom-fermented, lagered, central-europe, traditional-style, amber-lager-family, balanced"
+  },
+  {
+    "name": "Wee Heavy",
+    "tags": "high-strength, amber-color, top-fermented, british-isles, traditional-style, strong-ale-family, malty"
+  },
+  {
+    "name": "Weissbier",
+    "tags": "standard-strength, pale-color, top-fermented, centraleurope, traditional-style, wheat-beer-family, malty"
+  },
+  {
+    "name": "Weizenbock",
+    "tags": "high-strength, amber-color, pale-color, top-fermented, central-europe, traditional-style, wheat-beer-family, malty"
+  },
+  {
+    "name": "Wheatwine",
+    "tags": "very-high-strength, amber-color, top-fermented, northamerica, craft-style, strong-ale-family, wheat-beer-family, balanced, hoppy"
+  },
+  {
+    "name": "Wild Specialty Beer",
+    "tags": "wild-fermentation, north-america, craft-style, specialtybeer, sour, fruit"
+  },
+  {
+    "name": "Winter Seasonal Beer",
+    "tags": "specialty-beer, spice"
+  },
+  {
+    "name": "Witbier",
+    "tags": "standard-strength, pale-color, top-fermented, westerneurope, traditional-style, wheat-beer-family, spice"
+  },
+  {
+    "name": "Wood-Aged Beer",
+    "tags": "specialty-beer, wood"
+  }
+]
