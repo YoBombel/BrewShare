@@ -42,11 +42,9 @@
                 <ul>
                     <li th:each="entry : ${stats.styleStats.fermentationTypePercentage}"><span th:text="${entry.key}"></span> - <span th:text="${entry.value}"></span>%</li>
                 </ul>
-                <h4>MOCK Balance</h4>
+                <h4>Balance</h4>
                 <ul>
-                    <li>Hoppy - 50% (50 beers)</li>
-                    <li>Balanced - 40% (40 beers)</li>
-                    <li>Malty - 10% (10 beers)</li>
+                    <li th:each="entry : ${stats.styleStats.balancePercentage}"><span th:text="${entry.key}"></span> - <span th:text="${entry.value}"></span>%</li>
                 </ul>
             </div>
             <div class="col-md-6">

@@ -20,9 +20,10 @@ public class StyleStatsService {
         Map<String, Integer> stylesCount = bjcpTagService.countStyles(beerStatsDtos);
 
         return new StyleStats(
-                bjcpTagService.countTagsPercentages(stylesCount, "family"),
-                bjcpTagService.countTagsPercentages(stylesCount, "color"),
-                bjcpTagService.countTagsPercentages(stylesCount, "ferment")
+                bjcpTagService.countTagsPercentages(stylesCount, List.of("family")),
+                bjcpTagService.countTagsPercentages(stylesCount, List.of("color")),
+                bjcpTagService.countTagsPercentages(stylesCount, List.of("ferment")),
+                bjcpTagService.countTagsPercentages(stylesCount, List.of("bitter", "malty", "balanced"))
         );
     }
 }

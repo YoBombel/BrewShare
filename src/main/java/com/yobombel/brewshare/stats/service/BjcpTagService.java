@@ -18,7 +18,7 @@ import java.util.*;
 public class BjcpTagService {
 
     private static final Logger log = LoggerFactory.getLogger(BjcpTagService.class);
-    private final Map<String, List<String>> bjcpStylesTags = new HashMap<>();
+    private final Map<String, List<String>> bjcpStylesAndTags = new HashMap<>();
 
     public BjcpTagService() {
         setupStyleTags();
@@ -34,9 +34,9 @@ public class BjcpTagService {
         return stylesCount;
     }
 
-    public Map<String, BigDecimal> countTagsPercentages(Map<String, Integer> stylesCount, String tag) {
+    public Map<String, BigDecimal> countTagsPercentages(Map<String, Integer> stylesCount, List<String> tags) {
         Map<String, BigDecimal> tagsPercentages = new HashMap<>();
-        Map<String, Integer> tagCount = countTagOccurrences(stylesCount, tag);
+        Map<String, Integer> tagCount = countTagOccurrences(stylesCount, tags);
         int allTagsSum = sumCounts(tagCount);
 
         for (Map.Entry<String, Integer> entry : tagCount.entrySet()
@@ -60,8 +60,8 @@ public class BjcpTagService {
         return result;
     }
 
-    private BigDecimal calculatePercentage(Integer value, int allFamiliesSum) {
-        return BigDecimal.valueOf((value * 100) / allFamiliesSum).setScale(2, RoundingMode.HALF_UP);
+    private BigDecimal calculatePercentage(Integer value, int tagsSum) {
+        return BigDecimal.valueOf((value * 100) / tagsSum).setScale(2, RoundingMode.HALF_UP);
     }
 
     private int sumCounts(Map<String, Integer> tagCounts) {
@@ -73,18 +73,27 @@ public class BjcpTagService {
         return sum;
     }
 
-    private Map<String, Integer> countTagOccurrences(Map<String, Integer> stylesCount, String tag) {
+    private Map<String, Integer> countTagOccurrences(Map<String, Integer> stylesCount, List<String> tags) {
         Map<String, Integer> tagCounting = new HashMap<>();
         for (Map.Entry<String, Integer> entry : stylesCount.entrySet()
         ) {
-
             String currentStyle = entry.getKey();
             Integer currentStyleCount = entry.getValue();
 
-            if (bjcpStylesTags.containsKey(currentStyle)) {
-                bjcpStylesTags.get(currentStyle).stream()
-                        .filter(t -> t.contains(tag))
-                        .forEach(t -> tagCounting.merge(formatName(t), currentStyleCount, Integer::sum));
+            if (bjcpStylesAndTags.containsKey(currentStyle)) {
+
+                List<String> currentStyleTags = bjcpStylesAndTags.get(currentStyle);
+                String relevantTag = "";
+
+                for (String currentTag : tags
+                ) {
+                    relevantTag = currentStyleTags.stream().filter(t -> t.contains(currentTag)).findFirst().orElse("");
+                    if (!relevantTag.isBlank())
+                        break;
+                }
+
+                if (!relevantTag.isBlank())
+                    tagCounting.merge(formatName(relevantTag), currentStyleCount, Integer::sum);
 
             }
         }
@@ -112,7 +121,7 @@ public class BjcpTagService {
                         .map(String::trim)
                         .map(s -> s.replace("\"", ""))
                         .toList();
-                bjcpStylesTags.put(styleName, tags);
+                bjcpStylesAndTags.put(styleName, tags);
             }
         } catch (IOException e) {
             log.error(e.getMessage());
