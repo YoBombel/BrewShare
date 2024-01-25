@@ -61,7 +61,7 @@ public class BjcpTagService {
     }
 
     private BigDecimal calculatePercentage(Integer value, int tagsSum) {
-        return BigDecimal.valueOf((value * 100) / tagsSum).setScale(2, RoundingMode.HALF_UP);
+        return BigDecimal.valueOf((value * 100) / tagsSum);
     }
 
     private int sumCounts(Map<String, Integer> tagCounts) {

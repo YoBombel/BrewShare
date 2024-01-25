@@ -1,5 +1,6 @@
 package com.yobombel.brewshare.stats.service;
 
+import com.yobombel.brewshare.config.NumberConfig;
 import com.yobombel.brewshare.stats.model.AggregateStat;
 import com.yobombel.brewshare.stats.model.BeerStatsDto;
 import com.yobombel.brewshare.stats.model.enums.StatType;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+
+import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
 
 @Service
 public class AggregateStatsService {
@@ -61,13 +64,15 @@ public class AggregateStatsService {
         if (sum.equals(BigDecimal.ZERO))
             return BigDecimal.ZERO;
 
-        return sum.divide(new BigDecimal(values.size()), RoundingMode.HALF_UP);
+        return setDefaultScale(
+                sum.divide(new BigDecimal(values.size()), RoundingMode.HALF_UP));
     }
 
     private BigDecimal calculateMin(Function<BeerStatsDto, BigDecimal> valueExtractor) {
         return beerStatsDtos.stream()
                 .map(valueExtractor)
                 .reduce(BigDecimal::min)
+                .map(NumberConfig::setDefaultScale)
                 .orElse(BigDecimal.ZERO);
     }
 
@@ -75,6 +80,7 @@ public class AggregateStatsService {
         return beerStatsDtos.stream()
                 .map(valueExtractor)
                 .reduce(BigDecimal::max)
+                .map(NumberConfig::setDefaultScale)
                 .orElse(BigDecimal.ZERO);
     }
 

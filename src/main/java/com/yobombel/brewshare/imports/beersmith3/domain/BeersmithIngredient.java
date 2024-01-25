@@ -1,7 +1,6 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public abstract class BeersmithIngredient extends BeerXmlObject{
 
@@ -21,6 +20,6 @@ public abstract class BeersmithIngredient extends BeerXmlObject{
     }
 
     public void setAmount(BigDecimal amount) {
-        this.amount = amount.setScale(2, RoundingMode.HALF_UP);
+        this.amount = amount;
     }
 }

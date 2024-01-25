@@ -11,7 +11,6 @@
 //import org.springframework.stereotype.Component;
 //
 //import java.math.BigDecimal;
-//import java.math.RoundingMode;
 //import java.util.ArrayList;
 //import java.util.List;
 //import java.util.Random;
@@ -67,6 +66,6 @@
 //    }
 //
 //    private double generate1DecimalPlaceRandom(int origin, int bound) {
-//        return BigDecimal.valueOf(random.nextDouble(origin, bound)).setScale(1, RoundingMode.HALF_UP).doubleValue();
+//        return BigDecimal.valueOf(random.nextDouble(origin, bound));
 //    }
 //}

@@ -8,9 +8,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
 
 @Entity
 @Table(name = Beer.TABLE_NAME)
@@ -34,25 +35,25 @@ public class Beer {
     private String style = "";
 
     @DecimalMin(value = "0.0", message = "Batch size cannot be negative")
-    @Column(name = COLUMN_PREFIX + "batchSize")
+    @Column(name = COLUMN_PREFIX + "batchSize", precision = 10, scale = 1)
     private BigDecimal batchSize = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Original gravity cannot be negative")
     @DecimalMax(value = "99.9", message = "Original gravity cannot exceed 99.9")
-    @Column(name = COLUMN_PREFIX + "originalGravity")
+    @Column(name = COLUMN_PREFIX + "originalGravity", precision = 10, scale = 1)
     private BigDecimal originalGravity = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Alcohol content cannot be negative")
     @DecimalMax(value = "96", message = "Alcohol content cannot exceed 96")
-    @Column(name = COLUMN_PREFIX + "abv")
+    @Column(name = COLUMN_PREFIX + "abv", precision = 10, scale = 1)
     private BigDecimal abv = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "IBU cannot be negative")
-    @Column(name = COLUMN_PREFIX + "ibu")
+    @Column(name = COLUMN_PREFIX + "ibu", precision = 10, scale = 1)
     private BigDecimal ibu = BigDecimal.ZERO;
 
     @DecimalMin(value = "0.0", message = "Color cannot be negative")
-    @Column(name = COLUMN_PREFIX + "color")
+    @Column(name = COLUMN_PREFIX + "color", precision = 10, scale = 1)
     private BigDecimal color = BigDecimal.ZERO;
 
     //TODO FIX - EAGER only for tests
@@ -88,7 +89,7 @@ public class Beer {
     }
 
     public void setBatchSize(BigDecimal batchSize) {
-        this.batchSize = batchSize.setScale(1, RoundingMode.HALF_UP);
+        this.batchSize = setDefaultScale(batchSize);
     }
 
     public BigDecimal getOriginalGravity() {
@@ -96,7 +97,7 @@ public class Beer {
     }
 
     public void setOriginalGravity(BigDecimal originalGravity) {
-        this.originalGravity = originalGravity.setScale(1, RoundingMode.HALF_UP);
+        this.originalGravity = setDefaultScale(originalGravity);
     }
 
     public BigDecimal getAbv() {
@@ -104,7 +105,7 @@ public class Beer {
     }
 
     public void setAbv(BigDecimal abv) {
-        this.abv = abv.setScale(2, RoundingMode.HALF_UP);
+        this.abv = setDefaultScale(abv);
     }
 
     public BigDecimal getIbu() {
@@ -112,7 +113,7 @@ public class Beer {
     }
 
     public void setIbu(BigDecimal ibu) {
-        this.ibu = ibu.setScale(1, RoundingMode.HALF_UP);
+        this.ibu = setDefaultScale(ibu);
     }
 
     public BigDecimal getColor() {
@@ -120,7 +121,7 @@ public class Beer {
     }
 
     public void setColor(BigDecimal color) {
-        this.color = color.setScale(1, RoundingMode.HALF_UP);
+        this.color = setDefaultScale(color);
     }
 
     public List<Ingredient> getIngredients() {

@@ -1,7 +1,6 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class Hop extends BeersmithIngredient {
 
@@ -27,7 +26,7 @@ public class Hop extends BeersmithIngredient {
     }
 
     public void setAlpha(BigDecimal alpha) {
-        this.alpha = alpha.setScale(2, RoundingMode.HALF_UP);
+        this.alpha = alpha;
     }
 
     public BigDecimal getIbuContribution() {
@@ -35,7 +34,7 @@ public class Hop extends BeersmithIngredient {
     }
 
     public void setIbuContribution(BigDecimal ibuContribution) {
-        this.ibuContribution = ibuContribution.setScale(2, RoundingMode.HALF_UP);;
+        this.ibuContribution = ibuContribution;
     }
 
     public BigDecimal getBoilTime() {
@@ -43,7 +42,7 @@ public class Hop extends BeersmithIngredient {
     }
 
     public void setBoilTime(BigDecimal boilTime) {
-        this.boilTime = boilTime.setScale(2, RoundingMode.HALF_UP);;
+        this.boilTime = boilTime;
     }
 
     public boolean isDryAddition() {
@@ -59,6 +58,6 @@ public class Hop extends BeersmithIngredient {
     }
 
     public void setDryHopTime(BigDecimal dryHopTime) {
-        this.dryHopTime = dryHopTime.setScale(2, RoundingMode.HALF_UP);;
+        this.dryHopTime = dryHopTime;
     }
 }

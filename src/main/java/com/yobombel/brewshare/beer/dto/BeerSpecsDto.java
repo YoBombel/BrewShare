@@ -1,7 +1,6 @@
 package com.yobombel.brewshare.beer.dto;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class BeerSpecsDto {
 
@@ -18,11 +17,11 @@ public class BeerSpecsDto {
         this.id = id;
         this.name = name;
         this.style = style;
-        this.batchSize = batchSize.setScale(2, RoundingMode.HALF_UP);
-        this.originalGravity = originalGravity.setScale(2, RoundingMode.HALF_UP);
-        this.abv = abv.setScale(2, RoundingMode.HALF_UP);
-        this.ibu = ibu.setScale(2, RoundingMode.HALF_UP);
-        this.color = color.setScale(2, RoundingMode.HALF_UP);
+        this.batchSize = batchSize;
+        this.originalGravity = originalGravity;
+        this.abv = abv;
+        this.ibu = ibu;
+        this.color = color;
     }
 
     public Long getId() {
@@ -70,22 +69,22 @@ public class BeerSpecsDto {
     }
 
     public void setBatchSize(BigDecimal batchSize) {
-        this.batchSize = batchSize.setScale(2, RoundingMode.HALF_UP);
+        this.batchSize = batchSize;
     }
 
     public void setOriginalGravity(BigDecimal originalGravity) {
-        this.originalGravity = originalGravity.setScale(2, RoundingMode.HALF_UP);
+        this.originalGravity = originalGravity;
     }
 
     public void setAbv(BigDecimal abv) {
-        this.abv = abv.setScale(2, RoundingMode.HALF_UP);
+        this.abv = abv;
     }
 
     public void setIbu(BigDecimal ibu) {
-        this.ibu = ibu.setScale(2, RoundingMode.HALF_UP);
+        this.ibu = ibu;
     }
 
     public void setColor(BigDecimal color) {
-        this.color = color.setScale(2, RoundingMode.HALF_UP);
+        this.color = color;
     }
 }

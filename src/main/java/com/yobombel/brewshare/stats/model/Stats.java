@@ -1,8 +1,9 @@
 package com.yobombel.brewshare.stats.model;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
+
+import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
 
 public class Stats {
 
@@ -24,7 +25,7 @@ public class Stats {
     }
 
     public void setTotalVolume(BigDecimal totalVolume) {
-        this.totalVolume = totalVolume.setScale(2, RoundingMode.HALF_UP);
+        this.totalVolume = setDefaultScale(totalVolume);
     }
 
     public List<AggregateStat> getAggregateStats() {

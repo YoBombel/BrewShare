@@ -1,7 +1,6 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class Yeast extends BeersmithIngredient {
 
@@ -41,7 +40,7 @@ public class Yeast extends BeersmithIngredient {
     }
 
     public void setMinAttenuation(BigDecimal minAttenuation) {
-        this.minAttenuation = minAttenuation.setScale(2, RoundingMode.HALF_UP);
+        this.minAttenuation = minAttenuation;
     }
 
     public BigDecimal getMaxAttenuation() {
@@ -49,6 +48,6 @@ public class Yeast extends BeersmithIngredient {
     }
 
     public void setMaxAttenuation(BigDecimal maxAttenuation) {
-        this.maxAttenuation = maxAttenuation.setScale(2, RoundingMode.HALF_UP);
+        this.maxAttenuation = maxAttenuation;
     }
 }

@@ -6,8 +6,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Comparator;
+
+import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
 
 @Entity
 @Table(name = Ingredient.TABLE_NAME)
@@ -28,7 +29,7 @@ public class Ingredient implements Comparable<Ingredient> {
     @Column(name = COLUMN_PREFIX + "name")
     private String name;
 
-    @Column(name = COLUMN_PREFIX + "amount")
+    @Column(name = COLUMN_PREFIX + "amount", precision = 10, scale = 1)
     private BigDecimal amount;
 
     public Long getId() {
@@ -60,7 +61,7 @@ public class Ingredient implements Comparable<Ingredient> {
     }
 
     public void setAmount(BigDecimal amount) {
-        this.amount = amount.setScale(2, RoundingMode.HALF_UP);
+        this.amount = setDefaultScale(amount);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.yobombel.brewshare.imports.beersmith3.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class Fermentable extends BeersmithIngredient {
 
@@ -21,7 +20,7 @@ public class Fermentable extends BeersmithIngredient {
     }
 
     public void setColor(BigDecimal color) {
-        this.color = color.setScale(2, RoundingMode.HALF_UP);
+        this.color = color;
     }
 
     public BigDecimal getYield() {
@@ -29,7 +28,7 @@ public class Fermentable extends BeersmithIngredient {
     }
 
     public void setYield(BigDecimal yield) {
-        this.yield = yield.setScale(2, RoundingMode.HALF_UP);
+        this.yield = yield;
     }
 }
 
