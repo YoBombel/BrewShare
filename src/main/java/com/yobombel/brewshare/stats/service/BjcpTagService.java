@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
+import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
+
 //TODO REFACTOR
 @Service
 public class BjcpTagService {
@@ -61,7 +63,8 @@ public class BjcpTagService {
     }
 
     private BigDecimal calculatePercentage(Integer value, int tagsSum) {
-        return BigDecimal.valueOf((value * 100) / tagsSum);
+        return setDefaultScale(
+                BigDecimal.valueOf((double) (value * 100) / tagsSum));
     }
 
     private int sumCounts(Map<String, Integer> tagCounts) {
