@@ -1,8 +1,8 @@
 package com.yobombel.brewshare.stats.service;
 
 import com.yobombel.brewshare.beer.BeerRepository;
-import com.yobombel.brewshare.stats.model.BeerStatsDto;
-import com.yobombel.brewshare.stats.model.Stats;
+import com.yobombel.brewshare.stats.model.BeerSpecDto;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -22,33 +22,39 @@ import static org.mockito.Mockito.verify;
 class StatsServiceTest {
 
     @Mock
-    GravityStatsService gravityStatsService;
-    @Mock
-    AlcoholStatsService alcoholStatsService;
-    @Mock
-    ColorStatsService colorStatsService;
-    @Mock
-    IbuStatsService ibuStatsService;
-    @Mock
     BeerRepository beerRepository;
+    @Mock
+    AggregateStatsService aggregateStatsService;
+    @Mock
+    StyleStatsService styleStatsService;
 
     @Spy
     @InjectMocks
     StatsService statsService;
 
     @Test
-    void shouldCallAllStatServices(){
+    void shouldCountTotalVolume() {
         //GIVEN
-        given(beerRepository.findAllByBatchSizeIsNotNull()).willReturn(List.of(new BeerStatsDto(BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO)));
+        BeerSpecDto beerDto1 = new BeerSpecDto("", BigDecimal.valueOf(25), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+        BeerSpecDto beerDto2 = new BeerSpecDto("", BigDecimal.valueOf(30), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+        List<BeerSpecDto> beerSpecDtos = List.of(beerDto1, beerDto2);
+        BigDecimal expected = BigDecimal.valueOf(55.0);
+        given(beerRepository.findAllByBatchSizeIsNotNull()).willReturn(beerSpecDtos);
         //WHEN
-        Stats stats = statsService.createStats();
+        var result = statsService.createStats().getTotalVolume();
         //THEN
-        verify(beerRepository).findAllByBatchSizeIsNotNull();
-        verify(gravityStatsService).calculateStats(anyList(), any());
-        verify(alcoholStatsService).calculateStats(anyList(), any());
-        verify(colorStatsService).calculateStats(anyList(), any());
-        verify(ibuStatsService).calculateStats(anyList(), any());
-
+        assertThat(expected, Matchers.comparesEqualTo(result));
     }
+
+    @Test
+    void shouldCallOtherStatsServices(){
+        //GIVEN
+        //WHEN
+        var result = statsService.createStats();
+        //THEN
+        verify(aggregateStatsService).createAggregateStats(anyList());
+        verify(styleStatsService).createStyleStats(anyList());
+    }
+
 
 }

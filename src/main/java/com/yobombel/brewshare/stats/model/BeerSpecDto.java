@@ -2,7 +2,7 @@ package com.yobombel.brewshare.stats.model;
 
 import java.math.BigDecimal;
 
-public record BeerStatsDto(
+public record BeerSpecDto(
         String style,
         BigDecimal batchSize,
         BigDecimal originalGravity,

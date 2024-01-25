@@ -1,6 +1,6 @@
 package com.yobombel.brewshare.stats.service;
 
-import com.yobombel.brewshare.stats.model.BeerStatsDto;
+import com.yobombel.brewshare.stats.model.BeerSpecDto;
 import com.yobombel.brewshare.stats.model.StyleStats;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,8 @@ public class StyleStatsService {
         this.bjcpTagService = bjcpTagService;
     }
 
-    public StyleStats createStyleStats(List<BeerStatsDto> beerStatsDtos) {
-        Map<String, Integer> stylesCount = bjcpTagService.countStyles(beerStatsDtos);
+    public StyleStats createStyleStats(List<BeerSpecDto> beerSpecDtos) {
+        Map<String, Integer> stylesCount = bjcpTagService.countStyles(beerSpecDtos);
 
         return new StyleStats(
                 bjcpTagService.countTagsPercentages(stylesCount, List.of("family")),

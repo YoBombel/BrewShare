@@ -2,7 +2,7 @@ package com.yobombel.brewshare.stats.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yobombel.brewshare.stats.model.BeerStatsDto;
+import com.yobombel.brewshare.stats.model.BeerSpecDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 
 import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
@@ -26,11 +25,11 @@ public class BjcpTagService {
         setupStyleTags();
     }
 
-    public Map<String, Integer> countStyles(List<BeerStatsDto> beerStatsDtos) {
+    public Map<String, Integer> countStyles(List<BeerSpecDto> beerSpecDtos) {
         Map<String, Integer> stylesCount = new HashMap<>();
 
-        beerStatsDtos.stream()
-                .map(BeerStatsDto::style)
+        beerSpecDtos.stream()
+                .map(BeerSpecDto::style)
                 .forEach(style -> stylesCount.merge(style, 1, Integer::sum));
 
         return stylesCount;
