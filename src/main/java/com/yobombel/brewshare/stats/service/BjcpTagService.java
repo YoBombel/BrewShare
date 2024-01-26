@@ -1,14 +1,11 @@
 package com.yobombel.brewshare.stats.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yobombel.brewshare.stats.model.BeerSpecDto;
+import com.yobombel.brewshare.stats.util.BjcpGuidelinesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -19,10 +16,10 @@ import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
 public class BjcpTagService {
 
     private static final Logger log = LoggerFactory.getLogger(BjcpTagService.class);
-    private final Map<String, List<String>> bjcpStylesAndTags = new HashMap<>();
+    private final Map<String, List<String>> bjcpStylesAndTags;
 
     public BjcpTagService() {
-        setupStyleTags();
+        bjcpStylesAndTags = BjcpGuidelinesService.setupStyleTags();
     }
 
     public Map<String, Integer> countStyles(List<BeerSpecDto> beerSpecDtos) {
@@ -107,27 +104,6 @@ public class BjcpTagService {
                 t.substring(1))
                 .trim()
                 .replace("-", " ");
-    }
-
-    private void setupStyleTags() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            JsonNode arrayNode = objectMapper.readTree(new File("src/main/resources/bjcp/stylesTags.json"));
-            for (JsonNode elementNode : arrayNode) {
-                String styleName = elementNode.get("name").toString();
-                styleName = styleName.trim().replace("\"", "");
-
-                String tagsString = elementNode.get("tags").toString();
-                List<String> tags = Arrays.stream(
-                                tagsString.split(","))
-                        .map(String::trim)
-                        .map(s -> s.replace("\"", ""))
-                        .toList();
-                bjcpStylesAndTags.put(styleName, tags);
-            }
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
     }
 
 }
