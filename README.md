@@ -1,14 +1,13 @@
-<a name="readme-top"></a>
 <h1 align="center">BrewShare</h1>
 
 ### About The Project
 BrewShare lets you access and share your brew recipes with friends and your homebrew club via shareable links.
-BrewShare was created in a dire need for quick and easy way to share beer recipe details with fellow homebrewers for free.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+BrewShare was created in a dire need for quick and easy way to share beer recipe details with fellow homebrewers.
 
 ### Features
 - Create quick view of beer specification and it's ingredients
 - Import recipes from BeerXML file (tested on Beersmith 3.2.8)
+- View statistics from all beers in database
 
 ### Built With
 [![Java][Java.com]][Java-url]
@@ -17,11 +16,35 @@ BrewShare was created in a dire need for quick and easy way to share beer recipe
 [![Docker][Docker.com]][Docker-url]
 [![Thymeleaf][Thymeleaf.com]][Thymeleaf-url]
 [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Screenshots
-<img src="screenshot_1.png" alt="App screenshot" />
-<img src="screenshot_2.png" alt="App screenshot"  />
+## Modules:
+
+### Beer library
+
+### Statistics
+Statistics module shows following stats:
+- overall stats:
+  - beer count,
+  - total volume brewed,
+- aggregate stats (minimum, maximum, average):
+  - original gravity,
+  - alcohol by volume,
+  - international bitterness units,
+  - color,
+- stats based on BJCP (Beer Judge Certification Program) style guidelines tags shown in percentages:
+  - style families,
+  - color,
+  - fermentation type,
+  - bitterness balance.
+
+BJCP style tags statistics module is based on BJCP 2021 style guidelines json:
+
+https://github.com/ascholer/bjcp-styleview/blob/main/styles.json
+
+<img src="screenshot_stats.png" alt="Statistics screenshot">
+
+### Imports
+
 
 ## Getting Started
 To get a local copy up and running follow these simple example steps.
@@ -41,7 +64,7 @@ git clone https://github.com/YoBombel/BrewShare.git
 Navigate to the project directory:
 
   ```sh
-cd home-supplies-monitor
+cd BrewShare
   ```
 
 Build and run the app using Docker Compose:
@@ -50,7 +73,7 @@ Build and run the app using Docker Compose:
 docker-compose up -d
   ```
 
-The app should now be running at http://localhost:8080.
+The app should now be running at http://localhost:8081
 
 ### Stopping the App
 
@@ -60,29 +83,14 @@ You can stop the app by running the following command in the project directory:
 docker-compose down
   ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Frontend links
-View all beers http://localhost:8081/beer/all
-
-View beer with {id}  http://localhost:8081/beer/id/{id}
-
-New beer form http://localhost:8081/beer/new/
-
-Edit beer with {id} http://localhost:8081/beer/edit/{id}
-
 <!-- LICENSE -->
 
 ## License
 
 Distributed under the GNU GPLv3  License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 Project
 Link: [https://github.com/YoBombel/BrewShare](https://github.com/YoBombel/BrewShare)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 [contributors-shield]: https://img.shields.io/github/contributors/BienkowskiTomasz/Home-Supplies-Monitor.svg?style=for-the-badge
 [contributors-url]: https://github.com/BienkowskiTomasz/Home-Supplies-Monitor/graphs/contributors
