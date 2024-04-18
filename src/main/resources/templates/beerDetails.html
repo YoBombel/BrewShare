@@ -18,15 +18,39 @@
 
     <div class="row fs-6">
         <div class="border border-dark rounded col-md-12 mb-3 py-1 mx-auto">
-            <h4 class="my-0" th:text="${beer.name}"></h4>
-            <ul class="list-unstyled my-0">
-                <li>Style: <span th:text="${beer.style}"></span></li>
-                <li>Batch size: <span th:text="${beer.batchSize}"></span></li>
-                <li>OG: <span th:text="${beer.originalGravity}"></span></li>
-                <li>ABV: <span th:text="${beer.abv}"></span></li>
-                <li>IBU: <span th:text="${beer.ibu}"></span></li>
-                <li>Color: <span th:text="${beer.color}"></span></li>
-            </ul>
+
+            <h1 class="my-0" th:text="${beer.name}"></h1>
+            <span th:text="${beer.style}"></span>
+
+            <div class="row w-50 my-2">
+                <div class="col-md-4">
+                    <img th:src="@{/img/fermentation.png}" width="40px">
+                    Batch size: <span th:text="${beer.batchSize}"></span>
+                </div>
+                <div class="col-md-4">
+                    <img th:src="@{/img/hydrometer.png}" width="40px">
+                    OG: <span th:text="${beer.originalGravity}"></span>
+                </div>
+                <div class="col-md-4">
+                    <img th:src="@{/img/percent.png}" width="40px">
+                    ABV: <span th:text="${beer.abv}"></span></span>
+                </div>
+            </div>
+            <div class="row w-50 my-2">
+                <div class="col-md-4">
+                    <img th:src="@{/img/hop.png}" width="40px">
+                    IBU: <span th:text="${beer.ibu}"></span>
+                </div>
+                <div class="col-md-4">
+                    <img th:src="@{/img/color.png}" width="40px">
+                    Color: <span th:text="${beer.color}"></span>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+
+            <h4>Ingredients:</h4>
             <ol>
                 <li th:each="ingredient :${beer.ingredients}">
                     <span th:text="${ingredient.name}"></span> - amount: <span th:text="${ingredient.amount}"></span>
