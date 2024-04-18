@@ -17,47 +17,55 @@
     <div th:insert="~{fragments/header}"></div>
 
     <div class="row fs-6">
-        <div class="border border-dark rounded col-md-12 mb-3 py-1 mx-auto">
+        <div class="col-md-12 mb-3 py-1 mx-auto">
 
             <h1 class="my-0" th:text="${beer.name}"></h1>
-            <span th:text="${beer.style}"></span>
+            <span th:text="${beer.style}"></span><br>
+            Brewed on: <span>01.01.2137</span>
 
-            <div class="row w-50 my-2">
-                <div class="col-md-4">
-                    <img th:src="@{/img/fermentation.png}" width="40px">
-                    Batch size: <span th:text="${beer.batchSize}"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row my-2">
+                        <div class="col-md-4">
+                            <img th:src="@{/img/fermentation.png}" width="40px">
+                            Batch size: <span th:text="${beer.batchSize}"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <img th:src="@{/img/hydrometer.png}" width="40px">
+                            OG: <span th:text="${beer.originalGravity}"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <img th:src="@{/img/percent.png}" width="40px">
+                            ABV: <span th:text="${beer.abv}"></span></span>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-md-4">
+                            <img th:src="@{/img/hop.png}" width="40px">
+                            IBU: <span th:text="${beer.ibu}"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <img th:src="@{/img/color.png}" width="40px">
+                            Color: <span th:text="${beer.color}"></span>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+
+                    <h4>Ingredients:</h4>
+                    <ol>
+                        <li th:each="ingredient :${beer.ingredients}">
+                            <span th:text="${ingredient.name}"></span> - amount: <span
+                                th:text="${ingredient.amount}"></span>
+                        </li>
+                    </ol>
                 </div>
-                <div class="col-md-4">
-                    <img th:src="@{/img/hydrometer.png}" width="40px">
-                    OG: <span th:text="${beer.originalGravity}"></span>
-                </div>
-                <div class="col-md-4">
-                    <img th:src="@{/img/percent.png}" width="40px">
-                    ABV: <span th:text="${beer.abv}"></span></span>
+                <div class="col-md-4 border border-dark rounded p-2 mx-3">
+                    Image placeholder
                 </div>
             </div>
-            <div class="row w-50 my-2">
-                <div class="col-md-4">
-                    <img th:src="@{/img/hop.png}" width="40px">
-                    IBU: <span th:text="${beer.ibu}"></span>
-                </div>
-                <div class="col-md-4">
-                    <img th:src="@{/img/color.png}" width="40px">
-                    Color: <span th:text="${beer.color}"></span>
-                </div>
-                <div class="col-md-4">
-
-                </div>
-            </div>
-
-            <h4>Ingredients:</h4>
-            <ol>
-                <li th:each="ingredient :${beer.ingredients}">
-                    <span th:text="${ingredient.name}"></span> - amount: <span th:text="${ingredient.amount}"></span>
-                </li>
-            </ol>
-            <div class="d-flex justify-content-end m-2">
-                <button class=" btn btn-outline-info"
+            <div class="d-flex m-2">
+                <button class=" btn btn-outline-dark"
                         th:onclick="'copyLink(\'' + ${beer.id} + '\', this)'">Copy link
                 </button>
                 <a th:href="@{/beer/edit/{id}(id = ${beer.id})}">
@@ -69,7 +77,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <div class="px-3" th:insert="~{fragments/footer}"></div>
