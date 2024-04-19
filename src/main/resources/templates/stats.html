@@ -16,39 +16,35 @@
     <!-- HEADER -->
     <div th:insert="~{fragments/header}"></div>
 
+    <div class="row fs-6 m-2 w-auto">
 
-    <div class="border border-dark rounded col-md-5 mb-3 mx-auto overflow-hidden w-auto">
-
-        <div class="border-bottom border-dark mb-2 bg-warning bg-opacity-75 p-2">
-            <h2>Statistics</h2>
-        </div>
         <div class="row px-2">
             <div class="col-md-6">
-                <h4>Overall: </h4>
+                <h4><img th:src="@{/img/stats.png}" width="40px"> Overall: </h4>
                 <ul>
                     <li>Beers: <span th:text="${stats.beerCount}"></span></li>
                     <li>Total volume: <span th:text="${stats.totalVolume}"></span> liters</li>
                 </ul>
                 <!-- percentage + amount -->
-                <h4>Top 3 style families</h4>
+                <h4><img th:src="@{/img/podium.png}" width="40px"> Top 3 style families</h4>
                 <ol>
                     <li>Pils - xx% (xx beers)</li>
                     <li>Stout - xx% (xx beers)</li>
                     <li>Sour - xx% (xx beers)</li>
                 </ol>
-                <h4>Color</h4>
+                <h4><img th:src="@{/img/color.png}" width="40px"> Color</h4>
                 <ul>
                     <li>Pale - 50% (50 beers)</li>
                     <li>Amber - 25% (25 beers)</li>
                     <li>Dark - 25% (25 beers)</li>
                 </ul>
-                <h4>Fermentation type</h4>
+                <h4><img th:src="@{/img/fermentation.png}" width="40px"> Fermentation type</h4>
                 <ul>
                     <li>Ale - 50% (50 beers)</li>
                     <li>Lager - 40% (40 beers)</li>
                     <li>Sour/wild - 10% (10 beers)</li>
                 </ul>
-                <h4>Balance</h4>
+                <h4><img th:src="@{/img/balance.png}" width="40px"> Balance</h4>
                 <ul>
                     <li>Hoppy - 50% (50 beers)</li>
                     <li>Balanced - 40% (40 beers)</li>
@@ -56,26 +52,25 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <h2>Specs</h2>
-                <h4>Original gravity: </h4>
+                <h4><img th:src="@{/img/hydrometer.png}" width="40px"> Original gravity: </h4>
                 <ul>
                     <li>Average: <span th:text="${stats.gravityStats.average}"></span> °Plato</li>
                     <li>Max: <span th:text="${stats.gravityStats.max}"></span> °Plato</li>
                     <li>Min: <span th:text="${stats.gravityStats.min}"></span> °Plato</li>
                 </ul>
-                <h4>Alcohol: </h4>
+                <h4><img th:src="@{/img/percent.png}" width="40px"> Alcohol: </h4>
                 <ul>
                     <li>Average: <span th:text="${stats.alcoholStats.average}"></span>% ABV</li>
                     <li>Max: <span th:text="${stats.alcoholStats.max}"></span>% ABV</li>
                     <li>Min: <span th:text="${stats.alcoholStats.min}"></span>% ABV</li>
                 </ul>
-                <h4>IBU: </h4>
+                <h4><img th:src="@{/img/hop.png}" width="40px"> IBU: </h4>
                 <ul>
                     <li>Average: <span th:text="${stats.ibuStats.average}"></span></li>
                     <li>Max: <span th:text="${stats.ibuStats.max}"></span></li>
                     <li>Min: <span th:text="${stats.ibuStats.min}"></span></li>
                 </ul>
-                <h4>Color: </h4>
+                <h4><img th:src="@{/img/color.png}" width="40px"> Color: </h4>
                 <ul>
                     <li>Average: <span th:text="${stats.colorStats.average}"></span> EBC</li>
                     <li>Max: <span th:text="${stats.colorStats.max}"></span> EBC</li>
@@ -85,7 +80,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="px-3" th:insert="~{fragments/footer}"></div>
 
