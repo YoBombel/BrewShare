@@ -22,6 +22,7 @@ public class BjcpTagService {
     }
 
     public Map<String, Integer> countStyles(List<BeerSpecDto> beerSpecDtos) {
+        log.trace("Counting styles.");
         Map<String, Integer> stylesCount = new HashMap<>();
 
         beerSpecDtos.stream()
@@ -32,9 +33,10 @@ public class BjcpTagService {
     }
 
     public Map<String, BigDecimal> countTagsPercentages(Map<String, Integer> stylesCount, List<String> tags) {
+        log.trace("Counting tag percentages.");
         Map<String, BigDecimal> tagsPercentages = new HashMap<>();
         Map<String, Integer> tagCount = countTagOccurrences(stylesCount, tags);
-        int allTagsSum = sumCounts(tagCount);
+        int allTagsSum =  tagCount.values().stream().reduce(0, Integer::sum);
 
         for (Map.Entry<String, Integer> entry : tagCount.entrySet()
         ) {
@@ -44,34 +46,8 @@ public class BjcpTagService {
         return sortMapByValue(tagsPercentages);
     }
 
-    private <K, V extends Comparable<? super V>> Map<K, V> sortMapByValue(Map<K, V> map) {
-        List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
-        list.sort(Map.Entry.comparingByValue());
-        Collections.reverse(list);
-
-        Map<K, V> result = new LinkedHashMap<>();
-        for (Map.Entry<K, V> entry : list) {
-            result.put(entry.getKey(), entry.getValue());
-        }
-
-        return result;
-    }
-
-    private BigDecimal calculatePercentage(Integer value, int tagsSum) {
-        return setDefaultScale(
-                BigDecimal.valueOf((double) (value * 100) / tagsSum));
-    }
-
-    private int sumCounts(Map<String, Integer> tagCounts) {
-        int sum = 0;
-        for (Integer i : tagCounts.values()
-        ) {
-            sum += i;
-        }
-        return sum;
-    }
-
     private Map<String, Integer> countTagOccurrences(Map<String, Integer> stylesCount, List<String> tags) {
+        log.trace("Counting tag occurrences.");
         Map<String, Integer> tagCounting = new HashMap<>();
         for (Map.Entry<String, Integer> entry : stylesCount.entrySet()
         ) {
@@ -93,6 +69,24 @@ public class BjcpTagService {
             }
         }
         return tagCounting;
+    }
+
+    private BigDecimal calculatePercentage(Integer value, int tagsSum) {
+        return setDefaultScale(
+                BigDecimal.valueOf((double) (value * 100) / tagsSum));
+    }
+
+    private <K, V extends Comparable<? super V>> Map<K, V> sortMapByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        Collections.reverse(list);
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
     }
 
     private String formatName(String t) {
