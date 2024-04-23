@@ -11,7 +11,6 @@ import java.util.*;
 
 import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
 
-//TODO REFACTOR
 @Service
 public class BjcpTagService {
 
@@ -87,13 +86,10 @@ public class BjcpTagService {
                 for (String currentTag : tags
                 ) {
                     relevantTag = currentStyleTags.stream().filter(t -> t.contains(currentTag)).findFirst().orElse("");
+
                     if (!relevantTag.isBlank())
-                        break;
+                        tagCounting.merge(formatName(relevantTag), currentStyleCount, Integer::sum);
                 }
-
-                if (!relevantTag.isBlank())
-                    tagCounting.merge(formatName(relevantTag), currentStyleCount, Integer::sum);
-
             }
         }
         return tagCounting;
