@@ -2,6 +2,7 @@ package com.yobombel.brewshare.stats.service;
 
 import com.yobombel.brewshare.stats.model.BeerSpecDto;
 import com.yobombel.brewshare.stats.model.StyleStats;
+import com.yobombel.brewshare.stats.service.bjcp.BjcpTagService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

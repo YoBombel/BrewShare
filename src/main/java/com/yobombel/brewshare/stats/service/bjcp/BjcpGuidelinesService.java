@@ -1,9 +1,11 @@
-package com.yobombel.brewshare.stats.util;
+package com.yobombel.brewshare.stats.service.bjcp;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
@@ -12,21 +14,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class BjcpGuidelinesService {
 
-    private BjcpGuidelinesService() {
-        throw new IllegalStateException("Utility class shouldn't be initialized.");
-    }
+    @Value("${bjcp.styles.url}")
+    private String bjcpStylesUrl;
 
     private static final Logger log = LoggerFactory.getLogger(BjcpGuidelinesService.class);
 
-    //TODO add dark-lagerfamily fix
-    public static Map<String, List<String>> setupStyleTags() {
+    public Map<String, List<String>> setupStyleTags() {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, List<String>> bjcpStylesAndTags = new HashMap<>();
         try {
-            JsonNode arrayNode = objectMapper.readTree( //TODO extract method
-                    new URL("https://raw.githubusercontent.com/ascholer/bjcp-styleview/main/styles.json"));
+            JsonNode arrayNode = objectMapper.readTree(
+                    new URL(bjcpStylesUrl));
             for (JsonNode elementNode : arrayNode) { //TODO extract method
                 String styleName = elementNode.get("name").toString();
                 styleName = styleName.trim().replace("\"", "");

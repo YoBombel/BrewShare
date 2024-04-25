@@ -1,7 +1,6 @@
-package com.yobombel.brewshare.stats.service;
+package com.yobombel.brewshare.stats.service.bjcp;
 
 import com.yobombel.brewshare.stats.model.BeerSpecDto;
-import com.yobombel.brewshare.stats.util.BjcpGuidelinesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,10 +14,10 @@ import static com.yobombel.brewshare.config.NumberConfig.setDefaultScale;
 public class BjcpTagService {
 
     private static final Logger log = LoggerFactory.getLogger(BjcpTagService.class);
-    private final Map<String, List<String>> bjcpStylesAndTags;
+    private final BjcpGuidelinesService bjcpGuidelinesService;
 
-    public BjcpTagService() {
-        bjcpStylesAndTags = BjcpGuidelinesService.setupStyleTags();
+    public BjcpTagService(BjcpGuidelinesService bjcpGuidelinesService) {
+        this.bjcpGuidelinesService = bjcpGuidelinesService;
     }
 
     public Map<String, Integer> countStyles(List<BeerSpecDto> beerSpecDtos) {
@@ -48,7 +47,9 @@ public class BjcpTagService {
 
     private Map<String, Integer> countTagOccurrences(Map<String, Integer> stylesCount, List<String> tags) {
         log.trace("Counting tag occurrences.");
+        Map<String, List<String>> bjcpStylesAndTags = bjcpGuidelinesService.setupStyleTags();
         Map<String, Integer> tagCounting = new HashMap<>();
+
         for (Map.Entry<String, Integer> entry : stylesCount.entrySet()
         ) {
             String currentStyle = entry.getKey();
