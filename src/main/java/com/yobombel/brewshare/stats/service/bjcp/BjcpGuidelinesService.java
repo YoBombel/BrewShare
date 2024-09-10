@@ -28,21 +28,25 @@ public class BjcpGuidelinesService {
         try {
             JsonNode arrayNode = objectMapper.readTree(
                     new URL(bjcpStylesUrl));
-            for (JsonNode elementNode : arrayNode) { //TODO extract method
-                String styleName = elementNode.get("name").toString();
-                styleName = styleName.trim().replace("\"", "");
-
-                String tagsString = elementNode.get("tags").toString();
-                List<String> tags = Arrays.stream(
-                                tagsString.split(","))
-                        .map(String::trim)
-                        .map(s -> s.replace("\"", ""))
-                        .toList();
-                bjcpStylesAndTags.put(styleName, tags);
-            }
+            fillStylesAndTags(bjcpStylesAndTags, arrayNode);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
         return bjcpStylesAndTags;
+    }
+
+    private static void fillStylesAndTags(Map<String, List<String>> bjcpStylesAndTags, JsonNode arrayNode) {
+        for (JsonNode elementNode : arrayNode) {
+            String styleName = elementNode.get("name").toString();
+            styleName = styleName.trim().replace("\"", "");
+
+            String tagsString = elementNode.get("tags").toString();
+            List<String> tags = Arrays.stream(
+                            tagsString.split(","))
+                    .map(String::trim)
+                    .map(s -> s.replace("\"", ""))
+                    .toList();
+            bjcpStylesAndTags.put(styleName, tags);
+        }
     }
 }
